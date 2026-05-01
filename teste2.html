@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diagnóstico</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+                "firebase/auth": "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Diagnóstico - MyLifeQR Brasil</h1>
+    <div id="status">Carregando...</div>
+    <button id="testBtn" disabled>Testar Firebase</button>
+
+    <script type="module">
+        import { initializeApp } from "firebase/app";
+        import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+        
+        const statusDiv = document.getElementById('status');
+        const testBtn = document.getElementById('testBtn');
+        
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
+                authDomain: "mylifeqrbrasil1.firebaseapp.com",
+                projectId: "mylifeqrbrasil1",
+                storageBucket: "mylifeqrbrasil1.firebasestorage.app",
+                messagingSenderId: "680108596725",
+                appId: "1:680108596725:web:d82e2121ce811bad45d4bc"
+            };
+            
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            
+            statusDiv.innerHTML = '✅ Firebase carregado com sucesso!';
+            testBtn.disabled = false;
+            console.log("Firebase OK");
+            
+            testBtn.onclick = () => {
+                const email = prompt("E-mail para teste:");
+                const senha = prompt("Senha (min 6 caracteres):");
+                
+                statusDiv.innerHTML = '⏳ Tentando registrar...';
+                
+                createUserWithEmailAndPassword(auth, email, senha)
+                    .then(user => statusDiv.innerHTML = `✅ Sucesso! Usuário: ${user.user.email}`)
+                    .catch(err => statusDiv.innerHTML = `❌ Erro: ${err.message}`);
+            };
+            
+        } catch (error) {
+            statusDiv.innerHTML = `❌ Erro ao carregar Firebase: ${error.message}`;
+            console.error(error);
+        }
+    </script>
+</body>
+</html>
