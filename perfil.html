@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>MyLifeQR Brasil — Perfil Médico de Emergência</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -36,20 +36,19 @@
         .slide-in { animation: slideIn 0.4s ease-out; }
         
         /* GATE */
-#gate {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #0A0A0A 0%, #002776 100%);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 28px 24px;
-    max-width: 500px;
-    margin: 0 auto;
-    width: 100%;
-}
+        #gate {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #0A0A0A 0%, #002776 100%);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 24px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
         
         .gate-icon {
             width: 80px;
@@ -83,12 +82,12 @@
         }
         
         .gate-box {
-    background: rgba(255,255,255,0.05);
-    border-radius: 20px;
-    padding: 24px;
-    margin-bottom: 16px;
-    width: 100%;
-}
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            width: 100%;
+        }
         
         .gate-box-text {
             font-size: 13px;
@@ -100,17 +99,19 @@
         .gate-box-text strong { color: #009C3B; }
         
         .btn-accept {
-    width: 100%;
-    background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%);
-    color: #002776;
-    border: none;
-    border-radius: 60px;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 16px;
-    cursor: pointer;
-    margin-top: 8px;
-}
+            width: 100%;
+            background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%);
+            color: #002776;
+            border: none;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         
         .btn-accept:hover {
             transform: scale(1.02);
@@ -841,6 +842,7 @@
     import { initializeApp } from "firebase/app";
     import { getFirestore, doc, getDoc, collection, addDoc } from "firebase/firestore";
     
+    // MYLIFEQR BRASIL - FIREBASE CONFIG
     const firebaseConfig = {
         apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
         authDomain: "mylifeqrbrasil1.firebaseapp.com",
@@ -850,8 +852,18 @@
         appId: "1:680108596725:web:d82e2121ce811bad45d4bc"
     };
     
+    // MYLIFEQR BRASIL - EMAILJS CONFIG (mismo que SafeRiderQR pero con tus datos)
+    const EMAILJS_CONFIG = {
+        PUBLIC_KEY: "DXbjn-ibhVBMPLBeT",
+        SERVICE_ID: "service_a6lrj31",
+        TEMPLATE_ID: "template_jt921om"
+    };
+    
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    console.log("✅ EmailJS inicializado para MyLifeQR Brasil");
     
     let currentPhotoUrl = "";
     let scanRegistered = false;
@@ -881,6 +893,37 @@
             registrarEscaneamento();
         }, 350);
     };
+    
+    async function enviarEmailEmergencia(email, nomeContato, perfil, protocolo, localizacao) {
+        if (!email) return { success: false, error: "No email provided" };
+        
+        const templateParams = {
+            email: email,
+            to_name: nomeContato,
+            nome: perfil.nome || 'Usuário',
+            data: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+            protocolo: protocolo,
+            latitude: localizacao?.lat || 'Não disponível',
+            longitude: localizacao?.lng || 'Não disponível',
+            sangue: perfil.sangue || 'Não registrado',
+            alergias: perfil.alergias || 'Nenhuma',
+            condicoes: perfil.condicoes || 'Nenhuma',
+            medicamentos: perfil.medicamentos || 'Nenhum'
+        };
+        
+        try {
+            const result = await emailjs.send(
+                EMAILJS_CONFIG.SERVICE_ID,
+                EMAILJS_CONFIG.TEMPLATE_ID,
+                templateParams
+            );
+            console.log(`✅ E-mail enviado para ${email}`);
+            return { success: true };
+        } catch (error) {
+            console.error(`❌ Erro ao enviar e-mail para ${email}:`, error);
+            return { success: false, error: error };
+        }
+    }
     
     async function registrarEscaneamento() {
         if (scanRegistered) {
@@ -950,9 +993,25 @@
                     dispositivo: navigator.userAgent
                 });
                 
+                const contactosParaEnviar = [];
+                for (let i = 1; i <= 5; i++) {
+                    const email = perfil[`contato${i}_email`];
+                    const notificar = perfil[`contato${i}_notificar`];
+                    const nome = perfil[`contato${i}_nome`] || `Contato ${i}`;
+                    if (email && notificar === true) {
+                        contactosParaEnviar.push({ email, nome });
+                    }
+                }
+                
+                console.log(`📧 Enviando e-mails para ${contactosParaEnviar.length} contatos...`);
+                
+                for (const contato of contactosParaEnviar) {
+                    await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, currentUserLocation);
+                }
+                
                 scanRegistered = true;
                 
-            }, (error) => {
+            }, async (error) => {
                 console.error("❌ Erro de geolocalização:", error);
                 document.getElementById('locationStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Não foi possível obter a localização. Ative os serviços de localização.';
                 scanRegistered = true;
