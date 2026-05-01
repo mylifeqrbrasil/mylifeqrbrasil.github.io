@@ -27,7 +27,7 @@
 <body>
     <div class="container">
         <div class="card" id="perfilCard">
-            <div class="loading" id="loadingIndicator">
+            <div id="loadingIndicator" class="loading">
                 <div>🔄 Carregando informações médicas...</div>
                 <div style="font-size: 12px; margin-top: 10px;">Por favor, aguarde</div>
             </div>
@@ -114,23 +114,28 @@
         
         const loadingDiv = document.getElementById('loadingIndicator');
         const conteudoDiv = document.getElementById('conteudoPerfil');
-        const perfilCard = document.getElementById('perfilCard');
         
-        // Mostrar error si no hay ID
-        if (!userId) {
-            loadingDiv.innerHTML = `
-                <div class="error-box">
-                    ❌ Link inválido<br>
-                    <small>ID de usuário não encontrado na URL.</small>
-                </div>
-            `;
-            loadingDiv.classList.remove('loading');
-            return;
+        function mostrarErro(mensagem) {
+            if (loadingDiv) {
+                loadingDiv.innerHTML = `
+                    <div class="error-box">
+                        ❌ ${mensagem}<br>
+                        <small>Verifique o link ou tente novamente mais tarde.</small>
+                    </div>
+                `;
+                loadingDiv.classList.remove('loading');
+            }
         }
         
-        console.log("ID do usuário:", userId);
-        
         async function carregarPerfil() {
+            // Verificar si hay userId
+            if (!userId) {
+                mostrarErro("Link inválido - ID de usuário não encontrado");
+                return;
+            }
+            
+            console.log("ID do usuário:", userId);
+            
             try {
                 console.log("Buscando perfil no Firebase...");
                 const docRef = doc(db, "perfiles", userId);
@@ -139,22 +144,16 @@
                 console.log("Documento existe?", docSnap.exists());
                 
                 if (!docSnap.exists()) {
-                    loadingDiv.innerHTML = `
-                        <div class="error-box">
-                            ❌ Perfil não encontrado<br>
-                            <small>Este usuário não existe ou excluiu sua conta.</small>
-                        </div>
-                    `;
-                    loadingDiv.classList.remove('loading');
+                    mostrarErro("Perfil não encontrado - Este usuário não existe ou excluiu sua conta");
                     return;
                 }
                 
                 const data = docSnap.data();
-                console.log("Dados carregados:", data);
+                console.log("Dados carregados com sucesso");
                 
                 // Ocultar loading y mostrar contenido
-                loadingDiv.style.display = 'none';
-                conteudoDiv.style.display = 'block';
+                if (loadingDiv) loadingDiv.style.display = 'none';
+                if (conteudoDiv) conteudoDiv.style.display = 'block';
                 
                 // Mostrar datos básicos
                 document.getElementById('nome').innerText = data.nome || "Não informado";
@@ -168,62 +167,65 @@
                 
                 // Mostrar contactos
                 const contatosDiv = document.getElementById('contatos');
-                contatosDiv.innerHTML = '';
-                
-                const contactos = [];
-                let temContatos = false;
-                
-                for (let i = 1; i <= 5; i++) {
-                    const nome = data[`contato${i}_nome`];
-                    const telefone = data[`contato${i}_telefone`];
-                    const relacao = data[`contato${i}_relacao`];
-                    const email = data[`contato${i}_email`];
-                    const notificar = data[`contato${i}_notificar`];
+                if (contatosDiv) {
+                    contatosDiv.innerHTML = '';
                     
-                    if (nome && nome.trim() !== "") {
-                        temContatos = true;
-                        contactos.push({
-                            nome: nome,
-                            telefone: telefone,
-                            relacao: relacao,
-                            email: email,
-                            notificar: notificar
-                        });
+                    const contactos = [];
+                    let temContatos = false;
+                    
+                    for (let i = 1; i <= 5; i++) {
+                        const nome = data[`contato${i}_nome`];
+                        const telefone = data[`contato${i}_telefone`];
+                        const relacao = data[`contato${i}_relacao`];
+                        const email = data[`contato${i}_email`];
+                        const notificar = data[`contato${i}_notificar`];
                         
-                        const contactCard = document.createElement('div');
-                        contactCard.className = 'contact-card';
-                        contactCard.innerHTML = `
-                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                                <div>
-                                    <strong>${nome}</strong> ${relacao ? `(${relacao})` : ''}<br>
-                                    ${telefone ? `📞 ${telefone}` : ''}
-                                    ${email ? `<br>✉️ ${email}` : ''}
-                                    ${notificar ? '<span style="background: #009C3B20; padding: 2px 8px; border-radius: 20px; font-size: 10px; margin-left: 8px;">🔔 Notificação ativa</span>' : ''}
+                        if (nome && nome.trim() !== "") {
+                            temContatos = true;
+                            contactos.push({
+                                nome: nome,
+                                telefone: telefone,
+                                relacao: relacao,
+                                email: email,
+                                notificar: notificar === true
+                            });
+                            
+                            const contactCard = document.createElement('div');
+                            contactCard.className = 'contact-card';
+                            contactCard.innerHTML = `
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                                    <div>
+                                        <strong>${escapeHtml(nome)}</strong> ${relacao ? `(${escapeHtml(relacao)})` : ''}<br>
+                                        ${telefone ? `📞 ${escapeHtml(telefone)}` : ''}
+                                        ${email ? `<br>✉️ ${escapeHtml(email)}` : ''}
+                                        ${notificar ? '<span style="background: #009C3B20; padding: 2px 8px; border-radius: 20px; font-size: 10px; margin-left: 8px;">🔔 Notificação ativa</span>' : ''}
+                                    </div>
+                                    ${telefone ? `<button onclick="window.location.href='tel:${escapeHtml(telefone)}'" style="background: #009C3B; color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer;">📞 Ligar</button>` : ''}
                                 </div>
-                                ${telefone ? `<button onclick="window.location.href='tel:${telefone}'" style="background: #009C3B; color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer;">📞 Ligar</button>` : ''}
-                            </div>
-                        `;
-                        contatosDiv.appendChild(contactCard);
+                            `;
+                            contatosDiv.appendChild(contactCard);
+                        }
                     }
+                    
+                    if (!temContatos) {
+                        contatosDiv.innerHTML = '<p style="color: #8a9a9a;">Nenhum contato de emergência registrado.</p>';
+                    }
+                    
+                    // Enviar alertas por correo
+                    await enviarAlertas(contactos, data);
                 }
-                
-                if (!temContatos) {
-                    contatosDiv.innerHTML = '<p style="color: #8a9a9a;">Nenhum contato de emergência registrado.</p>';
-                }
-                
-                // ENVIAR ALERTA POR CORREO A LOS CONTACTOS CON NOTIFICACIÓN ACTIVADA
-                await enviarAlertas(contactos, data);
                 
             } catch (error) {
                 console.error("Error carregando perfil:", error);
-                loadingDiv.innerHTML = `
-                    <div class="error-box">
-                        ❌ Erro ao carregar perfil<br>
-                        <small>${error.message}</small>
-                    </div>
-                `;
-                loadingDiv.classList.remove('loading');
+                mostrarErro("Erro ao carregar perfil: " + error.message);
             }
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
         
         async function enviarAlertas(contactos, userData) {
@@ -260,8 +262,9 @@
                     // Mostrar mensaje en la página
                     const alertMsg = document.createElement('div');
                     alertMsg.style.cssText = 'background: #009C3B20; border: 1px solid #009C3B; border-radius: 12px; padding: 12px; margin-top: 16px; text-align: center; font-size: 12px;';
-                    alertMsg.innerHTML = `📧 Alerta de emergência enviado para ${contacto.nome} (${contacto.email})`;
-                    document.querySelector('.card').appendChild(alertMsg);
+                    alertMsg.innerHTML = `📧 Alerta de emergência enviado para ${escapeHtml(contacto.nome)} (${escapeHtml(contacto.email)})`;
+                    const card = document.querySelector('.card');
+                    if (card) card.appendChild(alertMsg);
                     setTimeout(() => alertMsg.remove(), 5000);
                     
                 } catch (error) {
@@ -270,7 +273,7 @@
             }
         }
         
-        // Ejecutar
+        // Ejecutar la carga del perfil
         carregarPerfil();
     </script>
 </body>
