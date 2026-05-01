@@ -18,53 +18,59 @@
         .info-label { width: 40%; font-weight: 600; color: #6a7a7a; }
         .info-value { width: 60%; color: #1a2a2a; }
         .contact-card { background: #f8faf8; border-radius: 20px; padding: 16px; margin-top: 16px; border-left: 4px solid #009C3B; }
-        .btn-emergency { background: #E8152A; color: white; border: none; padding: 16px; border-radius: 60px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 20px; }
-        .btn-emergency:hover { background: #B01020; }
         .warning { background: #FFDF00; color: #002776; padding: 12px; border-radius: 16px; text-align: center; font-size: 12px; margin-top: 20px; }
+        .error-box { background: #E8152A20; border: 1px solid #E8152A; border-radius: 16px; padding: 20px; text-align: center; color: #E8152A; margin-top: 20px; }
         footer { text-align: center; font-size: 11px; color: #8a9a9a; margin-top: 20px; }
+        .loading { text-align: center; padding: 40px; color: #009C3B; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <span class="emergency-badge">🚨 EMERGÊNCIA MÉDICA</span>
-            <h1 id="nome">Carregando...</h1>
-            <div style="text-align: center;">
-                <div class="blood-type" id="sangue">---</div>
+        <div class="card" id="perfilCard">
+            <div class="loading" id="loadingIndicator">
+                <div>🔄 Carregando informações médicas...</div>
+                <div style="font-size: 12px; margin-top: 10px;">Por favor, aguarde</div>
             </div>
-            
-            <div class="info-row">
-                <div class="info-label">📋 Idade</div>
-                <div class="info-value" id="idade">---</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label">❤️ Doador de órgãos</div>
-                <div class="info-value" id="doador">---</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label">⚠️ Alergias</div>
-                <div class="info-value" id="alergias">---</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label">🏥 Condições médicas</div>
-                <div class="info-value" id="condicoes">---</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label">💊 Medicamentos</div>
-                <div class="info-value" id="medicamentos">---</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label">🏨 Hospital/Convênio</div>
-                <div class="info-value" id="hospital">---</div>
-            </div>
-            
-            <div style="margin-top: 24px;">
-                <h3>📞 Contatos de emergência</h3>
-                <div id="contatos"></div>
-            </div>
-            
-            <div class="warning">
-                ⚠️ As informações acima são fornecidas pelo titular do perfil. Em caso de emergência, ligue 192 (SAMU).
+            <div id="conteudoPerfil" style="display: none;">
+                <span class="emergency-badge">🚨 EMERGÊNCIA MÉDICA</span>
+                <h1 id="nome">---</h1>
+                <div style="text-align: center;">
+                    <div class="blood-type" id="sangue">---</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">📋 Idade</div>
+                    <div class="info-value" id="idade">---</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">❤️ Doador de órgãos</div>
+                    <div class="info-value" id="doador">---</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">⚠️ Alergias</div>
+                    <div class="info-value" id="alergias">---</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">🏥 Condições médicas</div>
+                    <div class="info-value" id="condicoes">---</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">💊 Medicamentos</div>
+                    <div class="info-value" id="medicamentos">---</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">🏨 Hospital/Convênio</div>
+                    <div class="info-value" id="hospital">---</div>
+                </div>
+                
+                <div style="margin-top: 24px;">
+                    <h3>📞 Contatos de emergência</h3>
+                    <div id="contatos"></div>
+                </div>
+                
+                <div class="warning">
+                    ⚠️ As informações acima são fornecidas pelo titular do perfil. Em caso de emergência, ligue 192 (SAMU).
+                </div>
             </div>
         </div>
         
@@ -106,22 +112,49 @@
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('id');
         
+        const loadingDiv = document.getElementById('loadingIndicator');
+        const conteudoDiv = document.getElementById('conteudoPerfil');
+        const perfilCard = document.getElementById('perfilCard');
+        
+        // Mostrar error si no hay ID
         if (!userId) {
-            document.body.innerHTML = '<div class="container"><div class="card"><h1>❌ Link inválido</h1><p>ID de usuário não encontrado.</p></div></div>';
+            loadingDiv.innerHTML = `
+                <div class="error-box">
+                    ❌ Link inválido<br>
+                    <small>ID de usuário não encontrado na URL.</small>
+                </div>
+            `;
+            loadingDiv.classList.remove('loading');
             return;
         }
         
+        console.log("ID do usuário:", userId);
+        
         async function carregarPerfil() {
             try {
+                console.log("Buscando perfil no Firebase...");
                 const docRef = doc(db, "perfiles", userId);
                 const docSnap = await getDoc(docRef);
                 
+                console.log("Documento existe?", docSnap.exists());
+                
                 if (!docSnap.exists()) {
-                    document.body.innerHTML = '<div class="container"><div class="card"><h1>❌ Perfil não encontrado</h1><p>Este usuário não existe ou excluiu sua conta.</p></div></div>';
+                    loadingDiv.innerHTML = `
+                        <div class="error-box">
+                            ❌ Perfil não encontrado<br>
+                            <small>Este usuário não existe ou excluiu sua conta.</small>
+                        </div>
+                    `;
+                    loadingDiv.classList.remove('loading');
                     return;
                 }
                 
                 const data = docSnap.data();
+                console.log("Dados carregados:", data);
+                
+                // Ocultar loading y mostrar contenido
+                loadingDiv.style.display = 'none';
+                conteudoDiv.style.display = 'block';
                 
                 // Mostrar datos básicos
                 document.getElementById('nome').innerText = data.nome || "Não informado";
@@ -138,6 +171,8 @@
                 contatosDiv.innerHTML = '';
                 
                 const contactos = [];
+                let temContatos = false;
+                
                 for (let i = 1; i <= 5; i++) {
                     const nome = data[`contato${i}_nome`];
                     const telefone = data[`contato${i}_telefone`];
@@ -146,6 +181,7 @@
                     const notificar = data[`contato${i}_notificar`];
                     
                     if (nome && nome.trim() !== "") {
+                        temContatos = true;
                         contactos.push({
                             nome: nome,
                             telefone: telefone,
@@ -157,12 +193,12 @@
                         const contactCard = document.createElement('div');
                         contactCard.className = 'contact-card';
                         contactCard.innerHTML = `
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                                 <div>
                                     <strong>${nome}</strong> ${relacao ? `(${relacao})` : ''}<br>
                                     ${telefone ? `📞 ${telefone}` : ''}
                                     ${email ? `<br>✉️ ${email}` : ''}
-                                    ${notificar ? '<span style="background: #009C3B20; padding: 2px 8px; border-radius: 20px; font-size: 10px;">🔔 Notificação ativa</span>' : ''}
+                                    ${notificar ? '<span style="background: #009C3B20; padding: 2px 8px; border-radius: 20px; font-size: 10px; margin-left: 8px;">🔔 Notificação ativa</span>' : ''}
                                 </div>
                                 ${telefone ? `<button onclick="window.location.href='tel:${telefone}'" style="background: #009C3B; color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer;">📞 Ligar</button>` : ''}
                             </div>
@@ -171,7 +207,7 @@
                     }
                 }
                 
-                if (contatosDiv.children.length === 0) {
+                if (!temContatos) {
                     contatosDiv.innerHTML = '<p style="color: #8a9a9a;">Nenhum contato de emergência registrado.</p>';
                 }
                 
@@ -179,8 +215,14 @@
                 await enviarAlertas(contactos, data);
                 
             } catch (error) {
-                console.error("Error cargando perfil:", error);
-                document.body.innerHTML = '<div class="container"><div class="card"><h1>❌ Erro ao carregar</h1><p>Tente novamente mais tarde.</p></div></div>';
+                console.error("Error carregando perfil:", error);
+                loadingDiv.innerHTML = `
+                    <div class="error-box">
+                        ❌ Erro ao carregar perfil<br>
+                        <small>${error.message}</small>
+                    </div>
+                `;
+                loadingDiv.classList.remove('loading');
             }
         }
         
@@ -193,6 +235,8 @@
                 return;
             }
             
+            console.log(`Enviando alertas a ${contactosParaNotificar.length} contactos...`);
+            
             const SERVICE_ID = "service_a6lrj31";
             const TEMPLATE_ID = "template_jt921om";
             
@@ -201,7 +245,6 @@
                     to_email: contacto.email,
                     to_name: contacto.nome,
                     user_name: userData.nome || "Usuário",
-                    user_phone: userData.telefone || "Não informado",
                     user_blood: userData.sangue || "Não informado",
                     user_allergies: userData.alergias || "Nenhuma",
                     user_conditions: userData.condicoes || "Nenhuma",
@@ -227,6 +270,7 @@
             }
         }
         
+        // Ejecutar
         carregarPerfil();
     </script>
 </body>
