@@ -889,12 +889,12 @@
     
     async function enviarEmailEmergencia(email, nomeContato, perfil, protocolo, localizacao) {
         if (!email) {
-            console.log("❌ No email provided");
+            console.log("❌ Nenhum email fornecido");
             return { success: false, error: "No email provided" };
         }
         
         const templateParams = {
-            email: email,
+            to_email: email,
             to_name: nomeContato,
             nome: perfil.nome || 'Usuário',
             data: new Date().toLocaleString('pt-BR'),
@@ -907,16 +907,18 @@
             medicamentos: perfil.medicamentos || 'Nenhum'
         };
         
+        console.log("📧 Enviando para:", email);
+        
         try {
             const result = await emailjs.send(
                 EMAILJS_CONFIG.SERVICE_ID,
                 EMAILJS_CONFIG.TEMPLATE_ID,
                 templateParams
             );
-            console.log(`✅ E-mail enviado para ${email}`);
+            console.log(`✅ E-mail enviado para ${email}`, result);
             return { success: true };
         } catch (error) {
-            console.error(`❌ Erro ao enviar e-mail para ${email}:`, error);
+            console.error(`❌ Erro ao enviar para ${email}:`, error);
             return { success: false, error: error };
         }
     }
@@ -965,7 +967,7 @@
         
         localStorage.setItem(lastKey, now.toString());
         
-        // Obtener contactos a notificar
+        // Pegar contatos com notificação ativada
         const contatosParaEnviar = [];
         for (let i = 1; i <= 5; i++) {
             const email = perfil[`contato${i}_email`];
@@ -973,6 +975,9 @@
             const nome = perfil[`contato${i}_nome`] || `Contato ${i}`;
             if (email && notificar === true) {
                 contatosParaEnviar.push({ email, nome });
+                console.log(`📧 Contato encontrado: ${nome} - ${email} (notificação: SIM)`);
+            } else if (email) {
+                console.log(`📧 Contato encontrado: ${nome} - ${email} (notificação: NÃO)`);
             }
         }
         
@@ -980,7 +985,6 @@
             console.log("⚠️ Nenhum contato com notificação ativa");
         }
         
-        // Geolocalização e envio de emails
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
                 currentUserLocation = {
@@ -1017,7 +1021,7 @@
                 console.error("❌ Erro de geolocalização:", error);
                 document.getElementById('locationStatus').innerHTML = '📍 Não foi possível obter a localização';
                 
-                // ENVIAR EMAILS MESMO SEM LOCALIZAÇÃO
+                // Enviar emails mesmo sem localização
                 for (const contato of contatosParaEnviar) {
                     await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, null);
                 }
@@ -1027,7 +1031,6 @@
         } else {
             document.getElementById('locationStatus').innerHTML = '📍 Geolocalização não suportada';
             
-            // ENVIAR EMAILS MESMO SEM GEOLOCALIZAÇÃO
             for (const contato of contatosParaEnviar) {
                 await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, null);
             }
@@ -1055,7 +1058,18 @@
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
         title.innerText = '📜 Termos e Condições';
-        body.innerHTML = `...`;
+        body.innerHTML = `
+            <h4>1. Aceitação dos Termos</h4>
+            <p>Ao utilizar MyLifeQR Brasil, você aceita estes Termos e Condições.</p>
+            <h4>2. Descrição do Serviço</h4>
+            <p>MyLifeQR Brasil é um sistema de identificação médica. Não é um serviço médico nem de emergência.</p>
+            <h4>3. Responsabilidade do Usuário</h4>
+            <p>Você é o único responsável pela veracidade e atualização de seus dados.</p>
+            <h4>4. Lei Aplicável</h4>
+            <p>Estes termos são regidos pela Lei Geral de Proteção de Dados (LGPD) do Brasil.</p>
+            <h4>5. Contato</h4>
+            <p>✉️ mylifeqrbrasil@gmail.com</p>
+        `;
         modal.style.display = 'flex';
     };
     
@@ -1064,7 +1078,18 @@
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
         title.innerText = '🔒 Política de Privacidade';
-        body.innerHTML = `...`;
+        body.innerHTML = `
+            <h4>1. Dados que Coletamos</h4>
+            <p>Coletamos nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência e foto (opcional).</p>
+            <h4>2. Uso das Informações</h4>
+            <p>As informações são usadas exclusivamente para seu perfil médico de emergência.</p>
+            <h4>3. Proteção de Dados</h4>
+            <p>Seus dados são protegidos pela LGPD. O acesso é registrado.</p>
+            <h4>4. Direitos do Titular</h4>
+            <p>Você tem direito a acessar, retificar, cancelar ou se opor ao uso de seus dados.</p>
+            <h4>5. Contato</h4>
+            <p>✉️ mylifeqrbrasil@gmail.com</p>
+        `;
         modal.style.display = 'flex';
     };
     
