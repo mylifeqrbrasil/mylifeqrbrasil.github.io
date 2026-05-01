@@ -695,7 +695,7 @@
         </div>
     </div>
     
-    <!-- Notificação de escaneo -->
+    <!-- Notificação de escaneamento -->
     <div id="scanNotification" class="scan-notification" style="display: none;">
         🔴 AVISO: PERFIL ESCANEADO 🔴<br>
         <span id="scanDateTime"></span><br>
@@ -708,7 +708,7 @@
         <span style="margin-left:auto;">MyLifeQR Brasil</span>
     </div>
     
-    <!-- Advertencia de casco -->
+    <!-- Advertência do capacete -->
     <div class="helmet-warning">
         <div class="helmet-icon">⚠️</div>
         <div class="helmet-title">NÃO REMOVER O CAPACETE!</div>
@@ -721,11 +721,11 @@
             <div class="avatar-placeholder" id="avatarPlaceholder">👤</div>
             <img id="avatarImg" style="display:none; width:100%; height:100%; object-fit:cover;">
         </div>
-        <div class="profile-name" id="perfilNome">Carregando...</div>
-        <div class="profile-age" id="perfilIdade"></div>
+        <div class="profile-name" id="perfilNombre">Carregando...</div>
+        <div class="profile-age" id="perfilEdad"></div>
     </div>
     
-    <!-- Ubicación -->
+    <!-- Localização -->
     <div class="location-card">
         <div class="location-header">
             <span>📍</span>
@@ -746,7 +746,7 @@
         </a>
     </div>
     
-    <!-- Instrucciones para no paramédicos -->
+    <!-- Instruções para quem não é paramédico -->
     <div class="accordion">
         <div class="accordion-header" onclick="toggleAccordion()">
             🚑 GUIA PARA QUEM NÃO É PARAMÉDICO
@@ -786,18 +786,18 @@
         </div>
     </div>
     
-    <!-- Datos médicos -->
+    <!-- Dados médicos -->
     <div class="medical-section">
         <div class="section-title">🩸 Dados Médicos</div>
         <div class="vitals-grid">
             <div class="vital-card blood">
                 <div class="vital-label">TIPO SANGUÍNEO</div>
-                <div class="vital-value blood" id="perfilSangue">---</div>
+                <div class="vital-value blood" id="perfilSangre">---</div>
             </div>
             <div class="vital-card">
                 <div class="vital-label">DOADOR DE ÓRGÃOS</div>
-                <div class="vital-value" id="perfilDoadorGrande">---</div>
-                <div id="perfilDoadorBadge" class="donor-badge" style="display: none;"></div>
+                <div class="vital-value" id="perfilDonadorGrande">---</div>
+                <div id="perfilDonadorBadge" class="donor-badge" style="display: none;"></div>
             </div>
         </div>
         
@@ -808,7 +808,7 @@
         
         <div class="info-card">
             <div class="info-label">🏥 CONDIÇÕES MÉDICAS</div>
-            <div class="info-value" id="perfilCondicoes">---</div>
+            <div class="info-value" id="perfilCondições">---</div>
         </div>
         
         <div class="info-card">
@@ -817,13 +817,13 @@
         </div>
     </div>
     
-    <!-- Contactos de emergencia -->
+    <!-- Contatos de emergência -->
     <div class="medical-section">
         <div class="section-title">📞 Contatos de Emergência</div>
-        <div id="contatosContainer"></div>
+        <div id="contactosContainer"></div>
     </div>
     
-    <!-- Información adicional -->
+    <!-- Informações adicionais -->
     <div class="medical-section">
         <div class="section-title">📋 Informações Adicionais</div>
         <div class="info-card">
@@ -832,7 +832,7 @@
         </div>
         <div class="notes-card">
             <div class="info-label">📝 OBSERVAÇÕES ADICIONAIS</div>
-            <div class="notes-text" id="perfilObservacoes">---</div>
+            <div class="notes-text" id="perfilNotas">---</div>
         </div>
     </div>
     
@@ -841,13 +841,13 @@
         <div class="footer-logo"><img src="MyLifeQRLogo.png" alt="MyLifeQR Brasil" onerror="this.style.display='none'"></div>
         <p class="disclaimer-text">
             <strong>⚠️ AVISO LEGAL IMPORTANTE ⚠️</strong><br><br>
-            MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><br>
+            MyLifeQR Brasil é um <strong>sistema de identificação médica de apoio</strong>. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><br>
             Em caso de emergência, a prioridade deve ser sempre ligar para o 192 (SAMU) e seguir as orientações da equipe médica.<br><br>
             <strong>📞 Em caso de emergência, ligue imediatamente para 192 (SAMU).</strong><br><br>
             <strong>✉️ Contato: mylifeqrbrasil@gmail.com</strong>
         </p>
         <div style="margin-top: 16px;">
-            <span class="legal-link" onclick="showTermos()">📜 Termos e Condições</span>
+            <span class="legal-link" onclick="showTerminos()">📜 Termos e Condições</span>
             <span style="color: #ccc; margin: 0 8px;">|</span>
             <span class="legal-link" onclick="showPrivacidade()">🔒 Política de Privacidade</span>
         </div>
@@ -868,14 +868,14 @@
     import { initializeApp } from "firebase/app";
     import { getFirestore, doc, getDoc, collection, addDoc } from "firebase/firestore";
     
-    // MYLIFEQR BRASIL - FIREBASE CONFIG
     const firebaseConfig = {
         apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
         authDomain: "mylifeqrbrasil1.firebaseapp.com",
         projectId: "mylifeqrbrasil1",
         storageBucket: "mylifeqrbrasil1.firebasestorage.app",
         messagingSenderId: "680108596725",
-        appId: "1:680108596725:web:d82e2121ce811bad45d4bc"
+        appId: "1:680108596725:web:d82e2121ce811bad45d4bc",
+        measurementId: "G-DKR6WB9JJM"
     };
     
     const app = initializeApp(firebaseConfig);
@@ -885,6 +885,7 @@
     let scanRegistered = false;
     let currentUserLocation = null;
     let currentPerfilData = null;
+    let lastNotificationTime = 0; // Control anti-spam: última vez que se enviaron correos para este perfil
     
     // Configuração EmailJS
     const EMAILJS_CONFIG = {
@@ -894,9 +895,9 @@
     };
     
     emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-    console.log("✅ EmailJS inicializado para MyLifeQR Brasil");
+    console.log("✅ EmailJS inicializado corretamente");
     
-    // Funções UI
+    // Funciones UI
     window.toggleAccordion = () => {
         const header = document.querySelector('.accordion-header');
         const content = document.getElementById('accordionContent');
@@ -917,21 +918,22 @@
             gate.style.display = 'none';
             profile.style.display = 'block';
             setTimeout(() => profile.classList.add('visible'), 10);
-            registrarEscaneamento();
+            // IMPORTANTE: O escaneamento e envio de e-mails SÓ é executado após aceitar o gate
+            registrarEscaneo();
         }, 350);
     };
     
-    async function enviarEmailEmergencia(email, nomeContato, perfil, protocolo, localizacao) {
+    async function enviarCorreoEmergencia(email, nomeContacto, perfil, folio, ubicacion) {
         if (!email) return { success: false, error: "No email provided" };
         
         const templateParams = {
             email: email,
-            to_name: nomeContato,
+            to_name: nomeContacto,
             nome: perfil.nome || 'Usuário',
             data: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
-            protocolo: protocolo,
-            latitude: localizacao?.lat || 'Não disponível',
-            longitude: localizacao?.lng || 'Não disponível',
+            folio: folio,
+            latitude: ubicacion?.lat || 'Não disponível',
+            longitude: ubicacion?.lng || 'Não disponível',
             sangue: perfil.sangue || 'Não registrado',
             alergias: perfil.alergias || 'Nenhuma',
             condicoes: perfil.condicoes || 'Nenhuma',
@@ -952,9 +954,9 @@
         }
     }
     
-    async function registrarEscaneamento() {
+    async function registrarEscaneo() {
         if (scanRegistered) {
-            console.log("⚠️ Escaneamento já registrado anteriormente. Ignorando...");
+            console.log("⚠️ Escaneamento já registrado anteriormente. Omitindo...");
             return;
         }
         
@@ -966,16 +968,17 @@
             return;
         }
         
+        // CONTROLE ANTI-SPAM: Verificar se já foram enviados e-mails para este perfil recentemente (5 minutos)
         const lastKey = `last_notification_${profileId}`;
         const lastNotif = localStorage.getItem(lastKey);
         const now = Date.now();
-        if (lastNotif && (now - parseInt(lastNotif)) < 300000) {
-            console.log("⚠️ Já foi enviada uma notificação para este perfil nos últimos 5 minutos. Ignorando.");
-            scanRegistered = true;
+        if (lastNotif && (now - parseInt(lastNotif)) < 300000) { // 5 minutos = 300,000 ms
+            console.log("⚠️ Já foi enviada uma notificação para este perfil nos últimos 5 minutos. Omitindo para evitar SPAM.");
+            scanRegistered = true; // Marcamos como registrado para não tentar de novo
             return;
         }
         
-        const docRef = doc(db, "perfiles", profileId);
+        const docRef = doc(db, "perfis", profileId);
         const docSnap = await getDoc(docRef);
         
         if (!docSnap.exists()) {
@@ -986,14 +989,15 @@
         currentPerfilData = docSnap.data();
         const perfil = currentPerfilData;
         
-        const protocolo = 'MLQR-BR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+        const folio = 'MLQR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
         const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         
         const notif = document.getElementById('scanNotification');
         document.getElementById('scanDateTime').innerHTML = `📅 ${dataHora}`;
-        document.getElementById('scanFolio').innerHTML = `Protocolo: ${protocolo}`;
+        document.getElementById('scanFolio').innerHTML = `Folio: ${folio}`;
         notif.style.display = 'block';
         
+        // Salvar no localStorage que já foi enviada notificação
         localStorage.setItem(lastKey, now.toString());
         
         if (navigator.geolocation) {
@@ -1011,16 +1015,17 @@
                 document.getElementById('googleMapsLink').href = mapsUrl;
                 document.getElementById('wazeLink').href = wazeUrl;
                 
-                await addDoc(collection(db, "eventos_escaneo"), {
+                // Registrar evento no Firestore
+                await addDoc(collection(db, "eventos_escaneamento"), {
                     perfil_id: profileId,
                     perfil_nome: perfil.nome || 'Usuário',
-                    protocolo: protocolo,
+                    folio: folio,
                     data: new Date().toISOString(),
                     localizacao: currentUserLocation,
                     dispositivo: navigator.userAgent
                 });
                 
-                // Enviar e-mails para contatos com notificação ativada
+                // Enviar e-mails APENAS para contatos que têm notificação ativada
                 const contatosParaEnviar = [];
                 for (let i = 1; i <= 5; i++) {
                     const email = perfil[`contato${i}_email`];
@@ -1034,7 +1039,7 @@
                 console.log(`📧 Enviando e-mails para ${contatosParaEnviar.length} contatos...`);
                 
                 for (const contato of contatosParaEnviar) {
-                    await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, currentUserLocation);
+                    await enviarCorreoEmergencia(contato.email, contato.nome, perfil, folio, currentUserLocation);
                 }
                 
                 scanRegistered = true;
@@ -1042,6 +1047,7 @@
             }, (error) => {
                 console.error("❌ Erro de geolocalização:", error);
                 document.getElementById('locationStatus').innerHTML = '📍 Não foi possível obter a localização. Ative os serviços de localização.';
+                // Mesmo assim marcamos como registrado para não tentar novamente
                 scanRegistered = true;
             });
         } else {
@@ -1065,20 +1071,20 @@
         document.getElementById('photoModal').style.display = 'none';
     };
     
-    window.showTermos = () => {
+    window.showTerminos = () => {
         const modal = document.getElementById('modalLegal');
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
         title.innerText = '📜 Termos e Condições';
         body.innerHTML = `
             <h4>1. Aceitação dos Termos</h4>
-            <p>Ao utilizar MyLifeQR Brasil, você aceita estes Termos e Condições.</p>
+            <p>Ao utilizar o MyLifeQR Brasil, você aceita estes Termos e Condições.</p>
             <h4>2. Descrição do Serviço</h4>
             <p>MyLifeQR Brasil é um sistema de identificação médica. Não é um serviço médico nem de emergência.</p>
             <h4>3. Responsabilidade do Usuário</h4>
-            <p>Você é o único responsável pela veracidade e atualização de seus dados.</p>
+            <p>Você é o único responsável pela veracidade e atualização dos seus dados.</p>
             <h4>4. Lei Aplicável</h4>
-            <p>Estes termos são regidos pela Lei Geral de Proteção de Dados (LGPD) do Brasil.</p>
+            <p>Estes termos são regidos pelas leis da República Federativa do Brasil.</p>
             <h4>5. Contato</h4>
             <p>✉️ mylifeqrbrasil@gmail.com</p>
         `;
@@ -1096,9 +1102,9 @@
             <h4>2. Uso das Informações</h4>
             <p>As informações são usadas exclusivamente para seu perfil médico de emergência.</p>
             <h4>3. Proteção de Dados</h4>
-            <p>Seus dados são protegidos pela LGPD. O acesso é registrado.</p>
+            <p>Seus dados estão protegidos pela LGPD. O acesso é registrado.</p>
             <h4>4. Direitos do Titular</h4>
-            <p>Você tem direito a acessar, retificar, cancelar ou se opor ao uso de seus dados.</p>
+            <p>Você tem direito de acessar, corrigir, cancelar ou se opor ao uso dos seus dados.</p>
             <h4>5. Contato</h4>
             <p>✉️ mylifeqrbrasil@gmail.com</p>
         `;
@@ -1118,38 +1124,38 @@
         const profileId = urlParams.get('id');
         
         if (!profileId) {
-            document.getElementById('perfilNome').innerText = 'ERRO';
-            document.getElementById('perfilIdade').innerText = 'ID não encontrado';
+            document.getElementById('perfilNombre').innerText = 'ERRO';
+            document.getElementById('perfilEdad').innerText = 'ID não encontrado';
             return;
         }
         
-        const docRef = doc(db, "perfiles", profileId);
+        const docRef = doc(db, "perfis", profileId);
         const docSnap = await getDoc(docRef);
         
         if (!docSnap.exists()) {
-            document.getElementById('perfilNome').innerText = 'PERFIL NÃO ENCONTRADO';
-            document.getElementById('perfilIdade').innerText = 'ID inválido';
+            document.getElementById('perfilNombre').innerText = 'PERFIL NÃO ENCONTRADO';
+            document.getElementById('perfilEdad').innerText = 'ID inválido';
             return;
         }
         
         const perfil = docSnap.data();
         
-        document.getElementById('perfilNome').innerText = perfil.nome || 'Usuário';
-        document.getElementById('perfilIdade').innerText = perfil.idade ? `${perfil.idade} anos` : 'Idade não registrada';
-        document.getElementById('perfilSangue').innerText = perfil.sangue || 'Não registrado';
+        document.getElementById('perfilNombre').innerText = perfil.nome || 'Usuário';
+        document.getElementById('perfilEdad').innerText = perfil.idade ? `${perfil.idade} anos` : 'Idade não registrada';
+        document.getElementById('perfilSangre').innerText = perfil.sangue || 'Não registrado';
         
         const doadorValor = perfil.doador || 'Não especificado';
         if (doadorValor === 'Sim') {
-            document.getElementById('perfilDoadorGrande').innerHTML = '✅';
-            document.getElementById('perfilDoadorBadge').style.display = 'inline-block';
-            document.getElementById('perfilDoadorBadge').innerHTML = '✅ SIM, doador de órgãos';
+            document.getElementById('perfilDonadorGrande').innerHTML = '✅';
+            document.getElementById('perfilDonadorBadge').style.display = 'inline-block';
+            document.getElementById('perfilDonadorBadge').innerHTML = '✅ SIM, doador de órgãos';
         } else if (doadorValor === 'Não') {
-            document.getElementById('perfilDoadorGrande').innerHTML = '❌';
-            document.getElementById('perfilDoadorBadge').style.display = 'inline-block';
-            document.getElementById('perfilDoadorBadge').innerHTML = '❌ NÃO doador';
+            document.getElementById('perfilDonadorGrande').innerHTML = '❌';
+            document.getElementById('perfilDonadorBadge').style.display = 'inline-block';
+            document.getElementById('perfilDonadorBadge').innerHTML = '❌ NÃO doador';
         } else {
-            document.getElementById('perfilDoadorGrande').innerHTML = '?';
-            document.getElementById('perfilDoadorBadge').style.display = 'none';
+            document.getElementById('perfilDonadorGrande').innerHTML = '?';
+            document.getElementById('perfilDonadorBadge').style.display = 'none';
         }
         
         const avatarImg = document.getElementById('avatarImg');
@@ -1167,40 +1173,40 @@
         
         const alergias = perfil.alergias ? perfil.alergias.split(',').map(a => `<span class="tag">${a.trim()}</span>`).join(' ') : 'Nenhuma registrada';
         document.getElementById('perfilAlergias').innerHTML = alergias;
-        document.getElementById('perfilCondicoes').innerText = perfil.condicoes || 'Nenhuma registrada';
+        document.getElementById('perfilCondições').innerText = perfil.condicoes || 'Nenhuma registrada';
         document.getElementById('perfilMedicamentos').innerText = perfil.medicamentos || 'Nenhum registrado';
-        document.getElementById('perfilHospital').innerText = perfil.hospital || 'Não especificado';
-        document.getElementById('perfilObservacoes').innerText = perfil.observacoes || 'Sem observações adicionais';
+        document.getElementById('perfilHospital').innerText = perfil.convenio || 'Não especificado';
+        document.getElementById('perfilNotas').innerText = perfil.observacoes || 'Sem observações adicionais';
         
-        const contatosDiv = document.getElementById('contatosContainer');
-        contatosDiv.innerHTML = '';
+        const contactosDiv = document.getElementById('contactosContainer');
+        contactosDiv.innerHTML = '';
         
         const contatos = [
-            { nome: perfil.contato1_nome, telefone: perfil.contato1_telefone, relacao: perfil.contato1_relacao, num: 1 },
-            { nome: perfil.contato2_nome, telefone: perfil.contato2_telefone, relacao: perfil.contato2_relacao, num: 2 },
-            { nome: perfil.contato3_nome, telefone: perfil.contato3_telefone, relacao: perfil.contato3_relacao, num: 3 },
-            { nome: perfil.contato4_nome, telefone: perfil.contato4_telefone, relacao: perfil.contato4_relacao, num: 4 },
-            { nome: perfil.contato5_nome, telefone: perfil.contato5_telefone, relacao: perfil.contato5_relacao, num: 5 }
+            { nome: perfil.contato1_nome, telefone: perfil.contato1_tel, relacao: perfil.contato1_relacao, num: 1 },
+            { nome: perfil.contato2_nome, telefone: perfil.contato2_tel, relacao: perfil.contato2_relacao, num: 2 },
+            { nome: perfil.contato3_nome, telefone: perfil.contato3_tel, relacao: perfil.contato3_relacao, num: 3 },
+            { nome: perfil.contato4_nome, telefone: perfil.contato4_tel, relacao: perfil.contato4_relacao, num: 4 },
+            { nome: perfil.contato5_nome, telefone: perfil.contato5_tel, relacao: perfil.contato5_relacao, num: 5 }
         ];
         
         contatos.forEach(contato => {
             if (contato.nome && contato.telefone) {
                 const relacaoMostrar = contato.relacao ? ` (${contato.relacao})` : '';
-                contatosDiv.innerHTML += `
+                contactosDiv.innerHTML += `
                     <div class="contact-card">
                         <div class="contact-avatar">${contato.nome.charAt(0)}</div>
                         <div class="contact-info">
                             <div class="contact-name">${contato.nome}${relacaoMostrar}</div>
                             <div class="contact-relation">Contato ${contato.num}</div>
                         </div>
-                        <a href="tel:${contato.telefone}" class="btn-call">📞 Ligar</a>
+                        <a href="tel:+55${contato.telefone}" class="btn-call">📞 Ligar</a>
                     </div>
                 `;
             }
         });
         
-        if (contatosDiv.innerHTML === '') {
-            contatosDiv.innerHTML = '<div class="info-card"><div class="info-value">Nenhum contato registrado</div></div>';
+        if (contactosDiv.innerHTML === '') {
+            contactosDiv.innerHTML = '<div class="info-card"><div class="info-value">Nenhum contato registrado</div></div>';
         }
     }
     
