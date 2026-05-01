@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs2-fix/qrcode.min.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -154,7 +155,7 @@
         .sticker-container { position: relative; width: 100%; margin: 0 auto; }
         .sticker-container.horizontal { max-width: 400px; }
         .sticker-container.cuadrado { max-width: 200px; }
-        .sticker-bg { width: 100%; height: auto; display: block; border-radius: 12px; }
+        .sticker-bg { width: 100%; height: auto; display: block; border-radius: 12px; background: #1a1a1a; min-height: 100px; }
         .sticker-qr-overlay { position: absolute; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 12px; }
         .sticker-qr-overlay canvas { width: 100% !important; height: 100% !important; border-radius: 12px; }
         .btn-download { background: #009C3B; color: white; border: none; padding: 12px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; margin: 6px; }
@@ -181,7 +182,7 @@
         .copyright { margin-top: 20px; font-size: 10px; color: #aabbab; }
         .sticker-selectors { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
         .selector-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .selector-label { font-size: 12px; font-weight: 600; color: #6a7a7a; }
+        .selector-label { font-size: 12px; font-weight: 600; color: #6a7a6a; }
         .format-option, .color-option { cursor: pointer; padding: 8px 16px; border-radius: 40px; font-weight: 600; font-size: 14px; }
         .format-option { background: #f0f4f0; color: #4a5a5a; border: 2px solid #e0e8e0; }
         .format-option.active { background: #009C3B; color: white; }
@@ -401,8 +402,12 @@
             <div><div class="sticker-preview"><h2 style="font-size: 22px; font-weight: 700; color: #009C3B;">🔲 Seu adesivo personalizado</h2>
                 <div class="sticker-selectors"><div class="selector-group"><span class="selector-label">Formato:</span><div class="format-option active" data-format="horizontal">📏 Horizontal (6×3cm)</div><div class="format-option" data-format="cuadrado">⬛ Quadrado (3×3cm)</div></div>
                 <div class="selector-group"><span class="selector-label">Cor:</span><div class="color-option negro active" data-color="negro">⚫ Fundo Preto</div><div class="color-option verde" data-color="verde">🟢 Fundo Verde</div></div></div>
-                <div id="stickerContainer" class="sticker-container horizontal"><img id="stickerBgImg" class="sticker-bg" src="TemplateNegroMyLifeQRBrasil.png" alt="Template" onerror="this.style.display='none'"><div id="qrOverlay" class="sticker-qr-overlay"></div></div>
-                <button class="btn-download" id="downloadPngBtn">📥 Baixar PNG</button><button class="btn-download" id="downloadPdfBtn">📄 Baixar PDF</button>
+                <div id="stickerContainer" class="sticker-container horizontal">
+                    <img id="stickerBgImg" class="sticker-bg" src="TemplateNegroMyLifeQRBrasil.png" alt="Template">
+                    <div id="qrOverlay" class="sticker-qr-overlay"></div>
+                </div>
+                <button class="btn-download" id="downloadPngBtn">📥 Baixar PNG</button>
+                <button class="btn-download" id="downloadPdfBtn">📄 Baixar PDF</button>
                 <p style="font-size: 11px; color: #8a9a9a; margin-top: 12px;">QR de 7cm (horizontal) ou 2.7cm (quadrado) | Escolha formato e cor</p>
             </div></div>
         </div>
@@ -456,13 +461,6 @@
     let fotoBase64 = "";
     let currentFormato = "horizontal";
     let currentColor = "negro";
-    let qrUpdateTimeout;
-    
-    // Configuración QR
-    const QR_CONFIG = {
-        horizontal: { leftPercent: 56.5, topPercent: 6, widthPercent: 37.4, heightPercent: 74.6, targetWidth: 709, targetHeight: 355 },
-        cuadrado: { leftPercent: 13, topPercent: 6, widthPercent: 75, heightPercent: 75, targetWidth: 355, targetHeight: 356 }
-    };
     
     // Elementos DOM
     const landingScreen = document.getElementById('landingScreen');
@@ -471,7 +469,7 @@
     const registerFormContainer = document.getElementById('registerFormContainer');
     
     // ============================================
-    // FUNCIONES DE NAVEGACIÓN - SIMPLES Y DIRECTAS
+    // FUNCIONES DE NAVEGACIÓN
     // ============================================
     
     function showLoginForm() {
@@ -494,30 +492,20 @@
         }, 100);
     }
     
-    // ============================================
-    // ASIGNAR EVENTOS A BOTONES
-    // ============================================
-    
-    // Botones principales
+    // Asignar eventos de navegación
     document.getElementById('navLoginBtn')?.addEventListener('click', showLoginForm);
     document.getElementById('navRegisterBtn')?.addEventListener('click', showRegisterForm);
     document.getElementById('heroRegisterBtn')?.addEventListener('click', showRegisterForm);
     document.getElementById('stickerRegisterBtn')?.addEventListener('click', showRegisterForm);
     document.getElementById('switchToRegisterBtn')?.addEventListener('click', showRegisterForm);
     document.getElementById('switchToLoginBtn')?.addEventListener('click', showLoginForm);
-    
-    // Botón "Ver adesivo"
     document.getElementById('verStickerBtn')?.addEventListener('click', () => {
         document.getElementById('stickerSection').scrollIntoView({ behavior: 'smooth' });
     });
-    
-    // Botón de donación
     document.getElementById('donateBtn')?.addEventListener('click', (e) => {
         e.preventDefault();
         alert('💚 Obrigado por querer ajudar! Em breve teremos opções de doação.');
     });
-    
-    // Botón de emergencia
     document.getElementById('emergencyBtn')?.addEventListener('click', () => {
         if (confirm('🚨 Você está em uma emergência? Ligue 192 (SAMU) imediatamente!')) {
             window.location.href = 'tel:192';
@@ -529,13 +517,216 @@
         localStorage.setItem('cookiesAceptadas', 'true');
         document.getElementById('cookieConsent').style.display = 'none';
     };
-    
     if (!localStorage.getItem('cookiesAceptadas')) {
         document.getElementById('cookieConsent').style.display = 'block';
     }
     
     // ============================================
-    // FUNCIONES DE FIREBASE Y PERFIL
+    // FUNCIONES DEL STICKER - CORREGIDAS
+    // ============================================
+    
+    const QR_CONFIG = {
+        horizontal: { leftPercent: 56.5, topPercent: 6, widthPercent: 37.4, heightPercent: 74.6, targetWidth: 709, targetHeight: 355 },
+        cuadrado: { leftPercent: 13, topPercent: 6, widthPercent: 75, heightPercent: 75, targetWidth: 355, targetHeight: 356 }
+    };
+    
+    function getStickerImage() {
+        if (currentFormato === "horizontal") {
+            return currentColor === "negro" ? 'TemplateNegroMyLifeQRBrasil.png' : 'TemplateVerdeMyLifeQRBrasil.png';
+        } else {
+            return currentColor === "negro" ? 'TemplateNegroMyLifeQRBrasilCuadrado.png' : 'TemplateVerdeMyLifeQRBrasilCuadrado.png';
+        }
+    }
+    
+    function updateStickerImage() {
+        const imgElement = document.getElementById('stickerBgImg');
+        if (imgElement) {
+            imgElement.src = getStickerImage();
+            imgElement.onload = () => {
+                setTimeout(() => {
+                    positionQR();
+                    generateQR();
+                }, 100);
+            };
+            if (imgElement.complete) {
+                setTimeout(() => {
+                    positionQR();
+                    generateQR();
+                }, 100);
+            }
+        }
+    }
+    
+    function positionQR() {
+        const container = document.getElementById('stickerContainer');
+        const overlay = document.getElementById('qrOverlay');
+        const img = document.getElementById('stickerBgImg');
+        if (!container || !overlay || !img) return;
+        
+        const imgRect = img.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        if (imgRect.width === 0) {
+            setTimeout(() => positionQR(), 100);
+            return;
+        }
+        
+        const config = QR_CONFIG[currentFormato];
+        const relativeLeft = (config.leftPercent / 100) * imgRect.width;
+        const relativeTop = (config.topPercent / 100) * imgRect.height;
+        
+        overlay.style.position = 'absolute';
+        overlay.style.left = `${relativeLeft}px`;
+        overlay.style.top = `${relativeTop}px`;
+        overlay.style.width = `${(config.widthPercent / 100) * imgRect.width}px`;
+        overlay.style.height = `${(config.heightPercent / 100) * imgRect.height}px`;
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+    }
+    
+    function generateQR() {
+        const urlPerfil = currentUser ? 
+            `https://mylifeqrbrasil.github.io/perfil.html?id=${currentUser.uid}` : 
+            'https://mylifeqrbrasil.github.io';
+        
+        const overlay = document.getElementById('qrOverlay');
+        if (overlay && typeof QRCode !== 'undefined') {
+            overlay.innerHTML = '';
+            const img = document.getElementById('stickerBgImg');
+            const imgRect = img.getBoundingClientRect();
+            
+            if (imgRect.width === 0) {
+                setTimeout(() => generateQR(), 100);
+                return;
+            }
+            
+            const config = QR_CONFIG[currentFormato];
+            const qrSize = Math.min(
+                (config.widthPercent / 100) * imgRect.width,
+                (config.heightPercent / 100) * imgRect.height,
+                250
+            );
+            
+            try {
+                new QRCode(overlay, {
+                    text: urlPerfil,
+                    width: qrSize,
+                    height: qrSize,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            } catch(e) {
+                console.error('Error generando QR:', e);
+            }
+        } else if (overlay) {
+            setTimeout(() => generateQR(), 200);
+        }
+    }
+    
+    // Eventos del sticker
+    document.querySelectorAll('.format-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            document.querySelectorAll('.format-option').forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+            currentFormato = opt.getAttribute('data-format');
+            const container = document.getElementById('stickerContainer');
+            container.classList.remove('horizontal', 'cuadrado');
+            container.classList.add(currentFormato);
+            updateStickerImage();
+        });
+    });
+    
+    document.querySelectorAll('.color-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+            currentColor = opt.getAttribute('data-color');
+            updateStickerImage();
+        });
+    });
+    
+    // Download functions
+    async function downloadPNG() {
+        const container = document.getElementById('stickerContainer');
+        if (!container) return;
+        
+        const btn = document.getElementById('downloadPngBtn');
+        const originalText = btn.innerText;
+        btn.innerText = '⏳ Gerando PNG...';
+        btn.disabled = true;
+        
+        try {
+            await new Promise(r => setTimeout(r, 300));
+            const canvas = await html2canvas(container, { scale: 4, backgroundColor: '#ffffff', useCORS: true });
+            const config = QR_CONFIG[currentFormato];
+            const finalCanvas = document.createElement('canvas');
+            finalCanvas.width = config.targetWidth;
+            finalCanvas.height = config.targetHeight;
+            const ctx = finalCanvas.getContext('2d');
+            ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, config.targetWidth, config.targetHeight);
+            
+            const link = document.createElement('a');
+            link.download = `mylifeqr_${currentFormato}_${currentColor}.png`;
+            link.href = finalCanvas.toDataURL('image/png');
+            link.click();
+        } catch (error) {
+            alert('❌ Erro ao gerar imagem');
+        } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }
+    }
+    
+    async function downloadPDF() {
+        const container = document.getElementById('stickerContainer');
+        if (!container) return;
+        
+        const btn = document.getElementById('downloadPdfBtn');
+        const originalText = btn.innerText;
+        btn.innerText = '⏳ Gerando PDF...';
+        btn.disabled = true;
+        
+        try {
+            await new Promise(r => setTimeout(r, 300));
+            const canvas = await html2canvas(container, { scale: 4, backgroundColor: '#ffffff', useCORS: true });
+            const config = QR_CONFIG[currentFormato];
+            const finalCanvas = document.createElement('canvas');
+            finalCanvas.width = config.targetWidth;
+            finalCanvas.height = config.targetHeight;
+            const ctx = finalCanvas.getContext('2d');
+            ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, config.targetWidth, config.targetHeight);
+            const imgData = finalCanvas.toDataURL('image/png');
+            
+            if (!window.jspdf?.jsPDF) {
+                await new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const size = currentFormato === "horizontal" ? [60, 30] : [30, 30];
+            const pdf = new jsPDF({ orientation: size[0] > size[1] ? 'landscape' : 'portrait', unit: 'mm', format: size });
+            pdf.addImage(imgData, 'PNG', 0, 0, size[0], size[1]);
+            pdf.save(`mylifeqr_${currentFormato}_${currentColor}.pdf`);
+        } catch (error) {
+            alert('❌ Erro ao gerar PDF');
+        } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }
+    }
+    
+    document.getElementById('downloadPngBtn')?.addEventListener('click', downloadPNG);
+    document.getElementById('downloadPdfBtn')?.addEventListener('click', downloadPDF);
+    
+    // ============================================
+    // RESTO DE FUNCIONES (Firebase, perfil, etc.)
     // ============================================
     
     async function actualizarContador() {
@@ -545,21 +736,19 @@
             if (counterDoc.exists() && counterDoc.data().totalUsuarios) {
                 total = counterDoc.data().totalUsuarios;
             }
-            const vidasElement = document.getElementById('vidasCounter');
-            if (vidasElement) vidasElement.innerHTML = `💚 ${total}+ vidas protegidas`;
-        } catch (error) { 
-            const vidasElement = document.getElementById('vidasCounter');
-            if (vidasElement) vidasElement.innerHTML = `💚 500+ vidas protegidas`;
+            document.getElementById('vidasCounter').innerHTML = `💚 ${total}+ vidas protegidas`;
+        } catch (error) {
+            document.getElementById('vidasCounter').innerHTML = `💚 500+ vidas protegidas`;
         }
     }
     
     async function obtenerIP() {
-        try { 
-            const response = await fetch('https://api.ipify.org?format=json'); 
-            const data = await response.json(); 
-            return data.ip; 
-        } catch (error) { 
-            return null; 
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        } catch (error) {
+            return null;
         }
     }
     
@@ -567,102 +756,18 @@
     document.getElementById('btnSuscripcion')?.addEventListener('click', async () => {
         const email = document.getElementById('suscripcionEmail').value;
         const msgDiv = document.getElementById('suscripcionMsg');
-        if (!email) { 
-            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ E-mail inválido</span>'; 
-            return; 
+        if (!email) {
+            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ E-mail inválido</span>';
+            return;
         }
         try {
             await addDoc(collection(db, "suscriptores"), { email, data: new Date().toISOString(), origem: "MyLifeQR Brasil" });
             msgDiv.innerHTML = '<span style="color: #009C3B;">✅ Obrigado por se inscrever!</span>';
             document.getElementById('suscripcionEmail').value = '';
             setTimeout(() => msgDiv.innerHTML = '', 3000);
-        } catch (error) { 
-            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ Erro, tente novamente</span>'; 
+        } catch (error) {
+            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ Erro, tente novamente</span>';
         }
-    });
-    
-    // Sticker funciones
-    function obtenerImagenSticker() {
-        if (currentFormato === "horizontal") {
-            return currentColor === "negro" ? 'TemplateNegroMyLifeQRBrasil.png' : 'TemplateVerdeMyLifeQRBrasil.png';
-        } else {
-            return currentColor === "negro" ? 'TemplateNegroMyLifeQRBrasilCuadrado.png' : 'TemplateVerdeMyLifeQRBrasilCuadrado.png';
-        }
-    }
-    
-    function atualizarImagemSticker() {
-        clearTimeout(qrUpdateTimeout);
-        const imgElement = document.getElementById('stickerBgImg');
-        if (imgElement) {
-            imgElement.src = obtenerImagemSticker();
-            imgElement.onload = () => {
-                qrUpdateTimeout = setTimeout(() => {
-                    posicionarQR();
-                    if (currentUser) actualizarQR();
-                }, 50);
-            };
-            if (imgElement.complete && currentUser) {
-                posicionarQR();
-                actualizarQR();
-            }
-        }
-    }
-    
-    function posicionarQR() {
-        const container = document.getElementById('stickerContainer');
-        const overlay = document.getElementById('qrOverlay');
-        const img = document.getElementById('stickerBgImg');
-        if (!container || !overlay || !img || !img.complete) return;
-        const imgRect = img.getBoundingClientRect();
-        if (imgRect.width === 0) return;
-        const config = QR_CONFIG[currentFormato];
-        overlay.style.left = `${(config.leftPercent / 100) * imgRect.width}px`;
-        overlay.style.top = `${(config.topPercent / 100) * imgRect.height}px`;
-        overlay.style.width = `${(config.widthPercent / 100) * imgRect.width}px`;
-        overlay.style.height = `${(config.heightPercent / 100) * imgRect.height}px`;
-        overlay.style.display = 'flex';
-    }
-    
-    function actualizarQR() {
-        if (!currentUser) return;
-        const urlPerfil = `https://mylifeqrbrasil.github.io/perfil.html?id=${currentUser.uid}`;
-        const overlay = document.getElementById('qrOverlay');
-        if (overlay && window.QRCode) {
-            overlay.innerHTML = '';
-            const img = document.getElementById('stickerBgImg');
-            const imgRect = img.getBoundingClientRect();
-            if (imgRect.width === 0) {
-                setTimeout(() => actualizarQR(), 100);
-                return;
-            }
-            const config = QR_CONFIG[currentFormato];
-            const qrWidth = (config.widthPercent / 100) * imgRect.width;
-            const qrHeight = (config.heightPercent / 100) * imgRect.height;
-            const qrSize = Math.min(qrWidth, qrHeight);
-            new QRCode(overlay, { text: urlPerfil, width: qrSize, height: qrSize, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M });
-        }
-    }
-    
-    // Sticker eventos
-    document.querySelectorAll('.format-option').forEach(opt => {
-        opt.addEventListener('click', () => {
-            document.querySelectorAll('.format-option').forEach(o => o.classList.remove('active'));
-            opt.classList.add('active');
-            currentFormato = opt.getAttribute('data-format');
-            const container = document.getElementById('stickerContainer');
-            container.classList.remove('horizontal', 'cuadrado');
-            container.classList.add(currentFormato);
-            atualizarImagemSticker();
-        });
-    });
-    
-    document.querySelectorAll('.color-option').forEach(opt => {
-        opt.addEventListener('click', () => {
-            document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
-            opt.classList.add('active');
-            currentColor = opt.getAttribute('data-color');
-            atualizarImagemSticker();
-        });
     });
     
     // Upload foto
@@ -705,31 +810,31 @@
     
     fotoInput?.addEventListener('change', (e) => {
         const file = e.target.files[0];
-        if (file) { 
-            comprimirImagem(file, (img) => { 
-                fotoBase64 = img; 
-                fotoPreview.src = fotoBase64; 
-                fotoPreview.style.display = 'block'; 
+        if (file) {
+            comprimirImagem(file, (img) => {
+                fotoBase64 = img;
+                fotoPreview.src = fotoBase64;
+                fotoPreview.style.display = 'block';
                 if (currentUser) guardarFotoFirestore();
-            }); 
+            });
         }
     });
     
-    async function guardarFotoFirestore() { 
-        if (!currentUser) return; 
-        await setDoc(doc(db, "perfiles", currentUser.uid), { foto: fotoBase64 }, { merge: true }); 
+    async function guardarFotoFirestore() {
+        if (!currentUser) return;
+        await setDoc(doc(db, "perfiles", currentUser.uid), { foto: fotoBase64 }, { merge: true });
     }
     
-    async function carregarFoto(userId) { 
-        const docSnap = await getDoc(doc(db, "perfiles", userId)); 
-        if (docSnap.exists() && docSnap.data().foto) { 
-            fotoBase64 = docSnap.data().foto; 
-            fotoPreview.src = fotoBase64; 
-            fotoPreview.style.display = 'block'; 
-        } 
+    async function carregarFoto(userId) {
+        const docSnap = await getDoc(doc(db, "perfiles", userId));
+        if (docSnap.exists() && docSnap.data().foto) {
+            fotoBase64 = docSnap.data().foto;
+            fotoPreview.src = fotoBase64;
+            fotoPreview.style.display = 'block';
+        }
     }
     
-    // REGISTRO
+    // Registro
     async function handleRegister() {
         const email = document.getElementById('registerEmail').value;
         const password = document.getElementById('registerPassword').value;
@@ -751,12 +856,11 @@
                 contato3_nome: "", contato3_relacao: "", contato3_telefone: "", contato3_email: "", contato3_notificar: false,
                 contato4_nome: "", contato4_relacao: "", contato4_telefone: "", contato4_email: "", contato4_notificar: false,
                 contato5_nome: "", contato5_relacao: "", contato5_telefone: "", contato5_email: "", contato5_notificar: false,
-                hospital: "", observacoes: "", email: email, foto: "", 
+                hospital: "", observacoes: "", email: email, foto: "",
                 aceita_termos: true, aceita_privacidade: true,
                 data_aceitacao_termos: new Date().toISOString(),
                 data_aceitacao_privacidade: new Date().toISOString(),
-                ip_registro: ip,
-                data_criacao: new Date().toISOString()
+                ip_registro: ip, data_criacao: new Date().toISOString()
             });
             
             const statsRef = doc(db, "public", "stats");
@@ -779,26 +883,26 @@
         }
     }
     
-    // LOGIN
+    // Login
     async function handleLogin() {
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
         const loginError = document.getElementById('loginError');
         if (!email || !password) { loginError.innerText = 'Preencha todos os campos'; return; }
         loginError.innerText = '';
-        try { 
-            await signInWithEmailAndPassword(auth, email, password); 
-        } catch (error) { 
-            loginError.innerText = 'E-mail ou senha incorretos'; 
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            loginError.innerText = 'E-mail ou senha incorretos';
         }
     }
     
-    // LOGOUT
-    async function handleLogout() { 
-        await signOut(auth); 
+    // Logout
+    async function handleLogout() {
+        await signOut(auth);
     }
     
-    // CARREGAR PERFIL
+    // Cargar perfil
     async function carregarPerfil(userId) {
         const docSnap = await getDoc(doc(db, "perfiles", userId));
         if (docSnap.exists()) {
@@ -826,10 +930,10 @@
             
             document.getElementById('hospital').value = data.hospital || '';
             document.getElementById('notas').value = data.observacoes || '';
-            if (data.foto) { 
-                fotoBase64 = data.foto; 
-                fotoPreview.src = fotoBase64; 
-                fotoPreview.style.display = 'block'; 
+            if (data.foto) {
+                fotoBase64 = data.foto;
+                fotoPreview.src = fotoBase64;
+                fotoPreview.style.display = 'block';
             }
             
             if (data.contato4_nome || data.contato5_nome) {
@@ -839,13 +943,11 @@
                 if (addBtn) addBtn.innerText = '− Ocultar contatos adicionais';
             }
         }
-        if (document.getElementById('stickerBgImg')) {
-            atualizarImagemSticker();
-        }
+        updateStickerImage();
         actualizarContador();
     }
     
-    // GUARDAR PERFIL
+    // Guardar perfil
     async function guardarPerfil() {
         if (!currentUser) return;
         const saveMessage = document.getElementById('saveMessage');
@@ -854,13 +956,11 @@
         
         if (!nome) {
             saveMessage.innerText = '⚠️ O nome completo é obrigatório';
-            saveMessage.style.color = '#009C3B';
             setTimeout(() => saveMessage.innerText = '', 3000);
             return;
         }
         if (!sangue) {
             saveMessage.innerText = '⚠️ Selecione seu tipo sanguíneo';
-            saveMessage.style.color = '#009C3B';
             setTimeout(() => saveMessage.innerText = '', 3000);
             return;
         }
@@ -900,94 +1000,11 @@
         };
         await setDoc(doc(db, "perfiles", currentUser.uid), perfil, { merge: true });
         saveMessage.innerText = '✅ Dados salvos com sucesso';
-        saveMessage.style.color = '#009C3B';
         setTimeout(() => saveMessage.innerText = '', 2000);
-        if (document.getElementById('stickerBgImg')) {
-            atualizarImagemSticker();
-        }
+        updateStickerImage();
     }
     
-    // DOWNLOAD PNG
-    async function downloadPNG() {
-        const container = document.getElementById('stickerContainer');
-        if (!container) return;
-        const btn = document.getElementById('downloadPngBtn');
-        const originalText = btn.innerText;
-        btn.innerText = '⏳ Gerando PNG...';
-        btn.disabled = true;
-        try {
-            await new Promise(resolve => setTimeout(resolve, 300));
-            const img = document.getElementById('stickerBgImg');
-            if (!img.complete || img.naturalWidth === 0) {
-                throw new Error('A imagem do adesivo ainda não carregou');
-            }
-            const canvas = await html2canvas(container, { scale: 4, backgroundColor: '#ffffff', useCORS: true });
-            const config = QR_CONFIG[currentFormato];
-            const finalCanvas = document.createElement('canvas');
-            finalCanvas.width = config.targetWidth;
-            finalCanvas.height = config.targetHeight;
-            const ctx = finalCanvas.getContext('2d');
-            ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, config.targetWidth, config.targetHeight);
-            const link = document.createElement('a');
-            let formatoNome = currentFormato === "horizontal" ? "horizontal" : "quadrado";
-            link.download = `mylifeqrbrasil_adesivo_${formatoNome}_${currentColor}_${currentUser?.uid || 'usuario'}.png`;
-            link.href = finalCanvas.toDataURL('image/png');
-            link.click();
-        } catch (error) { 
-            alert('❌ Erro ao gerar a imagem. Tente novamente.');
-        } finally { 
-            btn.innerText = originalText; 
-            btn.disabled = false; 
-        }
-    }
-    
-    // DOWNLOAD PDF
-    async function downloadPDF() {
-        const container = document.getElementById('stickerContainer');
-        if (!container) return;
-        const btn = document.getElementById('downloadPdfBtn');
-        const originalText = btn.innerText;
-        btn.innerText = '⏳ Gerando PDF...';
-        btn.disabled = true;
-        try {
-            await new Promise(resolve => setTimeout(resolve, 300));
-            const img = document.getElementById('stickerBgImg');
-            if (!img.complete || img.naturalWidth === 0) {
-                throw new Error('A imagem do adesivo ainda não carregou');
-            }
-            const canvas = await html2canvas(container, { scale: 4, backgroundColor: '#ffffff', useCORS: true });
-            const config = QR_CONFIG[currentFormato];
-            const finalCanvas = document.createElement('canvas');
-            finalCanvas.width = config.targetWidth;
-            finalCanvas.height = config.targetHeight;
-            const ctx = finalCanvas.getContext('2d');
-            ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, config.targetWidth, config.targetHeight);
-            const imgData = finalCanvas.toDataURL('image/png');
-            await new Promise((resolve, reject) => {
-                if (window.jspdf && window.jspdf.jsPDF) { resolve(); return; }
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-                script.onload = () => resolve();
-                script.onerror = () => reject(new Error('Não foi possível carregar jsPDF'));
-                document.head.appendChild(script);
-            });
-            const { jsPDF } = window.jspdf;
-            let larguraMM, alturaMM;
-            if (currentFormato === "horizontal") { larguraMM = 60; alturaMM = 30; }
-            else { larguraMM = 30; alturaMM = 30; }
-            const pdf = new jsPDF({ orientation: larguraMM > alturaMM ? 'landscape' : 'portrait', unit: 'mm', format: [larguraMM, alturaMM] });
-            pdf.addImage(imgData, 'PNG', 0, 0, larguraMM, alturaMM, undefined, 'FAST');
-            let formatoNome = currentFormato === "horizontal" ? "horizontal" : "quadrado";
-            pdf.save(`mylifeqrbrasil_adesivo_${formatoNome}_${currentColor}_${currentUser?.uid || 'usuario'}.pdf`);
-        } catch (error) { 
-            alert('❌ Erro ao gerar o PDF. Tente novamente.');
-        } finally { 
-            btn.innerText = originalText; 
-            btn.disabled = false; 
-        }
-    }
-    
-    // ELIMINAR CONTA
+    // Eliminar cuenta
     window.eliminarCuenta = async () => {
         if (!currentUser) return;
         if (!confirm('⚠️ VOCÊ TEM CERTEZA?\n\nEsta ação irá EXCLUIR PERMANENTEMENTE todos os seus dados pessoais.')) return;
@@ -1004,72 +1021,33 @@
         }
     };
     
-    // ESQUECI SENHA
+    // Esqueci senha
     const modalReset = document.getElementById('modalResetPassword');
-    const resetEmailInput = document.getElementById('resetEmail');
-    const btnSendReset = document.getElementById('btnSendReset');
-    const resetMessageDiv = document.getElementById('resetMessage');
-    
-    window.openModalReset = () => {
-        modalReset.style.display = 'flex';
-        if (resetEmailInput) resetEmailInput.value = '';
-        if (resetMessageDiv) resetMessageDiv.innerHTML = '';
-        if (btnSendReset) btnSendReset.disabled = false;
-    };
-    
-    window.closeModalReset = () => {
-        modalReset.style.display = 'none';
-        if (resetMessageDiv) resetMessageDiv.innerHTML = '';
-        if (resetEmailInput) resetEmailInput.value = '';
-        if (btnSendReset) btnSendReset.disabled = false;
-    };
+    window.openModalReset = () => { modalReset.style.display = 'flex'; };
+    window.closeModalReset = () => { modalReset.style.display = 'none'; };
     
     document.getElementById('forgotPasswordBtn')?.addEventListener('click', (e) => {
         e.preventDefault();
         window.openModalReset();
     });
     
-    async function sendPasswordReset() {
-        const email = resetEmailInput?.value.trim();
-        
+    document.getElementById('btnSendReset')?.addEventListener('click', async () => {
+        const email = document.getElementById('resetEmail').value;
+        const msgDiv = document.getElementById('resetMessage');
         if (!email) {
-            if (resetMessageDiv) resetMessageDiv.innerHTML = '<span style="color: #E8152A;">❌ Digite seu e-mail</span>';
+            msgDiv.innerHTML = '<span style="color: #E8152A;">❌ Digite seu e-mail</span>';
             return;
         }
-        
-        if (resetMessageDiv) resetMessageDiv.innerHTML = '<span style="color: #009C3B;">⏳ Enviando...</span>';
-        if (btnSendReset) btnSendReset.disabled = true;
-        
         try {
             await sendPasswordResetEmail(auth, email);
-            if (resetMessageDiv) {
-                resetMessageDiv.innerHTML = `<span style="color: #009C3B;">✅ <strong>E-mail enviado!</strong><br><br>Verifique sua caixa de entrada.<br>📬 <strong>Não encontrou?</strong> Verifique sua pasta de <strong>SPAM</strong>.</span>`;
-            }
-            if (resetEmailInput) resetEmailInput.value = '';
-            setTimeout(() => window.closeModalReset(), 4000);
+            msgDiv.innerHTML = '<span style="color: #009C3B;">✅ E-mail enviado! Verifique sua caixa de entrada.</span>';
+            setTimeout(() => window.closeModalReset(), 3000);
         } catch (error) {
-            let mensagem = '';
-            switch (error.code) {
-                case 'auth/user-not-found': mensagem = '❌ Não existe uma conta com este e-mail.'; break;
-                case 'auth/invalid-email': mensagem = '❌ O formato do e-mail é inválido.'; break;
-                case 'auth/too-many-requests': mensagem = '⏳ Muitas tentativas. Aguarde alguns minutos.'; break;
-                default: mensagem = '📧 Se o e-mail estiver cadastrado, você receberá um link em alguns minutos. Verifique sua pasta de SPAM.'; break;
-            }
-            if (resetMessageDiv) resetMessageDiv.innerHTML = `<span style="color: #E8152A;">${mensagem}</span>`;
-        } finally {
-            setTimeout(() => { if (btnSendReset) btnSendReset.disabled = false; }, 3000);
-        }
-    }
-    
-    btnSendReset?.addEventListener('click', sendPasswordReset);
-    resetEmailInput?.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            sendPasswordReset();
+            msgDiv.innerHTML = '<span style="color: #E8152A;">❌ Erro ao enviar e-mail</span>';
         }
     });
     
-    // Botones varios
+    // Otros eventos
     document.getElementById('scanQrBtn')?.addEventListener('click', () => {
         alert('📷 Para escanear um QR, abra a câmera do seu celular e aponte para o código.');
     });
@@ -1079,7 +1057,7 @@
         const url = `https://mylifeqrbrasil.github.io/perfil.html?id=${currentUser.uid}`;
         if (navigator.share) {
             try {
-                await navigator.share({ title: 'Meu perfil MyLifeQR Brasil', text: 'Minhas informações médicas de emergência', url: url });
+                await navigator.share({ title: 'Meu perfil MyLifeQR Brasil', url: url });
             } catch (e) {}
         } else {
             await navigator.clipboard.writeText(url);
@@ -1099,19 +1077,19 @@
         const extra = document.getElementById('contactosExtra');
         const btn = document.getElementById('btnAgregarContacto');
         if (extra && btn) {
-            if (extra.classList.contains('hidden')) { 
-                extra.classList.remove('hidden'); 
-                btn.innerText = '− Ocultar contatos adicionais'; 
-            } else { 
-                extra.classList.add('hidden'); 
-                btn.innerText = '+ Adicionar outro contato (máx. 5)'; 
+            if (extra.classList.contains('hidden')) {
+                extra.classList.remove('hidden');
+                btn.innerText = '− Ocultar contatos adicionais';
+            } else {
+                extra.classList.add('hidden');
+                btn.innerText = '+ Adicionar outro contato (máx. 5)';
             }
         }
     });
     
     document.getElementById('deleteAccountBtn')?.addEventListener('click', window.eliminarCuenta);
     
-    // TABS
+    // Tabs
     document.getElementById('tabFormBtn')?.addEventListener('click', () => {
         document.getElementById('tabForm').classList.add('active');
         document.getElementById('tabFormBtn').classList.add('active');
@@ -1121,24 +1099,26 @@
         document.getElementById('tabForm').classList.remove('active');
         document.getElementById('tabStickerBtn').classList.add('active');
         document.getElementById('tabFormBtn').classList.remove('active');
+        setTimeout(() => {
+            positionQR();
+            generateQR();
+        }, 200);
     });
     
-    // Botones de login/registro
+    // Botones login/registro
     document.getElementById('btnLogin')?.addEventListener('click', handleLogin);
     document.getElementById('btnRegister')?.addEventListener('click', handleRegister);
     document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
     document.getElementById('saveProfileBtn')?.addEventListener('click', guardarPerfil);
-    document.getElementById('downloadPngBtn')?.addEventListener('click', downloadPNG);
-    document.getElementById('downloadPdfBtn')?.addEventListener('click', downloadPDF);
     
-    // MODAIS LEGAIS
+    // Modales legales
     window.showAvisoPrivacidad = () => { document.getElementById('modalAvisoPrivacidad').style.display = 'flex'; };
     window.closeModalAvisoPrivacidad = () => { document.getElementById('modalAvisoPrivacidad').style.display = 'none'; };
     window.showTerminosRegistro = () => { document.getElementById('modalLegalRegistro').style.display = 'flex'; };
     window.showPrivacidadRegistro = () => { document.getElementById('modalLegalRegistro').style.display = 'flex'; };
     window.closeModalLegalRegistro = () => { document.getElementById('modalLegalRegistro').style.display = 'none'; };
     
-    // AUTH STATE
+    // Auth state
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             currentUser = user;
@@ -1148,11 +1128,9 @@
             await carregarPerfil(user.uid);
             await carregarFoto(user.uid);
             setTimeout(() => {
-                if (document.getElementById('stickerBgImg')) {
-                    posicionarQR();
-                    actualizarQR();
-                }
-            }, 200);
+                positionQR();
+                generateQR();
+            }, 500);
         } else {
             currentUser = null;
             landingScreen.classList.remove('hidden');
@@ -1160,20 +1138,14 @@
         }
     });
     
-    // Inicialización
-    const scriptQR = document.createElement('script');
-    scriptQR.src = 'https://cdn.jsdelivr.net/npm/qrcodejs2-fix/qrcode.min.js';
-    document.head.appendChild(scriptQR);
-    
+    // Inicializar
     actualizarContador();
+    setTimeout(() => {
+        positionQR();
+        generateQR();
+    }, 1000);
     
-    window.addEventListener('load', () => {
-        if (document.getElementById('stickerBgImg') && document.getElementById('stickerBgImg').complete) {
-            posicionarQR();
-        }
-    });
-    
-    console.log("✅ Site carregado e pronto para uso!");
+    console.log("✅ Site carregado!");
 </script>
 
 </body>
