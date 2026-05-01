@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>MyLifeQR Brasil — Perfil Médico de Emergência</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #f0f4f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            min-height: 100vh;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        .slide-in { animation: slideIn 0.4s ease-out; }
+        
+        /* GATE */
+        #gate {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #0A0A0A 0%, #002776 100%);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 24px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .gate-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0,156,59,0.15);
+            border: 2px solid rgba(0,156,59,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 40px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .gate-title {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: white;
+            text-align: center;
+        }
+        
+        .gate-subtitle {
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: #FFDF00;
+            text-align: center;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .gate-box {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+        
+        .gate-box-text {
+            font-size: 13px;
+            color: #aabbba;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .gate-box-text strong { color: #009C3B; }
+        
+        .btn-accept {
+            width: 100%;
+            background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%);
+            color: #002776;
+            border: none;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .btn-accept:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,156,59,0.4);
+        }
+        
+        /* PERFIL PRINCIPAL */
+        #profile {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto;
+            background: #f0f4f0;
+            min-height: 100vh;
+        }
+        
+        #profile.visible { display: block; }
+        
+        .scan-notification {
+            background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%);
+            color: #002776;
+            padding: 16px;
+            text-align: center;
+            font-weight: 600;
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        .folio-number {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            background: rgba(0,0,0,0.1);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .emergency-banner {
+            background: #E8152A;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .helmet-warning {
+            background: linear-gradient(135deg, #1a2a2a 0%, #2a3a3a 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #009C3B;
+        }
+        
+        .helmet-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        
+        .helmet-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #FFDF00;
+            letter-spacing: 1px;
+        }
+        
+        .helmet-desc {
+            font-size: 14px;
+            color: #aabbba;
+            margin-top: 4px;
+        }
+        
+        .profile-card {
+            background: white;
+            margin: 20px;
+            border-radius: 28px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #f0f4f0 0%, #e0e8e0 100%);
+            border: 3px solid #009C3B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .avatar:hover { transform: scale(1.02); }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar-placeholder { font-size: 48px; color: #8a9a9a; }
+        
+        .profile-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a2a2a;
+            margin-bottom: 4px;
+        }
+        
+        .profile-age {
+            font-size: 16px;
+            color: #6a7a7a;
+            font-weight: 500;
+        }
+        
+        .location-card {
+            background: white;
+            margin: 20px;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f4f0;
+        }
+        
+        .location-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a2a2a;
+        }
+        
+        .location-status {
+            background: #f8faf8;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #6a7a7a;
+            margin-bottom: 16px;
+        }
+        
+        .map-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-map {
+            padding: 12px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-map:hover { transform: translateY(-2px); }
+        .btn-google { background: #009C3B; color: white; }
+        .btn-waze { background: #33CCFF; color: white; }
+        
+        .btn-192-container {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-192 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            background: linear-gradient(135deg, #E8152A 0%, #B01020 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 60px;
+            padding: 18px;
+            font-weight: 800;
+            font-size: 22px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(232,21,42,0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .btn-192:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(232,21,42,0.5);
+        }
+        
+        .accordion {
+            background: white;
+            border-radius: 24px;
+            margin: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        
+        .accordion-header {
+            background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%);
+            color: #002776;
+            padding: 16px 20px;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+        }
+        
+        .accordion-header span {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .accordion-header.active span { transform: rotate(180deg); }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #fafdfa;
+        }
+        
+        .accordion-content-inner { padding: 20px; }
+        
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #e8f0e8;
+        }
+        
+        .instruction-step:last-child { border-bottom: none; }
+        
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: #009C3B;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .step-content { flex: 1; }
+        .step-title { font-weight: 800; color: #1a2a2a; margin-bottom: 4px; }
+        .step-desc { font-size: 13px; color: #6a7a7a; line-height: 1.4; }
+        
+        .medical-section {
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #1a2a2a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #009C3B;
+            border-radius: 2px;
+        }
+        
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .vital-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        
+        .vital-card.blood {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid rgba(0,156,59,0.2);
+        }
+        
+        .vital-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #8a9a9a;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .vital-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a2a2a;
+        }
+        
+        .vital-value.blood { color: #009C3B; }
+        
+        .donor-badge {
+            display: inline-block;
+            background: #009C3B;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        
+        .info-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #8a9a9a;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .info-value {
+            font-size: 14px;
+            color: #1a2a2a;
+            line-height: 1.5;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: rgba(0,156,59,0.1);
+            color: #009C3B;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin: 2px 4px 2px 0;
+        }
+        
+        .notes-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-left: 4px solid #009C3B;
+        }
+        
+        .notes-card .info-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #008455;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        
+        .notes-text {
+            font-size: 14px;
+            color: #166534;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+        
+        .contact-card:hover { transform: translateX(4px); }
+        
+        .contact-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #f0f4f0 0%, #e0e8e0 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #6a7a7a;
+        }
+        
+        .contact-info { flex: 1; }
+        .contact-name { font-weight: 800; color: #1a2a2a; margin-bottom: 4px; }
+        .contact-relation { font-size: 12px; color: #8a9a9a; }
+        
+        .btn-call {
+            background: #009C3B;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+        
+        .btn-call:hover { transform: scale(1.05); }
+        
+        .footer {
+            background: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-top: 1px solid #e8f0e8;
+            margin-top: 20px;
+        }
+        
+        .footer-logo img { height: 32px; opacity: 0.6; margin-bottom: 16px; }
+        .disclaimer-text { font-size: 10px; color: #8a9a9a; line-height: 1.6; }
+        .legal-link { color: #009C3B; text-decoration: none; font-weight: 500; cursor: pointer; margin: 0 8px; font-size: 11px; }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 16px; }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        
+        .modal-legal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-legal-content {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            max-height: 85%;
+            border-radius: 24px;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-legal-header {
+            background: #009C3B;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-legal-header h3 { color: white; font-size: 20px; margin: 0; }
+        .modal-legal-close { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
+        .modal-legal-body { padding: 20px; overflow-y: auto; max-height: 60vh; font-size: 13px; line-height: 1.6; }
+        .modal-legal-body h4 { color: #009C3B; margin: 16px 0 8px; }
+        .modal-legal-footer { padding: 16px 20px; border-top: 1px solid #eee; text-align: center; }
+        .modal-legal-footer button { background: #009C3B; color: white; border: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; }
+        
+        @media (max-width: 480px) {
+            .profile-name { font-size: 24px; }
+            .vital-value { font-size: 28px; }
+            .btn-192 { font-size: 18px; padding: 14px; }
+        }
+    </style>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKR6WB9JJM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DKR6WB9JJM');
+    </script>
+</head>
+<body>
+
+<!-- GATE DE ACESSO -->
+<div id="gate">
+    <div class="gate-icon"><i class="fas fa-shield-alt"></i></div>
+    <div class="gate-title">Acesso Restrito</div>
+    <div class="gate-subtitle">Aviso de privacidade — LGPD</div>
+    <div class="gate-box">
+        <p class="gate-box-text">
+            As informações contidas neste perfil são <strong>confidenciais e protegidas</strong> pela Lei Geral de Proteção de Dados Pessoais (<strong>LGPD</strong>).
+            <br><br>
+            Este acesso é <strong>registrado com data, hora, localização aproximada e dispositivo</strong>. O uso indevido será perseguido e punido conforme a legislação brasileira vigente.
+            <br><br>
+            Este perfil deve ser consultado <strong>exclusivamente em situações de emergência médica</strong>.
+        </p>
+    </div>
+    <p style="font-size:11px; color:#8a9a9a; margin:8px 0 16px;">Ao aceitar, você confirma que acessa para fins de atendimento médico de emergência.</p>
+    <button class="btn-accept" onclick="acceptGate()"><i class="fas fa-check-circle"></i> Entendi — Ver perfil de emergência</button>
+</div>
+
+<!-- PERFIL DE EMERGÊNCIA -->
+<div id="profile">
+    <div id="photoModal" class="modal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Foto ampliada">
+    </div>
+    
+    <div id="modalLegal" class="modal-legal">
+        <div class="modal-legal-content">
+            <div class="modal-legal-header">
+                <h3 id="modalLegalTitle">Termos e Condições</h3>
+                <button class="modal-legal-close" onclick="closeModalLegal()">&times;</button>
+            </div>
+            <div class="modal-legal-body" id="modalLegalBody"></div>
+            <div class="modal-legal-footer">
+                <button onclick="closeModalLegal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="scanNotification" class="scan-notification" style="display: none;">
+        <i class="fas fa-exclamation-triangle"></i> AVISO: PERFIL ESCANEADO<br>
+        <span id="scanDateTime"></span><br>
+        <span id="scanFolio" class="folio-number"></span>
+    </div>
+    
+    <div class="emergency-banner">
+        <i class="fas fa-ambulance"></i>
+        <span>PERFIL DE EMERGÊNCIA</span>
+        <span style="margin-left:auto;"><i class="fas fa-motorcycle"></i> MyLifeQR Brasil</span>
+    </div>
+    
+    <div class="helmet-warning">
+        <div class="helmet-icon"><i class="fas fa-hard-hat"></i></div>
+        <div class="helmet-title">NÃO REMOVER O CAPACETE!</div>
+        <div class="helmet-desc">Possível lesão cervical. Apenas pessoal médico capacitado pode removê-lo.</div>
+    </div>
+    
+    <div class="profile-card fade-in">
+        <div class="avatar" id="avatarContainer" onclick="openModal()">
+            <div class="avatar-placeholder" id="avatarPlaceholder"><i class="fas fa-user-circle"></i></div>
+            <img id="avatarImg" style="display:none; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="profile-name" id="perfilNome">Carregando...</div>
+        <div class="profile-age" id="perfilIdade"></div>
+    </div>
+    
+    <div class="location-card">
+        <div class="location-header">
+            <i class="fas fa-map-marker-alt" style="color: #009C3B;"></i>
+            <h3>Localização aproximada</h3>
+        </div>
+        <div class="location-status" id="locationStatus"><i class="fas fa-spinner fa-pulse"></i> Obtendo localização...</div>
+        <div class="map-buttons" id="mapButtons" style="display: none;">
+            <a href="#" id="googleMapsLink" class="btn-map btn-google" target="_blank"><i class="fab fa-google"></i> Google Maps</a>
+            <a href="#" id="wazeLink" class="btn-map btn-waze" target="_blank"><i class="fab fa-waze"></i> Waze</a>
+        </div>
+    </div>
+    
+    <div class="btn-192-container">
+        <a href="tel:192" class="btn-192">
+            <i class="fas fa-phone-alt" style="font-size:28px;"></i>
+            <span>LIGAR PARA 192 (SAMU)</span>
+        </a>
+    </div>
+    
+    <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion()">
+            🚑 GUIA PARA QUEM NÃO É PARAMÉDICO
+            <span><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="accordion-content" id="accordionContent">
+            <div class="accordion-content-inner">
+                <div class="instruction-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title"><i class="fas fa-phone"></i> Ligue para 192 (SAMU)</div>
+                        <div class="step-desc">Informe a localização exata. Não mova o motociclista.</div>
+                    </div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title"><i class="fas fa-hard-hat"></i> Não remova o capacete</div>
+                        <div class="step-desc">Apenas pessoal capacitado. Possível lesão cervical.</div>
+                    </div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title"><i class="fas fa-tint"></i> Controle hemorragias</div>
+                        <div class="step-desc">Pressione com um pano limpo sem soltar.</div>
+                    </div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title"><i class="fas fa-id-card"></i> Mostre este perfil ao paramédico</div>
+                        <div class="step-desc">Contém tipo sanguíneo, alergias e contatos de emergência.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="medical-section">
+        <div class="section-title"><i class="fas fa-heartbeat"></i> Dados Médicos</div>
+        <div class="vitals-grid">
+            <div class="vital-card blood">
+                <div class="vital-label">TIPO SANGUÍNEO</div>
+                <div class="vital-value blood" id="perfilSangue">---</div>
+            </div>
+            <div class="vital-card">
+                <div class="vital-label">DOADOR DE ÓRGÃOS</div>
+                <div class="vital-value" id="perfilDoadorGrande">---</div>
+                <div id="perfilDoadorBadge" class="donor-badge" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <div class="info-label"><i class="fas fa-allergies"></i> ALERGIAS</div>
+            <div class="info-value" id="perfilAlergias">---</div>
+        </div>
+        
+        <div class="info-card">
+            <div class="info-label"><i class="fas fa-stethoscope"></i> CONDIÇÕES MÉDICAS</div>
+            <div class="info-value" id="perfilCondicoes">---</div>
+        </div>
+        
+        <div class="info-card">
+            <div class="info-label"><i class="fas fa-capsules"></i> MEDICAMENTOS ATUAIS</div>
+            <div class="info-value" id="perfilMedicamentos">---</div>
+        </div>
+    </div>
+    
+    <div class="medical-section">
+        <div class="section-title"><i class="fas fa-address-book"></i> Contatos de Emergência</div>
+        <div id="contatosContainer"></div>
+    </div>
+    
+    <div class="medical-section">
+        <div class="section-title"><i class="fas fa-info-circle"></i> Informações Adicionais</div>
+        <div class="info-card">
+            <div class="info-label"><i class="fas fa-hospital"></i> CONVÊNIO / NÚMERO</div>
+            <div class="info-value" id="perfilHospital">---</div>
+        </div>
+        <div class="notes-card">
+            <div class="info-label"><i class="fas fa-pen"></i> OBSERVAÇÕES ADICIONAIS</div>
+            <div class="notes-text" id="perfilObservacoes">---</div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-logo"><img src="MyLifeQRLogo.png" alt="MyLifeQR Brasil" onerror="this.style.display='none'"></div>
+        <p class="disclaimer-text">
+            <strong>⚠️ AVISO LEGAL IMPORTANTE ⚠️</strong><br><br>
+            MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><br>
+            Em caso de emergência, a prioridade deve ser sempre ligar para o 192 (SAMU) e seguir as orientações da equipe médica.<br><br>
+            <strong>📞 Em caso de emergência, ligue imediatamente para 192 (SAMU).</strong><br><br>
+            <strong>✉️ Contato: mylifeqrbrasil@gmail.com</strong>
+        </p>
+        <div style="margin-top: 16px;">
+            <span class="legal-link" onclick="showTermos()"><i class="fas fa-file-alt"></i> Termos e Condições</span>
+            <span style="color: #aabbba; margin: 0 8px;">|</span>
+            <span class="legal-link" onclick="showPrivacidade()"><i class="fas fa-lock"></i> Política de Privacidade</span>
+        </div>
+        <div class="copyright" style="margin-top: 16px; font-size: 10px; color: #aabbab;">MyLifeQR Brasil © 2026</div>
+    </div>
+</div>
+
+<script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+        }
+    }
+</script>
+
+<script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getFirestore, doc, getDoc, collection, addDoc } from "firebase/firestore";
+    
+    // MYLIFEQR BRASIL - FIREBASE CONFIG
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
+        authDomain: "mylifeqrbrasil1.firebaseapp.com",
+        projectId: "mylifeqrbrasil1",
+        storageBucket: "mylifeqrbrasil1.firebasestorage.app",
+        messagingSenderId: "680108596725",
+        appId: "1:680108596725:web:d82e2121ce811bad45d4bc"
+    };
+    
+    // MYLIFEQR BRASIL - EMAILJS CONFIG
+    const EMAILJS_CONFIG = {
+        PUBLIC_KEY: "DXbjn-ibhVBMPLBeT",
+        SERVICE_ID: "service_a6lrj31",
+        TEMPLATE_ID: "template_jt921om"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    console.log("✅ EmailJS inicializado para MyLifeQR Brasil");
+    
+    let currentPhotoUrl = "";
+    let scanRegistered = false;
+    let currentUserLocation = null;
+    let currentUserData = null;
+    
+    window.toggleAccordion = () => {
+        const header = document.querySelector('.accordion-header');
+        const content = document.getElementById('accordionContent');
+        header.classList.toggle('active');
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    };
+    
+    window.acceptGate = () => {
+        const gate = document.getElementById('gate');
+        const profile = document.getElementById('profile');
+        gate.style.transition = 'opacity 0.35s ease';
+        gate.style.opacity = '0';
+        setTimeout(() => {
+            gate.style.display = 'none';
+            profile.style.display = 'block';
+            setTimeout(() => profile.classList.add('visible'), 10);
+            registrarEscaneamento();
+        }, 350);
+    };
+    
+    async function enviarEmailEmergencia(email, nomeContato, perfil, protocolo, localizacao) {
+        if (!email) return { success: false, error: "No email provided" };
+        
+        const templateParams = {
+            email: email,
+            to_name: nomeContato,
+            nome: perfil.nome || 'Usuário',
+            data: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+            protocolo: protocolo,
+            latitude: localizacao?.lat || 'Não disponível',
+            longitude: localizacao?.lng || 'Não disponível',
+            sangue: perfil.sangue || 'Não registrado',
+            alergias: perfil.alergias || 'Nenhuma',
+            condicoes: perfil.condicoes || 'Nenhuma',
+            medicamentos: perfil.medicamentos || 'Nenhum'
+        };
+        
+        try {
+            const result = await emailjs.send(
+                EMAILJS_CONFIG.SERVICE_ID,
+                EMAILJS_CONFIG.TEMPLATE_ID,
+                templateParams
+            );
+            console.log(`✅ E-mail enviado para ${email}`);
+            return { success: true };
+        } catch (error) {
+            console.error(`❌ Erro ao enviar e-mail para ${email}:`, error);
+            return { success: false, error: error };
+        }
+    }
+    
+    async function registrarEscaneamento() {
+        if (scanRegistered) {
+            console.log("⚠️ Escaneamento já registrado anteriormente. Ignorando...");
+            return;
+        }
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const profileId = urlParams.get('id');
+        
+        if (!profileId) {
+            console.error("❌ ID do perfil não encontrado");
+            return;
+        }
+        
+        const lastKey = `last_notification_${profileId}`;
+        const lastNotif = localStorage.getItem(lastKey);
+        const now = Date.now();
+        if (lastNotif && (now - parseInt(lastNotif)) < 300000) {
+            console.log("⚠️ Já foi enviada uma notificação para este perfil nos últimos 5 minutos. Ignorando.");
+            scanRegistered = true;
+            return;
+        }
+        
+        const docRef = doc(db, "perfiles", profileId);
+        const docSnap = await getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+            console.error("❌ Perfil não encontrado");
+            return;
+        }
+        
+        currentUserData = docSnap.data();
+        const perfil = currentUserData;
+        
+        const protocolo = 'MLQR-BR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+        const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        
+        const notif = document.getElementById('scanNotification');
+        document.getElementById('scanDateTime').innerHTML = `<i class="fas fa-calendar-alt"></i> ${dataHora}`;
+        document.getElementById('scanFolio').innerHTML = `Protocolo: ${protocolo}`;
+        notif.style.display = 'block';
+        
+        localStorage.setItem(lastKey, now.toString());
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                currentUserLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                
+                document.getElementById('locationStatus').innerHTML = `<i class="fas fa-map-pin"></i> ${currentUserLocation.lat.toFixed(6)}, ${currentUserLocation.lng.toFixed(6)}`;
+                document.getElementById('mapButtons').style.display = 'flex';
+                
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${currentUserLocation.lat},${currentUserLocation.lng}`;
+                const wazeUrl = `https://www.waze.com/ul?ll=${currentUserLocation.lat},${currentUserLocation.lng}&navigate=yes`;
+                document.getElementById('googleMapsLink').href = mapsUrl;
+                document.getElementById('wazeLink').href = wazeUrl;
+                
+                await addDoc(collection(db, "eventos_escaneo"), {
+                    perfil_id: profileId,
+                    perfil_nome: perfil.nome || 'Usuário',
+                    protocolo: protocolo,
+                    data: new Date().toISOString(),
+                    localizacao: currentUserLocation,
+                    dispositivo: navigator.userAgent
+                });
+                
+                const contatosParaEnviar = [];
+                for (let i = 1; i <= 5; i++) {
+                    const email = perfil[`contato${i}_email`];
+                    const notificar = perfil[`contato${i}_notificar`];
+                    const nome = perfil[`contato${i}_nome`] || `Contato ${i}`;
+                    if (email && notificar === true) {
+                        contatosParaEnviar.push({ email, nome });
+                    }
+                }
+                
+                console.log(`📧 Enviando e-mails para ${contatosParaEnviar.length} contatos...`);
+                
+                for (const contato of contatosParaEnviar) {
+                    await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, currentUserLocation);
+                }
+                
+                scanRegistered = true;
+                
+            }, (error) => {
+                console.error("❌ Erro de geolocalização:", error);
+                document.getElementById('locationStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Não foi possível obter a localização. Ative os serviços de localização.';
+                scanRegistered = true;
+            });
+        } else {
+            console.warn("⚠️ Navegador não suporta geolocalização");
+            document.getElementById('locationStatus').innerHTML = '<i class="fas fa-ban"></i> Seu navegador não suporta geolocalização.';
+            scanRegistered = true;
+        }
+    }
+    
+    function openModal() {
+        if (currentPhotoUrl) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = currentPhotoUrl;
+            modal.style.display = 'flex';
+        }
+    }
+    
+    window.openModal = openModal;
+    window.closeModal = () => {
+        document.getElementById('photoModal').style.display = 'none';
+    };
+    
+    window.showTermos = () => {
+        const modal = document.getElementById('modalLegal');
+        const title = document.getElementById('modalLegalTitle');
+        const body = document.getElementById('modalLegalBody');
+        title.innerText = '📜 Termos e Condições';
+        body.innerHTML = `
+            <h4>1. Aceitação dos Termos</h4>
+            <p>Ao utilizar MyLifeQR Brasil, você aceita estes Termos e Condições.</p>
+            <h4>2. Descrição do Serviço</h4>
+            <p>MyLifeQR Brasil é um sistema de identificação médica. Não é um serviço médico nem de emergência.</p>
+            <h4>3. Responsabilidade do Usuário</h4>
+            <p>Você é o único responsável pela veracidade e atualização de seus dados.</p>
+            <h4>4. Lei Aplicável</h4>
+            <p>Estes termos são regidos pela Lei Geral de Proteção de Dados (LGPD) do Brasil.</p>
+            <h4>5. Contato</h4>
+            <p>✉️ mylifeqrbrasil@gmail.com</p>
+        `;
+        modal.style.display = 'flex';
+    };
+    
+    window.showPrivacidade = () => {
+        const modal = document.getElementById('modalLegal');
+        const title = document.getElementById('modalLegalTitle');
+        const body = document.getElementById('modalLegalBody');
+        title.innerText = '🔒 Política de Privacidade';
+        body.innerHTML = `
+            <h4>1. Dados que Coletamos</h4>
+            <p>Coletamos nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência e foto (opcional).</p>
+            <h4>2. Uso das Informações</h4>
+            <p>As informações são usadas exclusivamente para seu perfil médico de emergência.</p>
+            <h4>3. Proteção de Dados</h4>
+            <p>Seus dados são protegidos pela LGPD. O acesso é registrado.</p>
+            <h4>4. Direitos do Titular</h4>
+            <p>Você tem direito a acessar, retificar, cancelar ou se opor ao uso de seus dados.</p>
+            <h4>5. Contato</h4>
+            <p>✉️ mylifeqrbrasil@gmail.com</p>
+        `;
+        modal.style.display = 'flex';
+    };
+    
+    window.closeModalLegal = () => {
+        document.getElementById('modalLegal').style.display = 'none';
+    };
+    
+    document.getElementById('modalLegal')?.addEventListener('click', function(e) {
+        if (e.target === this) window.closeModalLegal();
+    });
+    
+    async function carregarPerfil() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const profileId = urlParams.get('id');
+        
+        if (!profileId) {
+            document.getElementById('perfilNome').innerText = 'ERRO';
+            document.getElementById('perfilIdade').innerText = 'ID não encontrado';
+            return;
+        }
+        
+        const docRef = doc(db, "perfiles", profileId);
+        const docSnap = await getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+            document.getElementById('perfilNome').innerText = 'PERFIL NÃO ENCONTRADO';
+            document.getElementById('perfilIdade').innerText = 'ID inválido';
+            return;
+        }
+        
+        const perfil = docSnap.data();
+        
+        document.getElementById('perfilNome').innerText = perfil.nome || 'Usuário';
+        document.getElementById('perfilIdade').innerText = perfil.idade ? `${perfil.idade} anos` : 'Idade não registrada';
+        document.getElementById('perfilSangue').innerText = perfil.sangue || 'Não registrado';
+        
+        const doadorValor = perfil.doador || 'Não especificado';
+        if (doadorValor === 'Sim') {
+            document.getElementById('perfilDoadorGrande').innerHTML = '✅';
+            document.getElementById('perfilDoadorBadge').style.display = 'inline-block';
+            document.getElementById('perfilDoadorBadge').innerHTML = '✅ SIM, doador de órgãos';
+        } else if (doadorValor === 'Não') {
+            document.getElementById('perfilDoadorGrande').innerHTML = '❌';
+            document.getElementById('perfilDoadorBadge').style.display = 'inline-block';
+            document.getElementById('perfilDoadorBadge').innerHTML = '❌ NÃO doador';
+        } else {
+            document.getElementById('perfilDoadorGrande').innerHTML = '?';
+            document.getElementById('perfilDoadorBadge').style.display = 'none';
+        }
+        
+        const avatarImg = document.getElementById('avatarImg');
+        const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+        if (perfil.foto && perfil.foto.startsWith('data:image')) {
+            currentPhotoUrl = perfil.foto;
+            avatarImg.src = perfil.foto;
+            avatarImg.style.display = 'block';
+            avatarPlaceholder.style.display = 'none';
+        } else {
+            currentPhotoUrl = "";
+            avatarImg.style.display = 'none';
+            avatarPlaceholder.style.display = 'flex';
+        }
+        
+        const alergias = perfil.alergias ? perfil.alergias.split(',').map(a => `<span class="tag">${a.trim()}</span>`).join(' ') : 'Nenhuma registrada';
+        document.getElementById('perfilAlergias').innerHTML = alergias;
+        document.getElementById('perfilCondicoes').innerText = perfil.condicoes || 'Nenhuma registrada';
+        document.getElementById('perfilMedicamentos').innerText = perfil.medicamentos || 'Nenhum registrado';
+        document.getElementById('perfilHospital').innerText = perfil.hospital || 'Não especificado';
+        document.getElementById('perfilObservacoes').innerText = perfil.observacoes || 'Sem observações adicionais';
+        
+        const contatosDiv = document.getElementById('contatosContainer');
+        contatosDiv.innerHTML = '';
+        
+        const contatos = [
+            { nome: perfil.contato1_nome, telefone: perfil.contato1_telefone, relacao: perfil.contato1_relacao, num: 1 },
+            { nome: perfil.contato2_nome, telefone: perfil.contato2_telefone, relacao: perfil.contato2_relacao, num: 2 },
+            { nome: perfil.contato3_nome, telefone: perfil.contato3_telefone, relacao: perfil.contato3_relacao, num: 3 },
+            { nome: perfil.contato4_nome, telefone: perfil.contato4_telefone, relacao: perfil.contato4_relacao, num: 4 },
+            { nome: perfil.contato5_nome, telefone: perfil.contato5_telefone, relacao: perfil.contato5_relacao, num: 5 }
+        ];
+        
+        contatos.forEach(contato => {
+            if (contato.nome && contato.telefone) {
+                const relacaoMostrar = contato.relacao ? ` (${contato.relacao})` : '';
+                contatosDiv.innerHTML += `
+                    <div class="contact-card">
+                        <div class="contact-avatar"><i class="fas fa-user"></i></div>
+                        <div class="contact-info">
+                            <div class="contact-name">${contato.nome}${relacaoMostrar}</div>
+                            <div class="contact-relation">Contato ${contato.num}</div>
+                        </div>
+                        <a href="tel:+55${contato.telefone}" class="btn-call"><i class="fas fa-phone"></i> Ligar</a>
+                    </div>
+                `;
+            }
+        });
+        
+        if (contatosDiv.innerHTML === '') {
+            contatosDiv.innerHTML = '<div class="info-card"><div class="info-value">Nenhum contato registrado</div></div>';
+        }
+    }
+    
+    carregarPerfil();
+</script>
+</body>
+</html>
