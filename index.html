@@ -1148,22 +1148,17 @@
     console.log("✅ Site carregado!");
 </script>
 
-// ============================================
-// SISTEMA DE IDIOMAS (PT/EN)
-// ============================================
-
+<!-- ============================================ -->
+<!-- SISTEMA DE IDIOMAS (PT/EN)                   -->
+<!-- ============================================ -->
+<script>
 // Diccionario de traducciones
 const traducoes = {
     pt: {
-        // Header
         "navLoginBtn": "🔐 Entrar",
         "navRegisterBtn": "📝 Cadastrar",
-        
-        // Donation bar
-        "donationText": "💚💛💙 MyLifeQR Brasil é gratuito. Se for útil, ajude-nos a continuar salvando vidas",
+        "donationText": "MyLifeQR Brasil é gratuito. Se for útil, ajude-nos a continuar salvando vidas",
         "donateBtn": "❤️ Doar",
-        
-        // Hero
         "heroBadge": "🏍️ Para motociclistas",
         "heroTitle": "Sua vida merece<br>um guardião",
         "heroSlogan": "🏍️ Na estrada, cada segundo conta. MyLifeQR Brasil é sua voz quando você não pode falar.",
@@ -1171,16 +1166,12 @@ const traducoes = {
         "heroBtnProtect": "🛡️ Proteger-me agora",
         "heroBtnSticker": "🔲 Ver adesivo",
         "floatingBadge": "Escaneie e obtenha ajuda",
-        
-        // Stats
         "stat1Title": "70%",
         "stat1Desc": "dos acidentes graves acontecem em vias urbanas",
         "stat2Title": "15 min",
         "stat2Desc": "é o tempo crítico para atendimento médico",
         "stat3Title": "9 a cada 10",
         "stat3Desc": "motociclistas não carregam identificação médica",
-        
-        // Features
         "featuresTitle": "Por que MyLifeQR Brasil?",
         "featuresSubtitle": "Porque os heróis também precisam de um anjo da guarda",
         "feature1Title": "Resposta imediata",
@@ -1191,11 +1182,7 @@ const traducoes = {
         "feature3Desc": "Altere seus dados, contatos ou medicamentos de qualquer dispositivo.",
         "feature4Title": "Sem aplicativo",
         "feature4Desc": "O paramédico só escaneia o QR com seu celular. Não precisa instalar nada.",
-        
-        // Creator
         "creatorBio": "O sucesso do MyLifeQR México foi tão grande que os próprios motociclistas brasileiros começaram a pedir: \"Quando teremos uma versão para o Brasil?\" MyLifeQR Brasil é a resposta. Adaptado para os motociclistas brasileiros, com o mesmo coração: gratuito, sincero e feito para que ninguém fique sem ajuda em uma emergência.",
-        
-        // Testimonials
         "testimonialsTitle": "💬 O que dizem nossos usuários",
         "testimonialsSubtitle": "Histórias reais de quem já protege sua vida sobre duas rodas",
         "testimonial1Text": "\"Sou motociclista de finais de semana, vou para a estrada com meus amigos. Em um dos nossos roles, um amigo caiu feio. Ninguém sabia o tipo sanguíneo dele, nem alergias. Foi um desespero. Depois desse dia, todo mundo do grupo adotou o MyLifeQR Brasil. É simples, mas pode salvar uma vida.\"",
@@ -1204,29 +1191,19 @@ const traducoes = {
         "testimonial2Text": "\"Sou aposentado e pego a estrada sozinho com minha moto. Meu maior medo sempre foi cair em algum lugar isolado e ninguém saber quem eu sou ou como avisar minha família. Descobri o MyLifeQR Brasil por acaso e me deu paz de espírito. Agora eu rodo tranquilo sabendo que, se algo acontecer, vão saber quem sou e como ajudar.\"",
         "testimonial2Author": "— José A.",
         "testimonial2Role": "Aposentado, viajante solo, Minas Gerais",
-        
-        // Sticker
         "stickerTitle": "🎯 Seu adesivo personalizado",
         "stickerDesc": "Imprima e cole no seu capacete. Resistente à água e ao sol. Dois formatos disponíveis: Horizontal (6×3cm) ou Quadrado (3×3cm).",
         "stickerBtn": "📥 Gerar meu adesivo agora",
-        
-        // Newsletter
         "newsletterTitle": "📧 Receba dicas de segurança",
         "newsletterDesc": "Inscreva-se e receba informações úteis para motociclistas.",
         "newsletterPlaceholder": "Seu e-mail",
         "newsletterBtn": "Inscrever-se",
-        
-        // Email tip
         "emailTip": "📧 Seus contatos não estão recebendo os alertas? Peça para adicionarem mylifeqrbrasil@gmail.com à lista de contatos e marcarem o e-mail como \"Não é spam\".",
-        
-        // Footer
         "footerTerms": "📜 Termos e Condições",
         "footerPrivacy": "🔒 Política de Privacidade",
         "footerNotice": "🔐 Aviso de Privacidade (LGPD)",
-        "footerWarning": "⚠️ AVISO LEGAL ⚠️ MyLifeQR Brasil é um sistema de identificação médica de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional. 📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.",
+        "footerWarning": "MyLifeQR Brasil é um sistema de identificação médica de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional. 📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.",
         "footerCopyright": "MyLifeQR Brasil © 2026 — Protegendo motociclistas brasileiros",
-        
-        // Dashboard
         "emergencyBtn": "🚨 EMERGÊNCIA! 🚨",
         "tabForm": "📝 Meus dados",
         "tabSticker": "🔲 Meu adesivo",
@@ -1264,15 +1241,10 @@ const traducoes = {
         "logoutBtn": "🚪 Sair"
     },
     en: {
-        // Header
         "navLoginBtn": "🔐 Login",
         "navRegisterBtn": "📝 Sign up",
-        
-        // Donation bar
-        "donationText": "💚💛💙 MyLifeQR Brasil is free. If it's useful, help us continue saving lives",
+        "donationText": "MyLifeQR Brasil is free. If it's useful, help us continue saving lives",
         "donateBtn": "❤️ Donate",
-        
-        // Hero
         "heroBadge": "🏍️ For motorcyclists",
         "heroTitle": "Your life deserves<br>a guardian",
         "heroSlogan": "🏍️ On the road, every second counts. MyLifeQR Brasil is your voice when you can't speak.",
@@ -1280,16 +1252,12 @@ const traducoes = {
         "heroBtnProtect": "🛡️ Protect me now",
         "heroBtnSticker": "🔲 See sticker",
         "floatingBadge": "Scan and get help",
-        
-        // Stats
         "stat1Title": "70%",
         "stat1Desc": "of serious accidents occur on urban roads",
         "stat2Title": "15 min",
         "stat2Desc": "is the critical time for medical care",
         "stat3Title": "9 out of 10",
         "stat3Desc": "motorcyclists don't carry medical ID",
-        
-        // Features
         "featuresTitle": "Why MyLifeQR Brasil?",
         "featuresSubtitle": "Because heroes also need a guardian angel",
         "feature1Title": "Immediate response",
@@ -1300,11 +1268,7 @@ const traducoes = {
         "feature3Desc": "Change your data, contacts, or medications from any device.",
         "feature4Title": "No app needed",
         "feature4Desc": "Paramedics just scan the QR with their phone. No installation required.",
-        
-        // Creator
         "creatorBio": "The success of MyLifeQR México was so great that Brazilian motorcyclists themselves started asking: \"When will we have a version for Brazil?\" MyLifeQR Brasil is the answer. Adapted for Brazilian motorcyclists, with the same heart: free, sincere, and made so that no one is left without help in an emergency.",
-        
-        // Testimonials
         "testimonialsTitle": "💬 What our users say",
         "testimonialsSubtitle": "Real stories from those who already protect their lives on two wheels",
         "testimonial1Text": "\"I'm a weekend rider, going on road trips with my friends. On one of our rides, a friend had a bad crash. No one knew his blood type or allergies. It was desperate. After that day, everyone in the group adopted MyLifeQR Brasil. It's simple, but it can save a life.\"",
@@ -1313,29 +1277,19 @@ const traducoes = {
         "testimonial2Text": "\"I'm retired and ride alone on my motorcycle. My biggest fear has always been falling in some isolated place and no one knowing who I am or how to contact my family. I discovered MyLifeQR Brasil by chance and it gave me peace of mind. Now I ride peacefully knowing that if something happens, they'll know who I am and how to help.\"",
         "testimonial2Author": "— José A.",
         "testimonial2Role": "Retired, solo traveler, Minas Gerais",
-        
-        // Sticker
         "stickerTitle": "🎯 Your custom sticker",
         "stickerDesc": "Print and stick on your helmet. Water and sun resistant. Two formats available: Horizontal (6×3cm) or Square (3×3cm).",
         "stickerBtn": "📥 Generate my sticker now",
-        
-        // Newsletter
         "newsletterTitle": "📧 Get safety tips",
         "newsletterDesc": "Subscribe and receive useful information for motorcyclists.",
         "newsletterPlaceholder": "Your email",
         "newsletterBtn": "Subscribe",
-        
-        // Email tip
         "emailTip": "📧 Your contacts aren't receiving alerts? Ask them to add mylifeqrbrasil@gmail.com to their contacts and mark the email as \"Not spam\".",
-        
-        // Footer
         "footerTerms": "📜 Terms & Conditions",
         "footerPrivacy": "🔒 Privacy Policy",
         "footerNotice": "🔐 Privacy Notice (LGPD)",
-        "footerWarning": "⚠️ LEGAL NOTICE ⚠️ MyLifeQR Brasil is a medical identification support system. It is not a medical or emergency service, nor does it replace professional care. 📞 In case of emergency, call 192 (SAMU) immediately.",
+        "footerWarning": "MyLifeQR Brasil is a medical identification support system. It is not a medical or emergency service, nor does it replace professional care. 📞 In case of emergency, call 192 (SAMU) immediately.",
         "footerCopyright": "MyLifeQR Brasil © 2026 — Protecting Brazilian motorcyclists",
-        
-        // Dashboard
         "emergencyBtn": "🚨 EMERGENCY! 🚨",
         "tabForm": "📝 My data",
         "tabSticker": "🔲 My sticker",
@@ -1485,7 +1439,7 @@ function aplicarIdioma() {
     const copyright = document.querySelector('.copyright');
     if (copyright) copyright.textContent = texts.footerCopyright;
     
-    // Dashboard (se estiver visível)
+    // Dashboard elements (if visible)
     const emergencyBtn = document.getElementById('emergencyBtn');
     if (emergencyBtn) emergencyBtn.innerHTML = texts.emergencyBtn;
     const tabFormBtn = document.getElementById('tabFormBtn');
@@ -1553,6 +1507,7 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 // Aplicar idioma salvo ao carregar a página
 aplicarIdioma();
+</script>
 
 </body>
 </html>
