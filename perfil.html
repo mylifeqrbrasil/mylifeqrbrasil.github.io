@@ -105,121 +105,13 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
-        // Inicializar EmailJS
         emailjs.init("DXbjn-ibhVBMPLBeT");
         
-        // Obtener ID de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('id');
         
         const loadingDiv = document.getElementById('loadingIndicator');
         const conteudoDiv = document.getElementById('conteudoPerfil');
-        
-        function mostrarErro(mensagem) {
-            if (loadingDiv) {
-                loadingDiv.innerHTML = `
-                    <div class="error-box">
-                        ❌ ${mensagem}<br>
-                        <small>Verifique o link ou tente novamente mais tarde.</small>
-                    </div>
-                `;
-                loadingDiv.classList.remove('loading');
-            }
-        }
-        
-        async function carregarPerfil() {
-            // Verificar si hay userId
-            if (!userId) {
-                mostrarErro("Link inválido - ID de usuário não encontrado");
-                return;
-            }
-            
-            console.log("ID do usuário:", userId);
-            
-            try {
-                console.log("Buscando perfil no Firebase...");
-                const docRef = doc(db, "perfiles", userId);
-                const docSnap = await getDoc(docRef);
-                
-                console.log("Documento existe?", docSnap.exists());
-                
-                if (!docSnap.exists()) {
-                    mostrarErro("Perfil não encontrado - Este usuário não existe ou excluiu sua conta");
-                    return;
-                }
-                
-                const data = docSnap.data();
-                console.log("Dados carregados com sucesso");
-                
-                // Ocultar loading y mostrar contenido
-                if (loadingDiv) loadingDiv.style.display = 'none';
-                if (conteudoDiv) conteudoDiv.style.display = 'block';
-                
-                // Mostrar datos básicos
-                document.getElementById('nome').innerText = data.nome || "Não informado";
-                document.getElementById('sangue').innerText = data.sangue || "Tipo não informado";
-                document.getElementById('idade').innerText = data.idade || "Não informada";
-                document.getElementById('doador').innerText = data.doador || "Não informado";
-                document.getElementById('alergias').innerText = data.alergias || "Nenhuma alergia registrada";
-                document.getElementById('condicoes').innerText = data.condicoes || "Nenhuma condição registrada";
-                document.getElementById('medicamentos').innerText = data.medicamentos || "Nenhum medicamento registrado";
-                document.getElementById('hospital').innerText = data.hospital || "Não informado";
-                
-                // Mostrar contactos
-                const contatosDiv = document.getElementById('contatos');
-                if (contatosDiv) {
-                    contatosDiv.innerHTML = '';
-                    
-                    const contactos = [];
-                    let temContatos = false;
-                    
-                    for (let i = 1; i <= 5; i++) {
-                        const nome = data[`contato${i}_nome`];
-                        const telefone = data[`contato${i}_telefone`];
-                        const relacao = data[`contato${i}_relacao`];
-                        const email = data[`contato${i}_email`];
-                        const notificar = data[`contato${i}_notificar`];
-                        
-                        if (nome && nome.trim() !== "") {
-                            temContatos = true;
-                            contactos.push({
-                                nome: nome,
-                                telefone: telefone,
-                                relacao: relacao,
-                                email: email,
-                                notificar: notificar === true
-                            });
-                            
-                            const contactCard = document.createElement('div');
-                            contactCard.className = 'contact-card';
-                            contactCard.innerHTML = `
-                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                                    <div>
-                                        <strong>${escapeHtml(nome)}</strong> ${relacao ? `(${escapeHtml(relacao)})` : ''}<br>
-                                        ${telefone ? `📞 ${escapeHtml(telefone)}` : ''}
-                                        ${email ? `<br>✉️ ${escapeHtml(email)}` : ''}
-                                        ${notificar ? '<span style="background: #009C3B20; padding: 2px 8px; border-radius: 20px; font-size: 10px; margin-left: 8px;">🔔 Notificação ativa</span>' : ''}
-                                    </div>
-                                    ${telefone ? `<button onclick="window.location.href='tel:${escapeHtml(telefone)}'" style="background: #009C3B; color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer;">📞 Ligar</button>` : ''}
-                                </div>
-                            `;
-                            contatosDiv.appendChild(contactCard);
-                        }
-                    }
-                    
-                    if (!temContatos) {
-                        contatosDiv.innerHTML = '<p style="color: #8a9a9a;">Nenhum contato de emergência registrado.</p>';
-                    }
-                    
-                    // Enviar alertas por correo
-                    await enviarAlertas(contactos, data);
-                }
-                
-            } catch (error) {
-                console.error("Error carregando perfil:", error);
-                mostrarErro("Erro ao carregar perfil: " + error.message);
-            }
-        }
         
         function escapeHtml(text) {
             if (!text) return '';
@@ -229,7 +121,6 @@
         }
         
         async function enviarAlertas(contactos, userData) {
-            // Filtrar contactos con email válido y notificación activada
             const contactosParaNotificar = contactos.filter(c => c.email && c.email.trim() !== "" && c.notificar === true);
             
             if (contactosParaNotificar.length === 0) {
@@ -238,9 +129,6 @@
             }
             
             console.log(`Enviando alertas a ${contactosParaNotificar.length} contactos...`);
-            
-            const SERVICE_ID = "service_a6lrj31";
-            const TEMPLATE_ID = "template_jt921om";
             
             for (const contacto of contactosParaNotificar) {
                 const templateParams = {
@@ -256,24 +144,100 @@
                 };
                 
                 try {
-                    await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+                    await emailjs.send("service_a6lrj31", "template_jt921om", templateParams);
                     console.log(`✅ Alerta enviado para: ${contacto.email}`);
                     
-                    // Mostrar mensaje en la página
                     const alertMsg = document.createElement('div');
                     alertMsg.style.cssText = 'background: #009C3B20; border: 1px solid #009C3B; border-radius: 12px; padding: 12px; margin-top: 16px; text-align: center; font-size: 12px;';
                     alertMsg.innerHTML = `📧 Alerta de emergência enviado para ${escapeHtml(contacto.nome)} (${escapeHtml(contacto.email)})`;
-                    const card = document.querySelector('.card');
-                    if (card) card.appendChild(alertMsg);
+                    document.querySelector('.card')?.appendChild(alertMsg);
                     setTimeout(() => alertMsg.remove(), 5000);
-                    
                 } catch (error) {
                     console.error(`❌ Error enviando a ${contacto.email}:`, error);
                 }
             }
         }
         
-        // Ejecutar la carga del perfil
+        async function carregarPerfil() {
+            if (!userId) {
+                if (loadingDiv) loadingDiv.innerHTML = '<div class="error-box">❌ Link inválido - ID não encontrado</div>';
+                return;
+            }
+            
+            console.log("ID do usuário:", userId);
+            
+            try {
+                const docRef = doc(db, "perfiles", userId);
+                const docSnap = await getDoc(docRef);
+                
+                if (!docSnap.exists()) {
+                    if (loadingDiv) loadingDiv.innerHTML = '<div class="error-box">❌ Perfil não encontrado</div>';
+                    return;
+                }
+                
+                const data = docSnap.data();
+                console.log("Dados carregados:", data);
+                
+                if (loadingDiv) loadingDiv.style.display = 'none';
+                if (conteudoDiv) conteudoDiv.style.display = 'block';
+                
+                document.getElementById('nome').innerText = data.nome || "Não informado";
+                document.getElementById('sangue').innerText = data.sangue || "Tipo não informado";
+                document.getElementById('idade').innerText = data.idade || "Não informada";
+                document.getElementById('doador').innerText = data.doador || "Não informado";
+                document.getElementById('alergias').innerText = data.alergias || "Nenhuma";
+                document.getElementById('condicoes').innerText = data.condicoes || "Nenhuma";
+                document.getElementById('medicamentos').innerText = data.medicamentos || "Nenhum";
+                document.getElementById('hospital').innerText = data.hospital || "Não informado";
+                
+                // Mostrar contactos - CORREGIDO
+                const contatosDiv = document.getElementById('contatos');
+                if (contatosDiv) {
+                    contatosDiv.innerHTML = '';
+                    const contactos = [];
+                    let temContatos = false;
+                    
+                    for (let i = 1; i <= 5; i++) {
+                        const nome = data[`contato${i}_nome`];
+                        const telefone = data[`contato${i}_telefone`];
+                        const relacao = data[`contato${i}_relacao`];
+                        const email = data[`contato${i}_email`];
+                        const notificar = data[`contato${i}_notificar`];
+                        
+                        if (nome && nome.trim() !== "") {
+                            temContatos = true;
+                            contactos.push({ nome, telefone, relacao, email, notificar: notificar === true });
+                            
+                            const contactCard = document.createElement('div');
+                            contactCard.className = 'contact-card';
+                            contactCard.innerHTML = `
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                                    <div>
+                                        <strong>${escapeHtml(nome)}</strong> ${relacao ? `(${escapeHtml(relacao)})` : ''}<br>
+                                        ${telefone ? `📞 ${escapeHtml(telefone)}` : ''}
+                                        ${email ? `<br>✉️ ${escapeHtml(email)}` : ''}
+                                        ${notificar ? '<span style="background: #009C3B20; padding: 2px 8px; border-radius: 20px; font-size: 10px;">🔔 Notificação ativa</span>' : ''}
+                                    </div>
+                                    ${telefone ? `<button onclick="window.location.href='tel:${escapeHtml(telefone)}'" style="background: #009C3B; color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer;">📞 Ligar</button>` : ''}
+                                </div>
+                            `;
+                            contatosDiv.appendChild(contactCard);
+                        }
+                    }
+                    
+                    if (!temContatos) {
+                        contatosDiv.innerHTML = '<p style="color: #8a9a9a;">Nenhum contato de emergência registrado.</p>';
+                    } else {
+                        await enviarAlertas(contactos, data);
+                    }
+                }
+                
+            } catch (error) {
+                console.error("Error:", error);
+                if (loadingDiv) loadingDiv.innerHTML = `<div class="error-box">❌ Erro: ${error.message}</div>`;
+            }
+        }
+        
         carregarPerfil();
     </script>
 </body>
