@@ -11,42 +11,41 @@
             box-sizing: border-box;
         }
         
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            width: 100%;
-            overflow-x: hidden;
         }
         
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Modal de Acceso Restrito */
+        /* Modal de Acesso Restrito */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 20px;
+            width: 100%;
+            height: 100%;
         }
         
         .modal-content {
             background: #1a1a2e;
             border-radius: 20px;
-            padding: 40px 30px;
+            padding: 30px 25px;
             max-width: 400px;
             width: 100%;
             text-align: center;
@@ -54,37 +53,37 @@
         }
         
         .modal-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 20px;
-            background: #16213e;
+            background: linear-gradient(135deg, #00b894, #00cec9);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 35px;
         }
         
         .modal-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 5px;
         }
         
         .modal-subtitle {
             color: #ffd700;
-            font-size: 14px;
-            margin-bottom: 30px;
+            font-size: 12px;
+            margin-bottom: 25px;
         }
         
         .modal-text {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px;
             margin-bottom: 20px;
             text-align: left;
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 13px;
+            line-height: 1.7;
         }
         
         .modal-text strong {
@@ -95,9 +94,9 @@
             background: linear-gradient(90deg, #00b894 0%, #ffd700 100%);
             color: #1a1a2e;
             border: none;
-            padding: 18px 30px;
+            padding: 16px 25px;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
@@ -105,86 +104,98 @@
         }
         
         .modal-footer {
-            margin-top: 20px;
-            font-size: 12px;
+            margin-top: 15px;
+            font-size: 11px;
             opacity: 0.7;
         }
         
         /* Header de Alerta */
         .alert-header {
             background: linear-gradient(90deg, #00b894 0%, #ffd700 100%);
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .protocol {
             background: rgba(0, 0, 0, 0.1);
-            padding: 8px;
+            padding: 6px;
             border-radius: 5px;
-            margin-top: 8px;
+            margin-top: 6px;
             font-family: monospace;
-            font-size: 12px;
+            font-size: 11px;
         }
         
         .emergency-banner {
             background: #e74c3c;
             color: white;
-            padding: 12px;
+            padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .helmet-warning {
             background: #2c3e50;
             color: white;
-            padding: 30px 20px;
+            padding: 20px 15px;
             text-align: center;
         }
         
         .helmet-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
+            font-size: 40px;
+            margin-bottom: 10px;
         }
         
         .helmet-title {
             color: #ffd700;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .helmet-text {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        /* Container Principal */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
         }
         
         /* Profile Card */
         .profile-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
-            margin: 20px 0;
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin: 15px 0;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
         
         .profile-photo {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 4px solid #00b894;
-            margin: 0 auto 15px;
+            border: 3px solid #00b894;
+            margin: 0 auto 12px;
             overflow: hidden;
-        }
-        
-        .profile-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            background: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
         }
         
         .profile-name {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: bold;
             margin-bottom: 5px;
             color: #2c3e50;
@@ -192,93 +203,95 @@
         
         .profile-age {
             color: #7f8c8d;
-            font-size: 16px;
+            font-size: 14px;
         }
         
         /* Location Card */
         .location-card {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
         .location-title {
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            font-size: 14px;
         }
         
         .location-info {
             background: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
             color: #7f8c8d;
+            margin-bottom: 10px;
         }
         
         .map-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 8px;
         }
         
         .map-button {
             flex: 1;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             text-decoration: none;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
+            color: white;
         }
         
         .map-google {
             background: #4285f4;
-            color: white;
         }
         
         .map-waze {
             background: #33ccff;
-            color: white;
         }
         
-        /* Emergency Buttons */
+        /* Emergency Button */
         .emergency-button {
             background: #e74c3c;
             color: white;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 18px;
+            border-radius: 12px;
             text-align: center;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             text-decoration: none;
             display: block;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            margin: 12px 0;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
         }
         
+        /* Guide Button */
         .guide-button {
             background: linear-gradient(90deg, #00b894 0%, #ffd700 100%);
             color: #2c3e50;
-            padding: 15px 20px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 10px;
             text-align: center;
             font-weight: bold;
             cursor: pointer;
-            margin: 15px 0;
+            margin: 12px 0;
             border: none;
             width: 100%;
+            font-size: 14px;
         }
         
         .guide-content {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
             display: none;
         }
         
@@ -287,9 +300,10 @@
         }
         
         .guide-step {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
             border-bottom: 1px solid #ecf0f1;
+            font-size: 13px;
         }
         
         .guide-step:last-child {
@@ -300,38 +314,40 @@
             color: #00b894;
         }
         
-        /* Medical Data */
+        /* Section Title */
         .section-title {
             font-weight: bold;
-            margin: 20px 0 15px;
-            padding-left: 10px;
-            border-left: 4px solid #00b894;
-            font-size: 18px;
+            margin: 18px 0 12px;
+            padding-left: 8px;
+            border-left: 3px solid #00b894;
+            font-size: 16px;
+            color: white;
         }
         
+        /* Medical Grid */
         .medical-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 10px;
+            margin: 12px 0;
         }
         
         .medical-box {
             background: white;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 10px;
+            padding: 12px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         .medical-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #7f8c8d;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .medical-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: #00b894;
         }
@@ -341,163 +357,139 @@
         }
         
         .organ-donor .medical-value {
-            font-size: 40px;
+            font-size: 30px;
         }
         
         .organ-donor-badge {
             background: #00b894;
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 10px;
             display: inline-block;
-            margin-top: 5px;
+            margin-top: 4px;
         }
         
+        /* Info Row */
         .info-row {
             background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 10px 0;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         .info-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #7f8c8d;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
         
         .info-value {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
         }
         
-        /* Emergency Contacts */
+        /* Contact Item */
         .contact-item {
             background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 10px 0;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .contact-info {
-            flex: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         .contact-name {
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            font-size: 14px;
         }
         
         .contact-relation {
-            font-size: 13px;
+            font-size: 12px;
             color: #7f8c8d;
         }
         
         .call-button {
             background: #00b894;
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 8px 16px;
+            border-radius: 20px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
         }
         
-        /* Additional Info */
+        /* Additional Box */
         .additional-box {
             background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 10px 0;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         .additional-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #7f8c8d;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
         
         .additional-value {
             background: #e8f8f5;
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 3px solid #00b894;
+            padding: 8px;
+            border-radius: 6px;
+            border-left: 2px solid #00b894;
+            font-size: 13px;
         }
         
         /* Footer */
         .footer {
             background: #2c3e50;
             color: white;
-            padding: 30px 20px;
+            padding: 20px 15px;
             text-align: center;
-            margin-top: 30px;
-            font-size: 13px;
+            margin-top: 25px;
+            font-size: 12px;
         }
         
         .footer-warning {
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            line-height: 1.8;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            line-height: 1.7;
         }
         
         .footer-links {
-            margin: 15px 0;
+            margin: 12px 0;
         }
         
         .footer-links a {
             color: #00ff88;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 8px;
+            font-size: 12px;
         }
         
         .footer-brand {
-            margin-top: 15px;
+            margin-top: 12px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
         }
         
         /* Utility */
         .hidden {
             display: none !important;
-        }
-        
-        /* Responsive */
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .modal-content {
-                padding: 30px 20px;
-            }
-            
-            .medical-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile-name {
-                font-size: 22px;
-            }
-            
-            .emergency-button {
-                font-size: 18px;
-                padding: 15px;
-            }
         }
     </style>
 </head>
@@ -528,8 +520,8 @@
     <!-- Modal de Termos -->
     <div id="termsModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <h2 style="margin-bottom: 20px;">Termos e Condições</h2>
-            <div style="text-align: left; max-height: 300px; overflow-y: auto; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+            <h2 style="margin-bottom: 15px; font-size: 20px;">Termos e Condições</h2>
+            <div style="text-align: left; max-height: 250px; overflow-y: auto; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 12px;">
                 <p><strong>1. ACEITAÇÃO DOS TERMOS</strong></p>
                 <p>Ao usar o MyLifeQR Brasil, você concorda com estes termos.</p>
                 <br>
@@ -562,15 +554,13 @@
         <div class="helmet-warning">
             <div class="helmet-icon">⛑️</div>
             <div class="helmet-title">NÃO REMOVER O CAPACETE!</div>
-            <div>Possível lesão cervical. Apenas pessoal médico capacitado pode removê-lo.</div>
+            <div class="helmet-text">Possível lesão cervical. Apenas pessoal médico capacitado pode removê-lo.</div>
         </div>
 
         <div class="container">
             <!-- Profile Card -->
             <div class="profile-card">
-                <div class="profile-photo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' font-size='40'%3E👤%3C/text%3E%3C/svg%3E" alt="Foto do perfil">
-                </div>
+                <div class="profile-photo">👤</div>
                 <div class="profile-name">Marcos Esparza</div>
                 <div class="profile-age">48 anos</div>
             </div>
@@ -653,7 +643,7 @@
             <div class="section-title">📞 Contatos de Emergência</div>
             
             <div class="contact-item">
-                <div class="contact-info">
+                <div>
                     <div class="contact-name" id="contact1Name">Marcos Esparza (Pai)</div>
                     <div class="contact-relation">Contato 1</div>
                 </div>
@@ -683,7 +673,7 @@
             </div>
             
             <div>📞 Em caso de emergência, ligue imediatamente para 192 (SAMU).</div>
-            <div style="margin-top: 10px;">✉️ Contato: mylifeqrbrasil@gmail.com</div>
+            <div style="margin-top: 8px;">✉️ Contato: mylifeqrbrasil@gmail.com</div>
             
             <div class="footer-links">
                 <a href="#" onclick="openTerms()">📜 Termos e Condições</a> | 
@@ -715,7 +705,8 @@
 
         // Toggle guide
         function toggleGuide() {
-            document.getElementById('guideContent').classList.toggle('show');
+            const guide = document.getElementById('guideContent');
+            guide.classList.toggle('show');
         }
 
         // Obter localização
@@ -746,14 +737,6 @@
             const dateString = now.toLocaleString('pt-BR');
             document.getElementById('scanDate').textContent = dateString;
         }
-
-        // Prevenir zoom em inputs no iOS
-        document.addEventListener('DOMContentLoaded', function() {
-            const viewport = document.querySelector('meta[name="viewport"]');
-            if (viewport) {
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-            }
-        });
     </script>
 </body>
 </html>
