@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>MyLifeQR Brasil — Perfil Médico de Emergência</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -626,10 +626,61 @@
         .modal-legal-footer { padding: 16px 20px; border-top: 1px solid #eee; text-align: center; }
         .modal-legal-footer button { background: #009C3B; color: white; border: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; }
         
+        /* Ajustes para móviles */
         @media (max-width: 480px) {
-            .profile-name { font-size: 24px; }
-            .vital-value { font-size: 28px; }
-            .btn-192 { font-size: 18px; padding: 14px; }
+            body {
+                font-size: 16px;
+            }
+            .gate-title {
+                font-size: 24px;
+            }
+            .gate-box-text {
+                font-size: 12px;
+            }
+            .btn-accept {
+                font-size: 16px;
+                padding: 14px;
+            }
+            .profile-name {
+                font-size: 24px;
+            }
+            .vital-value {
+                font-size: 28px;
+            }
+            .btn-192 {
+                font-size: 18px;
+                padding: 14px;
+            }
+            .contact-card {
+                flex-wrap: wrap;
+            }
+            .contact-info {
+                min-width: 150px;
+            }
+            .btn-call {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .medical-section {
+                padding: 0 16px;
+            }
+            .location-card, .profile-card {
+                margin: 16px;
+                padding: 16px;
+            }
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .avatar-placeholder {
+                font-size: 40px;
+            }
+            .vital-card {
+                padding: 12px;
+            }
+            .info-card, .notes-card {
+                padding: 12px;
+            }
         }
     </style>
     
