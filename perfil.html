@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>MyLifeQR Brasil — Perfil Médico de Emergência</title>
+    <title>SafeRiderQR — Perfil Médico de Emergencia</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -286,12 +286,12 @@
         .btn-google { background: #00A86B; color: white; }
         .btn-waze { background: #33CCFF; color: white; }
         
-        .btn-192-container {
+        .btn-911-container {
             padding: 0 20px;
             margin-bottom: 20px;
         }
         
-        .btn-192 {
+        .btn-911 {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -309,7 +309,7 @@
             animation: pulse 2s ease-in-out infinite;
         }
         
-        .btn-192:hover {
+        .btn-911:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(232,21,42,0.5);
         }
@@ -629,7 +629,7 @@
         @media (max-width: 480px) {
             .profile-name { font-size: 24px; }
             .vital-value { font-size: 28px; }
-            .btn-192 { font-size: 18px; padding: 14px; }
+            .btn-911 { font-size: 18px; padding: 14px; }
         }
     </style>
     
@@ -643,25 +643,25 @@
 </head>
 <body>
 
-<!-- GATE DE ACESSO -->
+<!-- GATE DE ACCESO -->
 <div id="gate">
     <div class="gate-icon"><i class="fas fa-shield-alt"></i></div>
-    <div class="gate-title">Acesso Restrito</div>
-    <div class="gate-subtitle">Aviso de privacidade — LGPD</div>
+    <div class="gate-title">Acceso Restringido</div>
+    <div class="gate-subtitle">Aviso de privacidad — LFPDPPP</div>
     <div class="gate-box">
         <p class="gate-box-text">
-            As informações contidas neste perfil são <strong>confidenciais e protegidas</strong> pela Lei Geral de Proteção de Dados Pessoais (<strong>LGPD</strong>).
+            La información contenida en este perfil es <strong>confidencial y está protegida</strong> por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (<strong>LFPDPPP</strong>).
             <br><br>
-            Este acesso é <strong>registrado com data, hora, localização aproximada e dispositivo</strong>. O uso indevido será perseguido e punido conforme a legislação brasileira vigente.
+            Este acceso queda <strong>registrado con fecha, hora, ubicación aproximada y dispositivo</strong>. El uso indebido será perseguido y sancionado conforme a la legislación mexicana vigente.
             <br><br>
-            Este perfil deve ser consultado <strong>exclusivamente em situações de emergência médica</strong>.
+            Este perfil debe consultarse <strong>exclusivamente en situaciones de emergencia médica</strong>.
         </p>
     </div>
-    <p style="font-size:11px; color:#8a9a9a; margin:8px 0 16px;">Ao aceitar, você confirma que acessa para fins de atendimento médico de emergência.</p>
-    <button class="btn-accept" onclick="acceptGate()"><i class="fas fa-check-circle"></i> Entendi — Ver perfil de emergência</button>
+    <p style="font-size:11px; color:#8a9a9a; margin:8px 0 16px;">Al aceptar confirmas que accedes con fines de atención médica de emergencia.</p>
+    <button class="btn-accept" onclick="acceptGate()"><i class="fas fa-check-circle"></i> Entiendo — Ver perfil de emergencia</button>
 </div>
 
-<!-- PERFIL DE EMERGÊNCIA -->
+<!-- PERFIL DE EMERGENCIA -->
 <div id="profile">
     <div id="photoModal" class="modal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -671,12 +671,12 @@
     <div id="modalLegal" class="modal-legal">
         <div class="modal-legal-content">
             <div class="modal-legal-header">
-                <h3 id="modalLegalTitle">Termos e Condições</h3>
+                <h3 id="modalLegalTitle">Términos y Condiciones</h3>
                 <button class="modal-legal-close" onclick="closeModalLegal()">&times;</button>
             </div>
             <div class="modal-legal-body" id="modalLegalBody"></div>
             <div class="modal-legal-footer">
-                <button onclick="closeModalLegal()">Fechar</button>
+                <button onclick="closeModalLegal()">Cerrar</button>
             </div>
         </div>
     </div>
@@ -689,14 +689,14 @@
     
     <div class="emergency-banner">
         <i class="fas fa-ambulance"></i>
-        <span>PERFIL DE EMERGÊNCIA</span>
-        <span style="margin-left:auto;"><i class="fas fa-motorcycle"></i> MyLifeQR Brasil</span>
+        <span>PERFIL DE EMERGENCIA</span>
+        <span style="margin-left:auto;"><i class="fas fa-bicycle"></i> SafeRiderQR</span>
     </div>
     
     <div class="helmet-warning">
         <div class="helmet-icon"><i class="fas fa-hard-hat"></i></div>
-        <div class="helmet-title">NÃO REMOVER O CAPACETE!</div>
-        <div class="helmet-desc">Possível lesão cervical. Apenas pessoal médico capacitado pode removê-lo.</div>
+        <div class="helmet-title">¡NO RETIRAR EL CASCO!</div>
+        <div class="helmet-desc">Posible lesión cervical. Solo personal médico capacitado puede retirarlo.</div>
     </div>
     
     <div class="profile-card fade-in">
@@ -704,32 +704,32 @@
             <div class="avatar-placeholder" id="avatarPlaceholder"><i class="fas fa-user-circle"></i></div>
             <img id="avatarImg" style="display:none; width:100%; height:100%; object-fit:cover;">
         </div>
-        <div class="profile-name" id="perfilNombre">Carregando...</div>
+        <div class="profile-name" id="perfilNombre">Cargando...</div>
         <div class="profile-age" id="perfilEdad"></div>
     </div>
     
     <div class="location-card">
         <div class="location-header">
             <i class="fas fa-map-marker-alt" style="color: #00A86B;"></i>
-            <h3>Localização aproximada</h3>
+            <h3>Ubicación aproximada</h3>
         </div>
-        <div class="location-status" id="locationStatus"><i class="fas fa-spinner fa-pulse"></i> Obtendo localização...</div>
+        <div class="location-status" id="locationStatus"><i class="fas fa-spinner fa-pulse"></i> Obteniendo ubicación...</div>
         <div class="map-buttons" id="mapButtons" style="display: none;">
             <a href="#" id="googleMapsLink" class="btn-map btn-google" target="_blank"><i class="fab fa-google"></i> Google Maps</a>
             <a href="#" id="wazeLink" class="btn-map btn-waze" target="_blank"><i class="fab fa-waze"></i> Waze</a>
         </div>
     </div>
     
-    <div class="btn-192-container">
-        <a href="tel:192" class="btn-192">
+    <div class="btn-911-container">
+        <a href="tel:911" class="btn-911">
             <i class="fas fa-phone-alt" style="font-size:28px;"></i>
-            <span>LIGAR PARA 192 (SAMU)</span>
+            <span>LLAMAR AL 911</span>
         </a>
     </div>
     
     <div class="accordion">
         <div class="accordion-header" onclick="toggleAccordion()">
-            🚑 GUIA PARA QUEM NÃO É PARAMÉDICO
+            🚑 GUÍA PARA QUIENES NO SON PARAMÉDICOS
             <span><i class="fas fa-chevron-down"></i></span>
         </div>
         <div class="accordion-content" id="accordionContent">
@@ -737,29 +737,29 @@
                 <div class="instruction-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <div class="step-title"><i class="fas fa-phone"></i> Ligue para 192 (SAMU)</div>
-                        <div class="step-desc">Informe a localização exata. Não mova o motociclista.</div>
+                        <div class="step-title"><i class="fas fa-phone"></i> Llama al 911</div>
+                        <div class="step-desc">Informa la ubicación exacta. No muevas al ciclista.</div>
                     </div>
                 </div>
                 <div class="instruction-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <div class="step-title"><i class="fas fa-hard-hat"></i> Não remova o capacete</div>
-                        <div class="step-desc">Apenas pessoal capacitado. Possível lesão cervical.</div>
+                        <div class="step-title"><i class="fas fa-hard-hat"></i> No retires el casco</div>
+                        <div class="step-desc">Solo personal capacitado. Posible lesión cervical.</div>
                     </div>
                 </div>
                 <div class="instruction-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <div class="step-title"><i class="fas fa-tint"></i> Controle hemorragias</div>
-                        <div class="step-desc">Pressione com um pano limpo sem soltar.</div>
+                        <div class="step-title"><i class="fas fa-tint"></i> Controla hemorragias</div>
+                        <div class="step-desc">Presiona con un trapo limpio sin soltar.</div>
                     </div>
                 </div>
                 <div class="instruction-step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <div class="step-title"><i class="fas fa-id-card"></i> Mostre este perfil ao paramédico</div>
-                        <div class="step-desc">Contém tipo sanguíneo, alergias e contatos de emergência.</div>
+                        <div class="step-title"><i class="fas fa-id-card"></i> Muestra este perfil al paramédico</div>
+                        <div class="step-desc">Contiene tipo de sangre, alergias y contactos de emergencia.</div>
                     </div>
                 </div>
             </div>
@@ -767,14 +767,14 @@
     </div>
     
     <div class="medical-section">
-        <div class="section-title"><i class="fas fa-heartbeat"></i> Dados Médicos</div>
+        <div class="section-title"><i class="fas fa-heartbeat"></i> Datos Médicos</div>
         <div class="vitals-grid">
             <div class="vital-card blood">
-                <div class="vital-label">TIPO SANGUÍNEO</div>
+                <div class="vital-label">TIPO DE SANGRE</div>
                 <div class="vital-value blood" id="perfilSangre">---</div>
             </div>
             <div class="vital-card">
-                <div class="vital-label">DOADOR DE ÓRGÃOS</div>
+                <div class="vital-label">DONADOR DE ÓRGANOS</div>
                 <div class="vital-value" id="perfilDonadorGrande">---</div>
                 <div id="perfilDonadorBadge" class="donor-badge" style="display: none;"></div>
             </div>
@@ -786,48 +786,48 @@
         </div>
         
         <div class="info-card">
-            <div class="info-label"><i class="fas fa-stethoscope"></i> CONDIÇÕES MÉDICAS</div>
-            <div class="info-value" id="perfilCondições">---</div>
+            <div class="info-label"><i class="fas fa-stethoscope"></i> CONDICIONES MÉDICAS</div>
+            <div class="info-value" id="perfilCondiciones">---</div>
         </div>
         
         <div class="info-card">
-            <div class="info-label"><i class="fas fa-capsules"></i> MEDICAMENTOS ATUAIS</div>
+            <div class="info-label"><i class="fas fa-capsules"></i> MEDICAMENTOS ACTUALES</div>
             <div class="info-value" id="perfilMedicamentos">---</div>
         </div>
     </div>
     
     <div class="medical-section">
-        <div class="section-title"><i class="fas fa-address-book"></i> Contatos de Emergência</div>
+        <div class="section-title"><i class="fas fa-address-book"></i> Contactos de Emergencia</div>
         <div id="contactosContainer"></div>
     </div>
     
     <div class="medical-section">
-        <div class="section-title"><i class="fas fa-info-circle"></i> Informações Adicionais</div>
+        <div class="section-title"><i class="fas fa-info-circle"></i> Información Adicional</div>
         <div class="info-card">
-            <div class="info-label"><i class="fas fa-hospital"></i> CONVÊNIO / NÚMERO</div>
+            <div class="info-label"><i class="fas fa-hospital"></i> SEGURO SOCIAL / NÚMERO</div>
             <div class="info-value" id="perfilHospital">---</div>
         </div>
         <div class="notes-card">
-            <div class="info-label"><i class="fas fa-pen"></i> OBSERVAÇÕES ADICIONAIS</div>
+            <div class="info-label"><i class="fas fa-pen"></i> NOTAS ADICIONALES</div>
             <div class="notes-text" id="perfilNotas">---</div>
         </div>
     </div>
     
     <div class="footer">
-        <div class="footer-logo"><img src="SafeRiderQRLogo.png" alt="MyLifeQR Brasil" onerror="this.style.display='none'"></div>
+        <div class="footer-logo"><img src="SafeRiderQRLogo.png" alt="SafeRiderQR" onerror="this.style.display='none'"></div>
         <p class="disclaimer-text">
             <strong>⚠️ AVISO LEGAL IMPORTANTE ⚠️</strong><br><br>
-            MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><br>
-            Em caso de emergência, a prioridade deve ser sempre ligar para o 192 (SAMU) e seguir as orientações da equipe médica.<br><br>
-            <strong>📞 Em caso de emergência, ligue imediatamente para 192 (SAMU).</strong><br><br>
-            <strong>✉️ Contato: mylifeqrbrasil@gmail.com</strong>
+            SafeRiderQR es un <strong>sistema de identificación médica</strong> de apoyo. No es un servicio médico, de emergencia ni sustituye la atención profesional.<br><br>
+            En caso de emergencia, la prioridad siempre debe ser llamar al 911 y seguir las indicaciones del personal médico.<br><br>
+            <strong>📞 En caso de emergencia, llame inmediatamente al 911.</strong><br><br>
+            <strong>✉️ Contacto: mylifeqrsticker@gmail.com</strong>
         </p>
         <div style="margin-top: 16px;">
-            <span class="legal-link" onclick="showTerminos()"><i class="fas fa-file-alt"></i> Termos e Condições</span>
+            <span class="legal-link" onclick="showTerminos()"><i class="fas fa-file-alt"></i> Términos y Condiciones</span>
             <span style="color: #aabbba; margin: 0 8px;">|</span>
-            <span class="legal-link" onclick="showPrivacidad()"><i class="fas fa-lock"></i> Política de Privacidade</span>
+            <span class="legal-link" onclick="showPrivacidad()"><i class="fas fa-lock"></i> Política de Privacidad</span>
         </div>
-        <div class="copyright" style="margin-top: 16px; font-size: 10px; color: #aabbab;">MyLifeQR Brasil © AImaginalabs 2026</div>
+        <div class="copyright" style="margin-top: 16px; font-size: 10px; color: #aabbab;">SafeRiderQR © AImaginalabs 2026</div>
     </div>
 </div>
 
@@ -844,28 +844,28 @@
     import { initializeApp } from "firebase/app";
     import { getFirestore, doc, getDoc, collection, addDoc } from "firebase/firestore";
     
-    // MYLIFEQR BRASIL - FIREBASE CONFIG
+    // SAFERIDERQR - FIREBASE CONFIG
     const firebaseConfig = {
-        apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
-        authDomain: "mylifeqrbrasil1.firebaseapp.com",
-        projectId: "mylifeqrbrasil1",
-        storageBucket: "mylifeqrbrasil1.firebasestorage.app",
-        messagingSenderId: "680108596725",
-        appId: "1:680108596725:web:d82e2121ce811bad45d4bc"
+        apiKey: "AIzaSyB2ecubGvryYKY-1XnvDSJzNKiDBOTtK2k",
+        authDomain: "saferiderqr.firebaseapp.com",
+        projectId: "saferiderqr",
+        storageBucket: "saferiderqr.firebasestorage.app",
+        messagingSenderId: "788479085894",
+        appId: "1:788479085894:web:d5a43a8de32136aae16947"
     };
     
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     
-    // EMAILJS - MYLIFEQR BRASIL CONFIG
+    // EMAILJS - SAFERIDERQR CONFIG
     const EMAILJS_CONFIG = {
-        PUBLIC_KEY: "DXbjn-ibhVBMPLBeT",
-        SERVICE_ID: "service_a6lrj31",
-        TEMPLATE_ID: "template_jt921om"
+        PUBLIC_KEY: "B5pDWcbWS3IpjrCBM",
+        SERVICE_ID: "service_6jhtsod",
+        TEMPLATE_ID: "template_jmlyqkn"
     };
     
     emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-    console.log("✅ EmailJS inicializado para MyLifeQR Brasil");
+    console.log("✅ EmailJS inicializado para SafeRiderQR");
     
     let currentPhotoUrl = "";
     let scanRegistered = false;
@@ -896,21 +896,21 @@
         }, 350);
     };
     
-    async function enviarCorreoEmergência(email, nomeContato, perfil, folio, localizacao) {
+    async function enviarCorreoEmergencia(email, nombreContacto, perfil, folio, ubicacion) {
         if (!email) return { success: false, error: "No email provided" };
         
         const templateParams = {
             email: email,
-            to_name: nomeContato,
-            nome: perfil.nome || 'Usuário',
-            data: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+            to_name: nombreContacto,
+            nombre: perfil.nombre || 'Usuario',
+            fecha: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }),
             folio: folio,
-            latitude: localizacao?.lat || 'Não disponível',
-            longitude: localizacao?.lng || 'Não disponível',
-            sangue: perfil.sangue || 'Não registrado',
-            alergias: perfil.alergias || 'Nenhuma',
-            condicoes: perfil.condicoes || 'Nenhuma',
-            medicamentos: perfil.medicamentos || 'Nenhum'
+            latitud: ubicacion?.lat || 'No disponible',
+            longitud: ubicacion?.lng || 'No disponible',
+            sangre: perfil.sangre || 'No registrado',
+            alergias: perfil.alergias || 'Ninguna',
+            condiciones: perfil.condiciones || 'Ninguna',
+            medicamentos: perfil.medicamentos || 'Ninguno'
         };
         
         try {
@@ -919,17 +919,17 @@
                 EMAILJS_CONFIG.TEMPLATE_ID,
                 templateParams
             );
-            console.log(`✅ E-mail enviado para ${email}`);
+            console.log(`✅ Correo enviado a ${email}`);
             return { success: true };
         } catch (error) {
-            console.error(`❌ Erro ao enviar e-mail para ${email}:`, error);
+            console.error(`❌ Error al enviar correo a ${email}:`, error);
             return { success: false, error: error };
         }
     }
     
     async function registrarEscaneo() {
         if (scanRegistered) {
-            console.log("⚠️ Escaneamento já registrado anteriormente. Ignorando...");
+            console.log("⚠️ Escaneo ya registrado anteriormente. Omitiendo...");
             return;
         }
         
@@ -937,7 +937,7 @@
         const profileId = urlParams.get('id');
         
         if (!profileId) {
-            console.error("❌ ID do perfil não encontrado");
+            console.error("❌ No se encontró ID de perfil");
             return;
         }
         
@@ -945,27 +945,27 @@
         const lastNotif = localStorage.getItem(lastKey);
         const now = Date.now();
         if (lastNotif && (now - parseInt(lastNotif)) < 300000) {
-            console.log("⚠️ Notificação já enviada para este perfil nos últimos 5 minutos. Ignorando.");
+            console.log("⚠️ Ya se envió una notificación para este perfil en los últimos 5 minutos. Omitiendo.");
             scanRegistered = true;
             return;
         }
         
-        const docRef = doc(db, "perfis", profileId);
+        const docRef = doc(db, "perfiles", profileId);
         const docSnap = await getDoc(docRef);
         
         if (!docSnap.exists()) {
-            console.error("❌ Perfil não encontrado");
+            console.error("❌ Perfil no encontrado");
             return;
         }
         
         currentPerfilData = docSnap.data();
         const perfil = currentPerfilData;
         
-        const folio = 'MLQR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        const folio = 'SRQR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+        const fechaHora = new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' });
         
         const notif = document.getElementById('scanNotification');
-        document.getElementById('scanDateTime').innerHTML = `<i class="fas fa-calendar-alt"></i> ${dataHora}`;
+        document.getElementById('scanDateTime').innerHTML = `<i class="fas fa-calendar-alt"></i> ${fechaHora}`;
         document.getElementById('scanFolio').innerHTML = `Folio: ${folio}`;
         notif.style.display = 'block';
         
@@ -986,41 +986,41 @@
                 document.getElementById('googleMapsLink').href = mapsUrl;
                 document.getElementById('wazeLink').href = wazeUrl;
                 
-                await addDoc(collection(db, "eventos_escaneamento"), {
+                await addDoc(collection(db, "eventos_escaneo"), {
                     perfil_id: profileId,
-                    perfil_nome: perfil.nome || 'Usuário',
+                    perfil_nombre: perfil.nombre || 'Usuario',
                     folio: folio,
-                    data: new Date().toISOString(),
-                    localizacao: currentUserLocation,
+                    fecha: new Date().toISOString(),
+                    ubicacion: currentUserLocation,
                     dispositivo: navigator.userAgent
                 });
                 
-                const contatosParaEnviar = [];
+                const contactosParaEnviar = [];
                 for (let i = 1; i <= 5; i++) {
-                    const email = perfil[`contato${i}_email`];
-                    const notificar = perfil[`contato${i}_notificar`];
-                    const nome = perfil[`contato${i}_nome`] || `Contato ${i}`;
+                    const email = perfil[`contacto${i}_email`];
+                    const notificar = perfil[`contacto${i}_notificar`];
+                    const nombre = perfil[`contacto${i}_nombre`] || `Contacto ${i}`;
                     if (email && notificar === true) {
-                        contatosParaEnviar.push({ email, nome });
+                        contactosParaEnviar.push({ email, nombre });
                     }
                 }
                 
-                console.log(`📧 Enviando e-mails para ${contatosParaEnviar.length} contatos...`);
+                console.log(`📧 Enviando correos a ${contactosParaEnviar.length} contactos...`);
                 
-                for (const contato of contatosParaEnviar) {
-                    await enviarCorreoEmergência(contato.email, contato.nome, perfil, folio, currentUserLocation);
+                for (const contacto of contactosParaEnviar) {
+                    await enviarCorreoEmergencia(contacto.email, contacto.nombre, perfil, folio, currentUserLocation);
                 }
                 
                 scanRegistered = true;
                 
             }, (error) => {
-                console.error("❌ Erro de geolocalização:", error);
-                document.getElementById('locationStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Não foi possível obter a localização. Ative os serviços de localização.';
+                console.error("❌ Error de geolocalización:", error);
+                document.getElementById('locationStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> No se pudo obtener la ubicación. Activa los servicios de ubicación.';
                 scanRegistered = true;
             });
         } else {
-            console.warn("⚠️ Navegador não suporta geolocalização");
-            document.getElementById('locationStatus').innerHTML = '<i class="fas fa-ban"></i> Seu navegador não suporta geolocalização.';
+            console.warn("⚠️ Navegador no soporta geolocalización");
+            document.getElementById('locationStatus').innerHTML = '<i class="fas fa-ban"></i> Tu navegador no soporta geolocalización.';
             scanRegistered = true;
         }
     }
@@ -1043,18 +1043,18 @@
         const modal = document.getElementById('modalLegal');
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
-        title.innerText = '📜 Termos e Condições';
+        title.innerText = '📜 Términos y Condiciones';
         body.innerHTML = `
-            <h4>1. Aceitação dos Termos</h4>
-            <p>Ao utilizar o MyLifeQR Brasil, você concorda com estes Termos e Condições.</p>
-            <h4>2. Descrição do Serviço</h4>
-            <p>MyLifeQR Brasil é um sistema de identificação médica. Não é um serviço médico nem de emergência.</p>
-            <h4>3. Responsabilidade do Usuário</h4>
-            <p>Você é o único responsável pela veracidade e atualização dos seus dados.</p>
-            <h4>4. Lei Aplicável</h4>
-            <p>Estes termos são regidos pelas leis da República Federativa do Brasil.</p>
-            <h4>5. Contato</h4>
-            <p>✉️ mylifeqrbrasil@gmail.com</p>
+            <h4>1. Aceptación de los Términos</h4>
+            <p>Al utilizar SafeRiderQR, aceptas estos Términos y Condiciones.</p>
+            <h4>2. Descripción del Servicio</h4>
+            <p>SafeRiderQR es un sistema de identificación médica. No es un servicio médico ni de emergencia.</p>
+            <h4>3. Responsabilidad del Usuario</h4>
+            <p>Eres el único responsable de la veracidad y actualización de tus datos.</p>
+            <h4>4. Ley Aplicable</h4>
+            <p>Estos términos se rigen por las leyes de los Estados Unidos Mexicanos.</p>
+            <h4>5. Contacto</h4>
+            <p>✉️ mylifeqrsticker@gmail.com</p>
         `;
         modal.style.display = 'flex';
     };
@@ -1063,18 +1063,18 @@
         const modal = document.getElementById('modalLegal');
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
-        title.innerText = '🔒 Política de Privacidade';
+        title.innerText = '🔒 Política de Privacidad';
         body.innerHTML = `
-            <h4>1. Dados que Coletamos</h4>
-            <p>Coletamos nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência e foto (opcional).</p>
-            <h4>2. Uso das Informações</h4>
-            <p>As informações são usadas exclusivamente para seu perfil médico de emergência.</p>
-            <h4>3. Proteção de Dados</h4>
-            <p>Seus dados estão protegidos pela LGPD. O acesso é registrado.</p>
-            <h4>4. Direitos do Titular</h4>
-            <p>Você tem direito a acessar, corrigir, cancelar ou se opor ao uso de seus dados.</p>
-            <h4>5. Contato</h4>
-            <p>✉️ mylifeqrbrasil@gmail.com</p>
+            <h4>1. Datos que Recopilamos</h4>
+            <p>Recopilamos nombre, edad, tipo de sangre, alergias, condiciones médicas, medicamentos, contactos de emergencia y foto (opcional).</p>
+            <h4>2. Uso de la Información</h4>
+            <p>La información se usa exclusivamente para tu perfil médico de emergencia.</p>
+            <h4>3. Protección de Datos</h4>
+            <p>Tus datos están protegidos por la LFPDPPP. El acceso queda registrado.</p>
+            <h4>4. Derechos ARCO</h4>
+            <p>Tienes derecho a Acceder, Rectificar, Cancelar u Oponerte al uso de tus datos.</p>
+            <h4>5. Contacto</h4>
+            <p>✉️ mylifeqrsticker@gmail.com</p>
         `;
         modal.style.display = 'flex';
     };
@@ -1087,40 +1087,40 @@
         if (e.target === this) window.closeModalLegal();
     });
     
-    async function carregarPerfil() {
+    async function cargarPerfil() {
         const urlParams = new URLSearchParams(window.location.search);
         const profileId = urlParams.get('id');
         
         if (!profileId) {
-            document.getElementById('perfilNombre').innerText = 'ERRO';
-            document.getElementById('perfilEdad').innerText = 'ID não encontrado';
+            document.getElementById('perfilNombre').innerText = 'ERROR';
+            document.getElementById('perfilEdad').innerText = 'ID no encontrado';
             return;
         }
         
-        const docRef = doc(db, "perfis", profileId);
+        const docRef = doc(db, "perfiles", profileId);
         const docSnap = await getDoc(docRef);
         
         if (!docSnap.exists()) {
-            document.getElementById('perfilNombre').innerText = 'PERFIL NÃO ENCONTRADO';
+            document.getElementById('perfilNombre').innerText = 'PERFIL NO ENCONTRADO';
             document.getElementById('perfilEdad').innerText = 'ID inválido';
             return;
         }
         
         const perfil = docSnap.data();
         
-        document.getElementById('perfilNombre').innerText = perfil.nome || 'Usuário';
-        document.getElementById('perfilEdad').innerText = perfil.idade ? `${perfil.idade} anos` : 'Idade não registrada';
-        document.getElementById('perfilSangre').innerText = perfil.sangue || 'Não registrado';
+        document.getElementById('perfilNombre').innerText = perfil.nombre || 'Usuario';
+        document.getElementById('perfilEdad').innerText = perfil.edad ? `${perfil.edad} años` : 'Edad no registrada';
+        document.getElementById('perfilSangre').innerText = perfil.sangre || 'No registrado';
         
-        const doadorValor = perfil.doador || 'Não especificado';
-        if (doadorValor === 'Sim') {
+        const donadorValor = perfil.donador || 'No especificado';
+        if (donadorValor === 'Sí') {
             document.getElementById('perfilDonadorGrande').innerHTML = '✅';
             document.getElementById('perfilDonadorBadge').style.display = 'inline-block';
-            document.getElementById('perfilDonadorBadge').innerHTML = '✅ SIM, doador de órgãos';
-        } else if (doadorValor === 'Não') {
+            document.getElementById('perfilDonadorBadge').innerHTML = '✅ SÍ, donador de órganos';
+        } else if (donadorValor === 'No') {
             document.getElementById('perfilDonadorGrande').innerHTML = '❌';
             document.getElementById('perfilDonadorBadge').style.display = 'inline-block';
-            document.getElementById('perfilDonadorBadge').innerHTML = '❌ NÃO doador';
+            document.getElementById('perfilDonadorBadge').innerHTML = '❌ NO donador';
         } else {
             document.getElementById('perfilDonadorGrande').innerHTML = '?';
             document.getElementById('perfilDonadorBadge').style.display = 'none';
@@ -1139,46 +1139,46 @@
             avatarPlaceholder.style.display = 'flex';
         }
         
-        const alergias = perfil.alergias ? perfil.alergias.split(',').map(a => `<span class="tag">${a.trim()}</span>`).join(' ') : 'Nenhuma registrada';
+        const alergias = perfil.alergias ? perfil.alergias.split(',').map(a => `<span class="tag">${a.trim()}</span>`).join(' ') : 'Ninguna registrada';
         document.getElementById('perfilAlergias').innerHTML = alergias;
-        document.getElementById('perfilCondições').innerText = perfil.condicoes || 'Nenhuma registrada';
-        document.getElementById('perfilMedicamentos').innerText = perfil.medicamentos || 'Nenhum registrado';
-        document.getElementById('perfilHospital').innerText = perfil.convenio || 'Não especificado';
-        document.getElementById('perfilNotas').innerText = perfil.notas || 'Sem observações adicionais';
+        document.getElementById('perfilCondiciones').innerText = perfil.condiciones || 'Ninguna registrada';
+        document.getElementById('perfilMedicamentos').innerText = perfil.medicamentos || 'Ninguno registrado';
+        document.getElementById('perfilHospital').innerText = perfil.hospital || 'No especificado';
+        document.getElementById('perfilNotas').innerText = perfil.notas || 'Sin notas adicionales';
         
-        const contatosDiv = document.getElementById('contactosContainer');
-        contatosDiv.innerHTML = '';
+        const contactosDiv = document.getElementById('contactosContainer');
+        contactosDiv.innerHTML = '';
         
-        const contatos = [
-            { nome: perfil.contato1_nome, telefone: perfil.contato1_tel, relacionamento: perfil.contato1_relacao, num: 1 },
-            { nome: perfil.contato2_nome, telefone: perfil.contato2_tel, relacionamento: perfil.contato2_relacao, num: 2 },
-            { nome: perfil.contato3_nome, telefone: perfil.contato3_tel, relacionamento: perfil.contato3_relacao, num: 3 },
-            { nome: perfil.contato4_nome, telefone: perfil.contato4_tel, relacionamento: perfil.contato4_relacao, num: 4 },
-            { nome: perfil.contato5_nome, telefone: perfil.contato5_tel, relacionamento: perfil.contato5_relacao, num: 5 }
+        const contactos = [
+            { nombre: perfil.contacto1_nombre, telefono: perfil.contacto1_tel, relacion: perfil.contacto1_relacion, num: 1 },
+            { nombre: perfil.contacto2_nombre, telefono: perfil.contacto2_tel, relacion: perfil.contacto2_relacion, num: 2 },
+            { nombre: perfil.contacto3_nombre, telefono: perfil.contacto3_tel, relacion: perfil.contacto3_relacion, num: 3 },
+            { nombre: perfil.contacto4_nombre, telefono: perfil.contacto4_tel, relacion: perfil.contacto4_relacion, num: 4 },
+            { nombre: perfil.contacto5_nombre, telefono: perfil.contacto5_tel, relacion: perfil.contacto5_relacion, num: 5 }
         ];
         
-        contatos.forEach(contato => {
-            if (contato.nome && contato.telefone) {
-                const relacaoMostrar = contato.relacionamento ? ` (${contato.relacionamento})` : '';
-                contatosDiv.innerHTML += `
+        contactos.forEach(contacto => {
+            if (contacto.nombre && contacto.telefono) {
+                const relacionMostrar = contacto.relacion ? ` (${contacto.relacion})` : '';
+                contactosDiv.innerHTML += `
                     <div class="contact-card">
                         <div class="contact-avatar"><i class="fas fa-user"></i></div>
                         <div class="contact-info">
-                            <div class="contact-name">${contato.nome}${relacaoMostrar}</div>
-                            <div class="contact-relation">Contato ${contato.num}</div>
+                            <div class="contact-name">${contacto.nombre}${relacionMostrar}</div>
+                            <div class="contact-relation">Contacto ${contacto.num}</div>
                         </div>
-                        <a href="tel:+55${contato.telefone}" class="btn-call"><i class="fas fa-phone"></i> Ligar</a>
+                        <a href="tel:+52${contacto.telefono}" class="btn-call"><i class="fas fa-phone"></i> Llamar</a>
                     </div>
                 `;
             }
         });
         
-        if (contatosDiv.innerHTML === '') {
-            contatosDiv.innerHTML = '<div class="info-card"><div class="info-value">Nenhum contato registrado</div></div>';
+        if (contactosDiv.innerHTML === '') {
+            contactosDiv.innerHTML = '<div class="info-card"><div class="info-value">No hay contactos registrados</div></div>';
         }
     }
     
-    carregarPerfil();
+    cargarPerfil();
 </script>
 </body>
 </html>
