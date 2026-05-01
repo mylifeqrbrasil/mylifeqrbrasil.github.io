@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>MyLifeQR Brasil — Perfil Médico de Emergência</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -10,11 +10,18 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        /* Forzar tamaño correcto en Chrome y Lens */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
         body {
             background: #f0f4f0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 16px;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
         
         @keyframes fadeIn {
@@ -92,7 +99,7 @@
         }
         
         .gate-box-text {
-            font-size: 13px;
+            font-size: 14px;
             color: #aabbba;
             line-height: 1.6;
             text-align: left;
@@ -258,7 +265,7 @@
             background: #f8faf8;
             padding: 12px;
             border-radius: 12px;
-            font-size: 13px;
+            font-size: 14px;
             color: #6a7a7a;
             margin-bottom: 16px;
         }
@@ -626,7 +633,7 @@
         .modal-legal-footer { padding: 16px 20px; border-top: 1px solid #eee; text-align: center; }
         .modal-legal-footer button { background: #009C3B; color: white; border: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; }
         
-        /* Ajustes para móviles */
+        /* Ajustes para móviles - Tamaño grande y legible */
         @media (max-width: 480px) {
             body {
                 font-size: 16px;
@@ -635,26 +642,26 @@
                 font-size: 28px;
             }
             .gate-subtitle {
-                font-size: 12px;
-            }
-            .gate-box-text {
                 font-size: 13px;
             }
+            .gate-box-text {
+                font-size: 14px;
+            }
             .btn-accept {
-                font-size: 17px;
-                padding: 15px;
+                font-size: 18px;
+                padding: 16px;
             }
             .profile-name {
                 font-size: 26px;
             }
             .profile-age {
-                font-size: 14px;
+                font-size: 15px;
             }
             .vital-value {
                 font-size: 30px;
             }
             .vital-label {
-                font-size: 10px;
+                font-size: 11px;
             }
             .btn-192 {
                 font-size: 20px;
@@ -668,7 +675,7 @@
             }
             .btn-call {
                 padding: 8px 14px;
-                font-size: 12px;
+                font-size: 13px;
             }
             .medical-section {
                 padding: 0 16px;
@@ -691,49 +698,49 @@
                 padding: 14px;
             }
             .info-label {
-                font-size: 10px;
+                font-size: 11px;
             }
             .info-value {
-                font-size: 13px;
+                font-size: 14px;
             }
             .section-title {
-                font-size: 15px;
+                font-size: 16px;
             }
             .emergency-banner {
-                font-size: 13px;
-                padding: 10px 16px;
+                font-size: 14px;
+                padding: 12px 16px;
             }
             .helmet-title {
                 font-size: 18px;
             }
             .helmet-desc {
-                font-size: 12px;
+                font-size: 13px;
             }
             .step-title {
                 font-size: 14px;
             }
             .step-desc {
-                font-size: 12px;
+                font-size: 13px;
             }
             .accordion-header {
-                font-size: 14px;
+                font-size: 15px;
                 padding: 14px 16px;
             }
             .location-status {
-                font-size: 12px;
+                font-size: 13px;
             }
             .btn-map {
-                font-size: 12px;
+                font-size: 13px;
                 padding: 10px 16px;
             }
             .footer {
                 padding: 20px 16px;
             }
             .disclaimer-text {
-                font-size: 9px;
+                font-size: 10px;
             }
             .legal-link {
-                font-size: 10px;
+                font-size: 11px;
             }
         }
     </style>
@@ -1127,7 +1134,6 @@
                 console.error("❌ Erro de geolocalização:", error);
                 document.getElementById('locationStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Não foi possível obter a localização. Ative os serviços de localização.';
                 
-                // Aún así, intentar enviar los correos sin ubicación
                 const contatosParaEnviar = [];
                 for (let i = 1; i <= 5; i++) {
                     const email = perfil[`contato${i}_email`];
