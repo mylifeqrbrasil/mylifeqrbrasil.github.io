@@ -16,7 +16,6 @@
             min-height: 100vh;
         }
         
-        /* ===== ANIMACIONES ===== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -35,7 +34,6 @@
         .fade-in { animation: fadeIn 0.5s ease-out; }
         .slide-in { animation: slideIn 0.4s ease-out; }
         
-        /* ===== GATE ===== */
         #gate {
             position: fixed;
             inset: 0;
@@ -119,7 +117,6 @@
             box-shadow: 0 8px 25px rgba(232,21,42,0.4);
         }
         
-        /* ===== PERFIL PRINCIPAL ===== */
         #profile {
             display: none;
             max-width: 500px;
@@ -130,7 +127,6 @@
         
         #profile.visible { display: block; }
         
-        /* Banner de escaneo */
         .scan-notification {
             background: linear-gradient(135deg, #E8152A 0%, #B01020 100%);
             color: white;
@@ -151,7 +147,6 @@
             letter-spacing: 1px;
         }
         
-        /* Banner de emergencia */
         .emergency-banner {
             background: #E8152A;
             padding: 12px 20px;
@@ -166,7 +161,6 @@
             font-size: 14px;
         }
         
-        /* Banner de casco */
         .helmet-warning {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             padding: 20px;
@@ -192,7 +186,6 @@
             margin-top: 4px;
         }
         
-        /* Tarjeta de perfil */
         .profile-card {
             background: white;
             margin: 20px;
@@ -234,7 +227,6 @@
             font-weight: 500;
         }
         
-        /* Tarjeta de ubicación */
         .location-card {
             background: white;
             margin: 20px;
@@ -290,7 +282,6 @@
         .btn-google { background: #E8152A; color: white; }
         .btn-waze { background: #33CCFF; color: white; }
         
-        /* Botão 192 (SAMU) */
         .btn-192-container {
             padding: 0 20px;
             margin-bottom: 20px;
@@ -319,7 +310,6 @@
             box-shadow: 0 8px 25px rgba(232,21,42,0.5);
         }
         
-        /* Acordeón de instrucciones */
         .accordion {
             background: white;
             border-radius: 20px;
@@ -384,7 +374,6 @@
         .step-title { font-weight: 800; color: #1a1a1a; margin-bottom: 4px; }
         .step-desc { font-size: 13px; color: #666; line-height: 1.4; }
         
-        /* Tarjetas de información médica */
         .medical-section {
             padding: 0 20px;
             margin-top: 20px;
@@ -490,7 +479,6 @@
             margin: 2px 4px 2px 0;
         }
         
-        /* Tarjeta de notas */
         .notes-card {
             background: linear-gradient(135deg, #FFF8F0 0%, #FFF0E0 100%);
             border-radius: 16px;
@@ -515,7 +503,6 @@
             line-height: 1.5;
         }
         
-        /* Contactos */
         .contact-card {
             background: white;
             border-radius: 16px;
@@ -560,7 +547,6 @@
         
         .btn-call:hover { transform: scale(1.05); }
         
-        /* Footer */
         .footer {
             background: white;
             padding: 24px 20px;
@@ -573,7 +559,6 @@
         .disclaimer-text { font-size: 10px; color: #999; line-height: 1.6; }
         .legal-link { color: #E8152A; text-decoration: none; font-weight: 500; cursor: pointer; margin: 0 8px; font-size: 11px; }
         
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -644,7 +629,6 @@
         }
     </style>
     
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKR6WB9JJM"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -655,7 +639,6 @@
 </head>
 <body>
 
-<!-- GATE DE ACESSO -->
 <div id="gate">
     <div class="gate-icon">⚠️</div>
     <div class="gate-title">Acesso Restrito</div>
@@ -673,15 +656,12 @@
     <button class="btn-accept" onclick="acceptGate()">✓ Entendi — Ver perfil de emergência</button>
 </div>
 
-<!-- PERFIL DE EMERGÊNCIA -->
 <div id="profile">
-    <!-- Modal de foto -->
     <div id="photoModal" class="modal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <img id="modalImage" src="" alt="Foto ampliada">
     </div>
     
-    <!-- Modal legal -->
     <div id="modalLegal" class="modal-legal">
         <div class="modal-legal-content">
             <div class="modal-legal-header">
@@ -695,27 +675,23 @@
         </div>
     </div>
     
-    <!-- Notificação de escaneo -->
     <div id="scanNotification" class="scan-notification" style="display: none;">
         🔴 AVISO: PERFIL ESCANEADO 🔴<br>
         <span id="scanDateTime"></span><br>
         <span id="scanFolio" class="folio-number"></span>
     </div>
     
-    <!-- Banner superior -->
     <div class="emergency-banner">
         <span>🚨 PERFIL DE EMERGÊNCIA</span>
         <span style="margin-left:auto;">MyLifeQR Brasil</span>
     </div>
     
-    <!-- Advertencia de casco -->
     <div class="helmet-warning">
         <div class="helmet-icon">⚠️</div>
         <div class="helmet-title">NÃO REMOVER O CAPACETE!</div>
         <div class="helmet-desc">Possível lesão cervical. Apenas pessoal médico capacitado pode removê-lo.</div>
     </div>
     
-    <!-- Tarjeta de perfil -->
     <div class="profile-card fade-in">
         <div class="avatar" id="avatarContainer" onclick="openModal()">
             <div class="avatar-placeholder" id="avatarPlaceholder">👤</div>
@@ -725,7 +701,6 @@
         <div class="profile-age" id="perfilIdade"></div>
     </div>
     
-    <!-- Ubicación -->
     <div class="location-card">
         <div class="location-header">
             <span>📍</span>
@@ -738,7 +713,6 @@
         </div>
     </div>
     
-    <!-- Botão 192 (SAMU) -->
     <div class="btn-192-container">
         <a href="tel:192" class="btn-192">
             <span style="font-size:28px;">📞</span>
@@ -746,7 +720,6 @@
         </a>
     </div>
     
-    <!-- Instrucciones para no paramédicos -->
     <div class="accordion">
         <div class="accordion-header" onclick="toggleAccordion()">
             🚑 GUIA PARA QUEM NÃO É PARAMÉDICO
@@ -786,7 +759,6 @@
         </div>
     </div>
     
-    <!-- Datos médicos -->
     <div class="medical-section">
         <div class="section-title">🩸 Dados Médicos</div>
         <div class="vitals-grid">
@@ -817,13 +789,11 @@
         </div>
     </div>
     
-    <!-- Contactos de emergencia -->
     <div class="medical-section">
         <div class="section-title">📞 Contatos de Emergência</div>
         <div id="contatosContainer"></div>
     </div>
     
-    <!-- Información adicional -->
     <div class="medical-section">
         <div class="section-title">📋 Informações Adicionais</div>
         <div class="info-card">
@@ -836,7 +806,6 @@
         </div>
     </div>
     
-    <!-- Footer -->
     <div class="footer">
         <div class="footer-logo"><img src="MyLifeQRLogo.png" alt="MyLifeQR Brasil" onerror="this.style.display='none'"></div>
         <p class="disclaimer-text">
@@ -868,7 +837,6 @@
     import { initializeApp } from "firebase/app";
     import { getFirestore, doc, getDoc, collection, addDoc } from "firebase/firestore";
     
-    // MYLIFEQR BRASIL - FIREBASE CONFIG
     const firebaseConfig = {
         apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
         authDomain: "mylifeqrbrasil1.firebaseapp.com",
@@ -886,7 +854,6 @@
     let currentUserLocation = null;
     let currentPerfilData = null;
     
-    // Configuração EmailJS
     const EMAILJS_CONFIG = {
         PUBLIC_KEY: "DXbjn-ibhVBMPLBeT",
         SERVICE_ID: "service_a6lrj31",
@@ -894,9 +861,8 @@
     };
     
     emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-    console.log("✅ EmailJS inicializado para MyLifeQR Brasil");
+    console.log("✅ EmailJS inicializado");
     
-    // Funções UI
     window.toggleAccordion = () => {
         const header = document.querySelector('.accordion-header');
         const content = document.getElementById('accordionContent');
@@ -922,13 +888,16 @@
     };
     
     async function enviarEmailEmergencia(email, nomeContato, perfil, protocolo, localizacao) {
-        if (!email) return { success: false, error: "No email provided" };
+        if (!email) {
+            console.log("❌ No email provided");
+            return { success: false, error: "No email provided" };
+        }
         
         const templateParams = {
             email: email,
             to_name: nomeContato,
             nome: perfil.nome || 'Usuário',
-            data: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+            data: new Date().toLocaleString('pt-BR'),
             protocolo: protocolo,
             latitude: localizacao?.lat || 'Não disponível',
             longitude: localizacao?.lng || 'Não disponível',
@@ -954,7 +923,7 @@
     
     async function registrarEscaneamento() {
         if (scanRegistered) {
-            console.log("⚠️ Escaneamento já registrado anteriormente. Ignorando...");
+            console.log("⚠️ Escaneamento já registrado");
             return;
         }
         
@@ -962,7 +931,7 @@
         const profileId = urlParams.get('id');
         
         if (!profileId) {
-            console.error("❌ ID do perfil não encontrado");
+            console.error("❌ ID não encontrado");
             return;
         }
         
@@ -970,7 +939,7 @@
         const lastNotif = localStorage.getItem(lastKey);
         const now = Date.now();
         if (lastNotif && (now - parseInt(lastNotif)) < 300000) {
-            console.log("⚠️ Já foi enviada uma notificação para este perfil nos últimos 5 minutos. Ignorando.");
+            console.log("⚠️ Aguarde 5 minutos para novo envio");
             scanRegistered = true;
             return;
         }
@@ -987,7 +956,7 @@
         const perfil = currentPerfilData;
         
         const protocolo = 'MLQR-BR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        const dataHora = new Date().toLocaleString('pt-BR');
         
         const notif = document.getElementById('scanNotification');
         document.getElementById('scanDateTime').innerHTML = `📅 ${dataHora}`;
@@ -996,6 +965,22 @@
         
         localStorage.setItem(lastKey, now.toString());
         
+        // Obtener contactos a notificar
+        const contatosParaEnviar = [];
+        for (let i = 1; i <= 5; i++) {
+            const email = perfil[`contato${i}_email`];
+            const notificar = perfil[`contato${i}_notificar`];
+            const nome = perfil[`contato${i}_nome`] || `Contato ${i}`;
+            if (email && notificar === true) {
+                contatosParaEnviar.push({ email, nome });
+            }
+        }
+        
+        if (contatosParaEnviar.length === 0) {
+            console.log("⚠️ Nenhum contato com notificação ativa");
+        }
+        
+        // Geolocalização e envio de emails
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
                 currentUserLocation = {
@@ -1020,17 +1005,6 @@
                     dispositivo: navigator.userAgent
                 });
                 
-                // Enviar e-mails para contatos com notificação ativada
-                const contatosParaEnviar = [];
-                for (let i = 1; i <= 5; i++) {
-                    const email = perfil[`contato${i}_email`];
-                    const notificar = perfil[`contato${i}_notificar`];
-                    const nome = perfil[`contato${i}_nome`] || `Contato ${i}`;
-                    if (email && notificar === true) {
-                        contatosParaEnviar.push({ email, nome });
-                    }
-                }
-                
                 console.log(`📧 Enviando e-mails para ${contatosParaEnviar.length} contatos...`);
                 
                 for (const contato of contatosParaEnviar) {
@@ -1039,14 +1013,25 @@
                 
                 scanRegistered = true;
                 
-            }, (error) => {
+            }, async (error) => {
                 console.error("❌ Erro de geolocalização:", error);
-                document.getElementById('locationStatus').innerHTML = '📍 Não foi possível obter a localização. Ative os serviços de localização.';
+                document.getElementById('locationStatus').innerHTML = '📍 Não foi possível obter a localização';
+                
+                // ENVIAR EMAILS MESMO SEM LOCALIZAÇÃO
+                for (const contato of contatosParaEnviar) {
+                    await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, null);
+                }
+                
                 scanRegistered = true;
             });
         } else {
-            console.warn("⚠️ Navegador não suporta geolocalização");
-            document.getElementById('locationStatus').innerHTML = '📍 Seu navegador não suporta geolocalização.';
+            document.getElementById('locationStatus').innerHTML = '📍 Geolocalização não suportada';
+            
+            // ENVIAR EMAILS MESMO SEM GEOLOCALIZAÇÃO
+            for (const contato of contatosParaEnviar) {
+                await enviarEmailEmergencia(contato.email, contato.nome, perfil, protocolo, null);
+            }
+            
             scanRegistered = true;
         }
     }
@@ -1070,18 +1055,7 @@
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
         title.innerText = '📜 Termos e Condições';
-        body.innerHTML = `
-            <h4>1. Aceitação dos Termos</h4>
-            <p>Ao utilizar MyLifeQR Brasil, você aceita estes Termos e Condições.</p>
-            <h4>2. Descrição do Serviço</h4>
-            <p>MyLifeQR Brasil é um sistema de identificação médica. Não é um serviço médico nem de emergência.</p>
-            <h4>3. Responsabilidade do Usuário</h4>
-            <p>Você é o único responsável pela veracidade e atualização de seus dados.</p>
-            <h4>4. Lei Aplicável</h4>
-            <p>Estes termos são regidos pela Lei Geral de Proteção de Dados (LGPD) do Brasil.</p>
-            <h4>5. Contato</h4>
-            <p>✉️ mylifeqrbrasil@gmail.com</p>
-        `;
+        body.innerHTML = `...`;
         modal.style.display = 'flex';
     };
     
@@ -1090,18 +1064,7 @@
         const title = document.getElementById('modalLegalTitle');
         const body = document.getElementById('modalLegalBody');
         title.innerText = '🔒 Política de Privacidade';
-        body.innerHTML = `
-            <h4>1. Dados que Coletamos</h4>
-            <p>Coletamos nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência e foto (opcional).</p>
-            <h4>2. Uso das Informações</h4>
-            <p>As informações são usadas exclusivamente para seu perfil médico de emergência.</p>
-            <h4>3. Proteção de Dados</h4>
-            <p>Seus dados são protegidos pela LGPD. O acesso é registrado.</p>
-            <h4>4. Direitos do Titular</h4>
-            <p>Você tem direito a acessar, retificar, cancelar ou se opor ao uso de seus dados.</p>
-            <h4>5. Contato</h4>
-            <p>✉️ mylifeqrbrasil@gmail.com</p>
-        `;
+        body.innerHTML = `...`;
         modal.style.display = 'flex';
     };
     
