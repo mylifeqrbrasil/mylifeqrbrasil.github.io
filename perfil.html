@@ -662,9 +662,9 @@
     <div class="gate-subtitle">Aviso de privacidade — LGPD</div>
     <div class="gate-box">
         <p class="gate-box-text">
-            As informações contidas neste perfil são <strong>confidenciais e protegidas</strong> pela Lei Geral de Proteção de Dados Pessoais (<strong>LGPD</strong>).
+            As informações contidas neste perfil são <strong>confidenciais e estão protegidas</strong> pela Lei Geral de Proteção de Dados Pessoais (<strong>LGPD</strong>).
             <br><br>
-            Este acesso é <strong>registrado com data, hora, localização aproximada e dispositivo</strong>. O uso indevido será perseguido e punido conforme a legislação brasileira vigente.
+            Este acesso fica <strong>registrado com data, hora, localização aproximada e dispositivo</strong>. O uso indevido será perseguido e punido conforme a legislação brasileira vigente.
             <br><br>
             Este perfil deve ser consultado <strong>exclusivamente em situações de emergência médica</strong>.
         </p>
@@ -885,7 +885,7 @@
     let scanRegistered = false;
     let currentUserLocation = null;
     let currentPerfilData = null;
-    let lastNotificationTime = 0; // Control anti-spam: última vez que se enviaron correos para este perfil
+    let lastNotificationTime = 0;
     
     // Configuração EmailJS
     const EMAILJS_CONFIG = {
@@ -918,7 +918,6 @@
             gate.style.display = 'none';
             profile.style.display = 'block';
             setTimeout(() => profile.classList.add('visible'), 10);
-            // IMPORTANTE: O escaneamento e envio de e-mails SÓ é executado após aceitar o gate
             registrarEscaneo();
         }, 350);
     };
@@ -929,15 +928,15 @@
         const templateParams = {
             email: email,
             to_name: nomeContacto,
-            nome: perfil.nome || 'Usuário',
-            data: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+            name: perfil.nome || 'Usuário',
+            date: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
             folio: folio,
-            latitude: ubicacion?.lat || 'Não disponível',
-            longitude: ubicacion?.lng || 'Não disponível',
-            sangue: perfil.sangue || 'Não registrado',
-            alergias: perfil.alergias || 'Nenhuma',
-            condicoes: perfil.condicoes || 'Nenhuma',
-            medicamentos: perfil.medicamentos || 'Nenhum'
+            lat: ubicacion?.lat || 'Não disponível',
+            lng: ubicacion?.lng || 'Não disponível',
+            blood: perfil.sangue || 'Não registrado',
+            allergies: perfil.alergias || 'Nenhuma',
+            conditions: perfil.condicoes || 'Nenhuma',
+            medications: perfil.medicamentos || 'Nenhum'
         };
         
         try {
@@ -968,13 +967,12 @@
             return;
         }
         
-        // CONTROLE ANTI-SPAM: Verificar se já foram enviados e-mails para este perfil recentemente (5 minutos)
         const lastKey = `last_notification_${profileId}`;
         const lastNotif = localStorage.getItem(lastKey);
         const now = Date.now();
-        if (lastNotif && (now - parseInt(lastNotif)) < 300000) { // 5 minutos = 300,000 ms
+        if (lastNotif && (now - parseInt(lastNotif)) < 300000) {
             console.log("⚠️ Já foi enviada uma notificação para este perfil nos últimos 5 minutos. Omitindo para evitar SPAM.");
-            scanRegistered = true; // Marcamos como registrado para não tentar de novo
+            scanRegistered = true;
             return;
         }
         
@@ -997,7 +995,6 @@
         document.getElementById('scanFolio').innerHTML = `Folio: ${folio}`;
         notif.style.display = 'block';
         
-        // Salvar no localStorage que já foi enviada notificação
         localStorage.setItem(lastKey, now.toString());
         
         if (navigator.geolocation) {
@@ -1015,7 +1012,6 @@
                 document.getElementById('googleMapsLink').href = mapsUrl;
                 document.getElementById('wazeLink').href = wazeUrl;
                 
-                // Registrar evento no Firestore
                 await addDoc(collection(db, "eventos_escaneamento"), {
                     perfil_id: profileId,
                     perfil_nome: perfil.nome || 'Usuário',
@@ -1025,7 +1021,6 @@
                     dispositivo: navigator.userAgent
                 });
                 
-                // Enviar e-mails APENAS para contatos que têm notificação ativada
                 const contatosParaEnviar = [];
                 for (let i = 1; i <= 5; i++) {
                     const email = perfil[`contato${i}_email`];
@@ -1047,7 +1042,6 @@
             }, (error) => {
                 console.error("❌ Erro de geolocalização:", error);
                 document.getElementById('locationStatus').innerHTML = '📍 Não foi possível obter a localização. Ative os serviços de localização.';
-                // Mesmo assim marcamos como registrado para não tentar novamente
                 scanRegistered = true;
             });
         } else {
