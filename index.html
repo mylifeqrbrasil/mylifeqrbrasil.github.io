@@ -78,7 +78,7 @@
         .feature-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
         .feature-card p { font-size: 14px; color: #6a7a7a; }
         
-        /* CREATOR SECTION */
+        /* CREATOR SECTION - Fixed duplicate text */
         .creator-section { background: #f8faf8; border-radius: 32px; padding: 48px 32px; margin: 60px 0 40px; text-align: center; }
         .creator-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 48px; color: white; }
         .creator-name { font-size: 28px; font-weight: 800; color: #009C3B; margin-bottom: 8px; }
@@ -275,11 +275,11 @@
             </div>
         </div>
         
-        <!-- CREATOR SECTION -->
+        <!-- CREATOR SECTION - Fixed: Removed duplicate text -->
         <div class="creator-section">
             <div class="creator-avatar">🇧🇷</div>
             <div class="creator-name"><a href="https://mylifeqr.github.io" target="_blank" style="color: #009C3B; text-decoration: none;">MyLifeQR México</a> → Brasil</div>
-            <div class="creator-bio"><p>O sucesso do <a href="https://mylifeqr.github.io" target="_blank" style="color: #009C3B;">MyLifeQR México</a> foi tão grande que os próprios motociclistas brasileiros começaram a pedir: <strong>"Quando teremos uma versão para o Brasil?"</strong></p><p><strong>MyLifeQR Brasil</strong> é a resposta. Adaptado para os motociclistas brasileiros, com o mesmo coração: gratuito, sincero e feito para que ninguém fique sem ajuda em uma emergência.</p></div>
+            <div class="creator-bio"><p>O sucesso do <a href="https://mylifeqr.github.io" target="_blank" style="color: #009C3B;">MyLifeQR México</a> foi tão grande que os próprios motociclistas brasileiros começaram a pedir: <strong>"Quando teremos uma versão para o Brasil?"</strong></p><p><strong>MyLifeQR Brasil é a resposta. Adaptado para os motociclistas brasileiros, com o mesmo coração: gratuito, sincero e feito para que ninguém fique sem ajuda em uma emergência.</strong></p></div>
             <div class="creator-contact"><a href="https://wa.me/525652502785" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp: +52 5652502785</a><a href="mailto:mylifeqrbrasil@gmail.com"><i class="fas fa-envelope"></i> mylifeqrbrasil@gmail.com</a></div>
         </div>
         
@@ -421,10 +421,50 @@
     <div class="modal-legal-footer"><button onclick="closeModalReset()">Fechar</button></div></div>
 </div>
 
-<!-- MODALS LEGALES -->
-<div id="modalAvisoPrivacidad" class="modal-legal"><div class="modal-legal-content"><div class="modal-legal-header"><h3>🔐 Aviso de Privacidade (LGPD)</h3><button class="modal-legal-close" onclick="closeModalAvisoPrivacidad()">&times;</button></div><div class="modal-legal-body"><h4>MyLifeQR Brasil - Aviso de Privacidade</h4><p><strong>Última atualização:</strong> Abril 2026</p><h4>Dados que coletamos</h4><p>Nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência, fotografia (opcional), endereço IP.</p><h4>Finalidade</h4><p>EXCLUSIVAMENTE para gerar seu perfil médico de emergência acessível via código QR.</p><h4>Seus direitos</h4><p>Você tem direito a acessar, retificar, cancelar e se opor ao tratamento de seus dados.</p><h4>Contato</h4><p><strong>✉️ mylifeqrbrasil@gmail.com</strong><br>📱 WhatsApp: +52 5652502785</p></div><div class="modal-legal-footer"><button onclick="closeModalAvisoPrivacidad()">Fechar</button></div></div></div>
+<!-- MODALS LEGALES - Updated with complete LGPD terms from PDF -->
+<div id="modalAvisoPrivacidad" class="modal-legal"><div class="modal-legal-content"><div class="modal-legal-header"><h3>🔐 Aviso de Privacidade (LGPD)</h3><button class="modal-legal-close" onclick="closeModalAvisoPrivacidad()">&times;</button></div><div class="modal-legal-body">
+    <h4>1. Dados Coletados</h4>
+    <p><strong>Dados Pessoais Obrigatórios:</strong> Nome completo, E-mail, Telefone/Contato de Emergência</p>
+    <p><strong>Dados Sensíveis:</strong> Tipo sanguíneo, Alergias, Condições médicas pré-existentes, Medicamentos utilizados</p>
+    
+    <h4>2. Finalidade da Coleta</h4>
+    <p>Os dados são coletados exclusivamente para: a) Criar um perfil médico do usuário; b) Gerar um QR Code que pode ser acessado em caso de emergência; c) Enviar notificações automáticas a contatos de emergência cadastrados.</p>
+    
+    <h4>3. Base Legal (LGPD)</h4>
+    <p>O tratamento dos dados pessoais e sensíveis é fundamentado em: a) Consentimento (Art. 7º, I da LGPD); b) Proteção da Vida e Saúde (Art. 11, I da LGPD).</p>
+    
+    <h4>4. Compartilhamento de Dados</h4>
+    <p>Os dados exibidos ao escanear o QR Code são públicos e acessíveis a qualquer pessoa que realize a leitura do código. O usuário aceita esse compartilhamento explícito no momento do cadastro.</p>
+    
+    <h4>5. Direitos do Titular (LGPD)</h4>
+    <p>O usuário tem o direito de: a) Acessar seus dados pessoais; b) Corrigir dados inexatos ou incompletos; c) Solicitar exclusão, quando aplicável; d) Revogar o consentimento, observadas as limitações legais.</p>
+    
+    <h4>6. Contato para Solicitações</h4>
+    <p>📧 mylifeqrbrasil@gmail.com</p>
+</div><div class="modal-legal-footer"><button onclick="closeModalAvisoPrivacidad()">Fechar</button></div></div></div>
 
-<div id="modalLegalRegistro" class="modal-legal"><div class="modal-legal-content"><div class="modal-legal-header"><h3>📜 Termos e Condições</h3><button class="modal-legal-close" onclick="closeModalLegalRegistro()">&times;</button></div><div class="modal-legal-body"><h4>1. Aceitação</h4><p>Ao utilizar MyLifeQR Brasil, você aceita estes Termos e Condições.</p><h4>2. Descrição do serviço</h4><p>MyLifeQR Brasil é um sistema de identificação médica de apoio. NÃO é um serviço médico nem de emergência.</p><h4>3. Responsabilidade do usuário</h4><p>Você é o único responsável pela veracidade de seus dados médicos.</p><h4>4. Lei aplicável</h4><p>Estes termos são regidos pela Lei Geral de Proteção de Dados (LGPD) do Brasil.</p><h4>5. Contato</h4><p><strong>mylifeqrbrasil@gmail.com</strong></p></div><div class="modal-legal-footer"><button onclick="closeModalLegalRegistro()">Fechar</button></div></div></div>
+<div id="modalLegalRegistro" class="modal-legal"><div class="modal-legal-content"><div class="modal-legal-header"><h3>📜 Termos e Condições</h3><button class="modal-legal-close" onclick="closeModalLegalRegistro()">&times;</button></div><div class="modal-legal-body">
+    <h4>1. Objeto</h4>
+    <p>O serviço MyLifeQR Brasil permite que usuários insiram dados pessoais, médicos e contatos de emergência para a geração de um QR Code personalizado, que pode ser impresso e colado em capacetes.</p>
+    
+    <h4>2. Aceitação</h4>
+    <p>Ao se cadastrar e inserir seus dados pessoais e médicos, o usuário concorda expressamente com: a) A exibição pública de seus Dados Pessoais e Sensíveis a qualquer pessoa que escanear o QR Code gerado; b) A isenção de responsabilidade do MyLifeQR Brasil, seus desenvolvedores, parceiros e colaboradores por qualquer uso indevido ou interpretação dos dados por terceiros.</p>
+    
+    <h4>3. Responsabilidade do Usuário</h4>
+    <p>a) Fornecer dados verdadeiros e atualizados; b) Zelar pela segurança de seu próprio dispositivo, senha e informações de login; c) Não utilizar o Site para práticas ilegais, fraudulentas ou que violem estes Termos.</p>
+    
+    <h4>4. Limitação de Responsabilidade</h4>
+    <p>O MyLifeQR Brasil não será responsável por: a) Qualquer dano direto ou indireto decorrente do uso dos dados exibidos via QR Code; b) Uso indevido, interpretação incorreta ou divulgação por terceiros que escanearem o código; c) Problemas técnicos, falhas temporárias ou interrupções de serviço.</p>
+    
+    <h4>5. E-mails Automáticos</h4>
+    <p>Ao ativar notificações para seus contatos de emergência, o usuário concorda que e-mails automáticos podem ser enviados e está ciente de que é sua responsabilidade orientar os contatos sobre verificarem a pasta de SPAM.</p>
+    
+    <h4>6. Lei Aplicável e Foro</h4>
+    <p>Estes Termos serão regidos pela legislação brasileira, especialmente pela LGPD (Lei nº 13.709/2018). Fica eleito o foro da comarca de São Paulo, SP, para dirimir quaisquer dúvidas.</p>
+    
+    <h4>7. Contato</h4>
+    <p>📧 mylifeqrbrasil@gmail.com</p>
+</div><div class="modal-legal-footer"><button onclick="closeModalLegalRegistro()">Fechar</button></div></div></div>
 
 <div id="cookieConsent"><p style="margin: 0; font-size: 13px;">🍪 MyLifeQR Brasil utiliza cookies essenciais para o funcionamento do site. Não usamos cookies de rastreamento. Ao continuar, você aceita seu uso.</p><button onclick="aceptarCookies()">Aceitar</button></div>
 
@@ -736,9 +776,15 @@
             if (counterDoc.exists() && counterDoc.data().totalUsuarios) {
                 total = counterDoc.data().totalUsuarios;
             }
-            document.getElementById('vidasCounter').innerHTML = `💚 ${total}+ vidas protegidas`;
+            const vidasElement = document.getElementById('vidasCounter');
+            if (vidasElement) {
+                vidasElement.innerHTML = `💚 ${total}+ vidas protegidas`;
+            }
         } catch (error) {
-            document.getElementById('vidasCounter').innerHTML = `💚 500+ vidas protegidas`;
+            const vidasElement = document.getElementById('vidasCounter');
+            if (vidasElement) {
+                vidasElement.innerHTML = `💚 500+ vidas protegidas`;
+            }
         }
     }
     
@@ -1122,7 +1168,8 @@
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             currentUser = user;
-            document.getElementById('userEmail').innerText = user.email;
+            const userEmailSpan = document.getElementById('userEmail');
+            if (userEmailSpan) userEmailSpan.innerText = user.email;
             landingScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
             await carregarPerfil(user.uid);
@@ -1149,7 +1196,7 @@
 </script>
 
 <!-- ============================================ -->
-<!-- SISTEMA DE IDIOMAS (PT/EN)                   -->
+<!-- SISTEMA DE IDIOMAS (PT/EN) - Updated with correct translations -->
 <!-- ============================================ -->
 <script>
 // Diccionario de traducciones
@@ -1166,6 +1213,9 @@ const traducoes = {
         "heroBtnProtect": "🛡️ Proteger-me agora",
         "heroBtnSticker": "🔲 Ver adesivo",
         "floatingBadge": "Escaneie e obtenha ajuda",
+        "badgeFree": "Gratuito",
+        "badgeSecure": "Dados protegidos",
+        "badgeMotorcycle": "Para motociclistas",
         "stat1Title": "70%",
         "stat1Desc": "dos acidentes graves acontecem em vias urbanas",
         "stat2Title": "15 min",
@@ -1252,6 +1302,9 @@ const traducoes = {
         "heroBtnProtect": "🛡️ Protect me now",
         "heroBtnSticker": "🔲 See sticker",
         "floatingBadge": "Scan and get help",
+        "badgeFree": "Free",
+        "badgeSecure": "Secure Data",
+        "badgeMotorcycle": "For Motorcyclists",
         "stat1Title": "70%",
         "stat1Desc": "of serious accidents occur on urban roads",
         "stat2Title": "15 min",
@@ -1341,14 +1394,23 @@ function aplicarIdioma() {
     if (navRegister) navRegister.innerHTML = texts.navRegisterBtn;
     
     // Donation bar
-    const donationText = document.querySelector('.donation-text span:last-child');
-    if (donationText) donationText.textContent = texts.donationText;
+    const donationTextSpan = document.querySelector('.donation-text span:last-child');
+    if (donationTextSpan) donationTextSpan.textContent = texts.donationText;
     const donateBtn = document.getElementById('donateBtn');
     if (donateBtn) donateBtn.innerHTML = texts.donateBtn;
     
-    // Hero
-    const heroBadge = document.querySelector('.hero-badge');
-    if (heroBadge) heroBadge.innerHTML = texts.heroBadge;
+    // Hero badges - Updated with correct translations
+    const heroBadges = document.querySelectorAll('.hero-badges .badge');
+    if (heroBadges.length >= 3) {
+        heroBadges[0].innerHTML = `<i class="fas fa-bolt"></i> ${texts.badgeFree}`;
+        heroBadges[1].innerHTML = `<i class="fas fa-lock"></i> ${texts.badgeSecure}`;
+        heroBadges[2].innerHTML = `<i class="fas fa-motorcycle"></i> ${texts.badgeMotorcycle}`;
+    }
+    
+    // Hero badge text (the first one)
+    const heroBadgeSpan = document.querySelector('.hero-badge');
+    if (heroBadgeSpan) heroBadgeSpan.innerHTML = `<i class="fas fa-motorcycle"></i> ${texts.heroBadge}`;
+    
     const heroTitle = document.querySelector('.hero-content h1');
     if (heroTitle) heroTitle.innerHTML = texts.heroTitle;
     const heroSlogan = document.querySelector('.hero-content .slogan');
@@ -1359,8 +1421,8 @@ function aplicarIdioma() {
     if (heroProtectBtn) heroProtectBtn.innerHTML = `<i class="fas fa-shield-alt"></i> ${texts.heroBtnProtect}`;
     const heroStickerBtn = document.getElementById('verStickerBtn');
     if (heroStickerBtn) heroStickerBtn.innerHTML = `<i class="fas fa-qrcode"></i> ${texts.heroBtnSticker}`;
-    const floatingBadge = document.querySelector('.floating-badge span');
-    if (floatingBadge) floatingBadge.textContent = texts.floatingBadge;
+    const floatingBadgeSpan = document.querySelector('.floating-badge span');
+    if (floatingBadgeSpan) floatingBadgeSpan.textContent = texts.floatingBadge;
     
     // Stats
     const statTitles = document.querySelectorAll('.stat-item h3');
@@ -1439,7 +1501,7 @@ function aplicarIdioma() {
     const copyright = document.querySelector('.copyright');
     if (copyright) copyright.textContent = texts.footerCopyright;
     
-    // Dashboard elements (if visible)
+    // Dashboard elements
     const emergencyBtn = document.getElementById('emergencyBtn');
     if (emergencyBtn) emergencyBtn.innerHTML = texts.emergencyBtn;
     const tabFormBtn = document.getElementById('tabFormBtn');
@@ -1485,7 +1547,6 @@ function mudarIdioma(lang) {
     idiomaAtual = lang;
     localStorage.setItem('myLifeQRLang', lang);
     
-    // Atualizar classe ativa dos botões
     document.querySelectorAll('.lang-btn').forEach(btn => {
         if (btn.getAttribute('data-lang') === lang) {
             btn.classList.add('active');
@@ -1497,7 +1558,6 @@ function mudarIdioma(lang) {
     aplicarIdioma();
 }
 
-// Adicionar eventos aos botões de idioma
 document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const lang = btn.getAttribute('data-lang');
@@ -1505,7 +1565,6 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
     });
 });
 
-// Aplicar idioma salvo ao carregar a página
 aplicarIdioma();
 </script>
 
