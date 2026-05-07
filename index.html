@@ -37,7 +37,7 @@
         
         /* LANGUAGE SELECTOR */
         .language-selector { display: flex; gap: 4px; background: #f0f4f0; padding: 4px; border-radius: 100px; }
-        .lang-btn { background: transparent; border: none; padding: 6px 14px; border-radius: 100px; cursor: pointer; font-size: 12px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .lang-btn { background: transparent; border: none; padding: 6px 14px; border-radius: 100px; cursor: pointer; font-size: 12px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s; }
         .lang-btn.active { background: #009C3B; color: white; }
         
         /* DONATION BAR */
@@ -73,15 +73,17 @@
         .section-header h2 { font-size: 36px; font-weight: 800; color: #1a2a2a; margin-bottom: 12px; }
         .section-header p { font-size: 18px; color: #6a7a7a; }
         .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-        .feature-card { background: #fafdfa; border-radius: 24px; padding: 32px 24px; text-align: center; border: 1px solid #e8f0e8; }
+        .feature-card { background: #fafdfa; border-radius: 24px; padding: 32px 24px; text-align: center; border: 1px solid #e8f0e8; transition: all 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); border-color: #009C3B; }
         .feature-icon { width: 70px; height: 70px; background: rgba(0,156,59,0.1); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; color: #009C3B; }
         .feature-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
         .feature-card p { font-size: 14px; color: #6a7a7a; }
         
-        /* CREATOR SECTION - Fixed duplicate text */
+        /* CREATOR SECTION */
         .creator-section { background: #f8faf8; border-radius: 32px; padding: 48px 32px; margin: 60px 0 40px; text-align: center; }
         .creator-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 48px; color: white; }
         .creator-name { font-size: 28px; font-weight: 800; color: #009C3B; margin-bottom: 8px; }
+        .creator-name a { color: #009C3B; text-decoration: none; }
         .creator-bio { max-width: 700px; margin: 20px auto; color: #5a6a6a; line-height: 1.8; }
         .creator-contact { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 24px; padding-top: 20px; border-top: 1px solid #e8f0e8; }
         .creator-contact a { color: #009C3B; text-decoration: none; display: flex; align-items: center; gap: 8px; }
@@ -89,7 +91,8 @@
         /* TESTIMONIALS */
         .testimonials { background: #f5faf5; border-radius: 48px; padding: 60px 40px; margin: 40px 0; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 40px; }
-        .testimonial-card { background: white; border-radius: 28px; padding: 32px; border: 1px solid #e8f0e8; }
+        .testimonial-card { background: white; border-radius: 28px; padding: 32px; border: 1px solid #e8f0e8; transition: all 0.3s; }
+        .testimonial-card:hover { transform: translateY(-5px); border-color: #009C3B; }
         .testimonial-icon { font-size: 32px; color: #009C3B; margin-bottom: 20px; }
         .testimonial-text { font-size: 16px; line-height: 1.6; color: #2a3a3a; margin-bottom: 24px; }
         .testimonial-author { font-weight: 700; color: #1a2a2a; }
@@ -172,6 +175,7 @@
         .modal-legal-header h3 { color: white; margin: 0; }
         .modal-legal-close { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
         .modal-legal-body { padding: 20px; overflow-y: auto; max-height: 60vh; font-size: 13px; line-height: 1.6; }
+        .modal-legal-body h4 { color: #009C3B; margin: 16px 0 8px; }
         .modal-legal-footer { padding: 16px 20px; border-top: 1px solid #eee; text-align: center; }
         .modal-legal-footer button { background: #009C3B; color: white; border: none; padding: 10px 24px; border-radius: 30px; cursor: pointer; }
         
@@ -275,11 +279,14 @@
             </div>
         </div>
         
-        <!-- CREATOR SECTION - Fixed: Removed duplicate text -->
+        <!-- CREATOR SECTION - CORREGIDO SIN REPETICIÓN -->
         <div class="creator-section">
             <div class="creator-avatar">🇧🇷</div>
-            <div class="creator-name"><a href="https://mylifeqr.github.io" target="_blank" style="color: #009C3B; text-decoration: none;">MyLifeQR México</a> → Brasil</div>
-            <div class="creator-bio"><p>O sucesso do <a href="https://mylifeqr.github.io" target="_blank" style="color: #009C3B;">MyLifeQR México</a> foi tão grande que os próprios motociclistas brasileiros começaram a pedir: <strong>"Quando teremos uma versão para o Brasil?"</strong></p><p><strong>MyLifeQR Brasil é a resposta. Adaptado para os motociclistas brasileiros, com o mesmo coração: gratuito, sincero e feito para que ninguém fique sem ajuda em uma emergência.</strong></p></div>
+            <div class="creator-name"><a href="https://mylifeqr.github.io" target="_blank">MyLifeQR México</a> → Brasil</div>
+            <div class="creator-bio">
+                <p>O sucesso do <a href="https://mylifeqr.github.io" target="_blank" style="color: #009C3B;">MyLifeQR México</a> foi tão grande que os próprios motociclistas brasileiros começaram a pedir: <strong>"Quando teremos uma versão para o Brasil?"</strong></p>
+                <p><strong>MyLifeQR Brasil</strong> é a resposta. Adaptado para os motociclistas brasileiros, com o mesmo coração: gratuito, sincero e feito para que ninguém fique sem ajuda em uma emergência.</p>
+            </div>
             <div class="creator-contact"><a href="https://wa.me/525652502785" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp: +52 5652502785</a><a href="mailto:mylifeqrbrasil@gmail.com"><i class="fas fa-envelope"></i> mylifeqrbrasil@gmail.com</a></div>
         </div>
         
@@ -339,7 +346,7 @@
         
         <!-- FOOTER -->
         <div class="footer">
-            <div class="footer-links"><span class="footer-link" onclick="showTerminosRegistro()">📜 Termos e Condições</span><span class="footer-link" onclick="showPrivacidadRegistro()">🔒 Política de Privacidade</span><span class="footer-link" onclick="showAvisoPrivacidad()">🔐 Aviso de Privacidade (LGPD)</span></div>
+            <div class="footer-links"><span class="footer-link" onclick="showTerminos()">📜 Termos e Condições</span><span class="footer-link" onclick="showPrivacidade()">🔒 Política de Privacidade</span><span class="footer-link" onclick="showAvisoPrivacidad()">🔐 Aviso de Privacidade (LGPD)</span></div>
             <p class="footer-text"><strong>⚠️ AVISO LEGAL ⚠️</strong><br>MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><strong>📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.</strong></p>
             <div class="copyright">MyLifeQR Brasil © 2026 — Protegendo motociclistas brasileiros</div>
         </div>
@@ -421,50 +428,58 @@
     <div class="modal-legal-footer"><button onclick="closeModalReset()">Fechar</button></div></div>
 </div>
 
-<!-- MODALS LEGALES - Updated with complete LGPD terms from PDF -->
-<div id="modalAvisoPrivacidad" class="modal-legal"><div class="modal-legal-content"><div class="modal-legal-header"><h3>🔐 Aviso de Privacidade (LGPD)</h3><button class="modal-legal-close" onclick="closeModalAvisoPrivacidad()">&times;</button></div><div class="modal-legal-body">
-    <h4>1. Dados Coletados</h4>
-    <p><strong>Dados Pessoais Obrigatórios:</strong> Nome completo, E-mail, Telefone/Contato de Emergência</p>
-    <p><strong>Dados Sensíveis:</strong> Tipo sanguíneo, Alergias, Condições médicas pré-existentes, Medicamentos utilizados</p>
-    
-    <h4>2. Finalidade da Coleta</h4>
-    <p>Os dados são coletados exclusivamente para: a) Criar um perfil médico do usuário; b) Gerar um QR Code que pode ser acessado em caso de emergência; c) Enviar notificações automáticas a contatos de emergência cadastrados.</p>
-    
-    <h4>3. Base Legal (LGPD)</h4>
-    <p>O tratamento dos dados pessoais e sensíveis é fundamentado em: a) Consentimento (Art. 7º, I da LGPD); b) Proteção da Vida e Saúde (Art. 11, I da LGPD).</p>
-    
-    <h4>4. Compartilhamento de Dados</h4>
-    <p>Os dados exibidos ao escanear o QR Code são públicos e acessíveis a qualquer pessoa que realize a leitura do código. O usuário aceita esse compartilhamento explícito no momento do cadastro.</p>
-    
-    <h4>5. Direitos do Titular (LGPD)</h4>
-    <p>O usuário tem o direito de: a) Acessar seus dados pessoais; b) Corrigir dados inexatos ou incompletos; c) Solicitar exclusão, quando aplicável; d) Revogar o consentimento, observadas as limitações legais.</p>
-    
-    <h4>6. Contato para Solicitações</h4>
-    <p>📧 mylifeqrbrasil@gmail.com</p>
-</div><div class="modal-legal-footer"><button onclick="closeModalAvisoPrivacidad()">Fechar</button></div></div></div>
+<!-- MODALS LEGALES CORREGIDOS -->
+<div id="modalAvisoPrivacidad" class="modal-legal">
+    <div class="modal-legal-content">
+        <div class="modal-legal-header">
+            <h3>🔐 Aviso de Privacidade (LGPD)</h3>
+            <button class="modal-legal-close" onclick="closeModalAvisoPrivacidad()">&times;</button>
+        </div>
+        <div class="modal-legal-body">
+            <h4>MyLifeQR Brasil - Aviso de Privacidade</h4>
+            <p><strong>Última atualização:</strong> Maio 2026</p>
+            <h4>Dados que coletamos</h4>
+            <p>Nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência, fotografia (opcional), endereço IP.</p>
+            <h4>Finalidade</h4>
+            <p>EXCLUSIVAMENTE para gerar seu perfil médico de emergência acessível via código QR.</p>
+            <h4>Seus direitos</h4>
+            <p>Você tem direito a acessar, retificar, cancelar e se opor ao tratamento de seus dados.</p>
+            <h4>Contato</h4>
+            <p><strong>✉️ mylifeqrbrasil@gmail.com</strong><br>📱 WhatsApp: +52 5652502785</p>
+        </div>
+        <div class="modal-legal-footer">
+            <button onclick="closeModalAvisoPrivacidad()">Fechar</button>
+        </div>
+    </div>
+</div>
 
-<div id="modalLegalRegistro" class="modal-legal"><div class="modal-legal-content"><div class="modal-legal-header"><h3>📜 Termos e Condições</h3><button class="modal-legal-close" onclick="closeModalLegalRegistro()">&times;</button></div><div class="modal-legal-body">
-    <h4>1. Objeto</h4>
-    <p>O serviço MyLifeQR Brasil permite que usuários insiram dados pessoais, médicos e contatos de emergência para a geração de um QR Code personalizado, que pode ser impresso e colado em capacetes.</p>
-    
-    <h4>2. Aceitação</h4>
-    <p>Ao se cadastrar e inserir seus dados pessoais e médicos, o usuário concorda expressamente com: a) A exibição pública de seus Dados Pessoais e Sensíveis a qualquer pessoa que escanear o QR Code gerado; b) A isenção de responsabilidade do MyLifeQR Brasil, seus desenvolvedores, parceiros e colaboradores por qualquer uso indevido ou interpretação dos dados por terceiros.</p>
-    
-    <h4>3. Responsabilidade do Usuário</h4>
-    <p>a) Fornecer dados verdadeiros e atualizados; b) Zelar pela segurança de seu próprio dispositivo, senha e informações de login; c) Não utilizar o Site para práticas ilegais, fraudulentas ou que violem estes Termos.</p>
-    
-    <h4>4. Limitação de Responsabilidade</h4>
-    <p>O MyLifeQR Brasil não será responsável por: a) Qualquer dano direto ou indireto decorrente do uso dos dados exibidos via QR Code; b) Uso indevido, interpretação incorreta ou divulgação por terceiros que escanearem o código; c) Problemas técnicos, falhas temporárias ou interrupções de serviço.</p>
-    
-    <h4>5. E-mails Automáticos</h4>
-    <p>Ao ativar notificações para seus contatos de emergência, o usuário concorda que e-mails automáticos podem ser enviados e está ciente de que é sua responsabilidade orientar os contatos sobre verificarem a pasta de SPAM.</p>
-    
-    <h4>6. Lei Aplicável e Foro</h4>
-    <p>Estes Termos serão regidos pela legislação brasileira, especialmente pela LGPD (Lei nº 13.709/2018). Fica eleito o foro da comarca de São Paulo, SP, para dirimir quaisquer dúvidas.</p>
-    
-    <h4>7. Contato</h4>
-    <p>📧 mylifeqrbrasil@gmail.com</p>
-</div><div class="modal-legal-footer"><button onclick="closeModalLegalRegistro()">Fechar</button></div></div></div>
+<div id="modalLegalRegistro" class="modal-legal">
+    <div class="modal-legal-content">
+        <div class="modal-legal-header">
+            <h3 id="modalLegalTitle">📜 Termos e Condições</h3>
+            <button class="modal-legal-close" onclick="closeModalLegalRegistro()">&times;</button>
+        </div>
+        <div class="modal-legal-body" id="modalLegalBody">
+            <h4>1. Objeto</h4>
+            <p>O serviço MyLifeQR Brasil permite que usuários insiram dados pessoais, médicos e contatos de emergência para a geração de um QR Code personalizado, que pode ser impresso e colado em capacetes.</p>
+            <h4>2. Aceitação</h4>
+            <p>Ao se cadastrar e inserir seus dados pessoais e médicos, o usuário concorda expressamente com: a) A exibição pública de seus Dados Pessoais e Sensíveis a qualquer pessoa que escanear o QR Code gerado; b) A isenção de responsabilidade do MyLifeQR Brasil, seus desenvolvedores, parceiros e colaboradores por qualquer uso indevido ou interpretação dos dados por terceiros.</p>
+            <h4>3. Responsabilidade do Usuário</h4>
+            <p>a) Fornecer dados verdadeiros e atualizados; b) Zelar pela segurança de seu próprio dispositivo, senha e informações de login; c) Não utilizar o Site para práticas ilegais, fraudulentas ou que violem estes Termos.</p>
+            <h4>4. Limitação de Responsabilidade</h4>
+            <p>O MyLifeQR Brasil não será responsável por: a) Qualquer dano direto ou indireto decorrente do uso dos dados exibidos via QR Code; b) Uso indevido, interpretação incorreta ou divulgação por terceiros que escanearem o código; c) Problemas técnicos, falhas temporárias ou interrupções de serviço.</p>
+            <h4>5. E-mails Automáticos</h4>
+            <p>Ao ativar notificações para seus contatos de emergência, o usuário concorda que e-mails automáticos podem ser enviados e está ciente de que é sua responsabilidade orientar os contatos sobre verificarem a pasta de SPAM.</p>
+            <h4>6. Lei Aplicável e Foro</h4>
+            <p>Estes Termos serão regidos pela legislação brasileira, especialmente pela LGPD (Lei nº 13.709/2018). Fica eleito o foro da comarca de São Paulo, SP, para dirimir quaisquer dúvidas.</p>
+            <h4>7. Contato</h4>
+            <p>📧 mylifeqrbrasil@gmail.com</p>
+        </div>
+        <div class="modal-legal-footer">
+            <button onclick="closeModalLegalRegistro()">Fechar</button>
+        </div>
+    </div>
+</div>
 
 <div id="cookieConsent"><p style="margin: 0; font-size: 13px;">🍪 MyLifeQR Brasil utiliza cookies essenciais para o funcionamento do site. Não usamos cookies de rastreamento. Ao continuar, você aceita seu uso.</p><button onclick="aceptarCookies()">Aceitar</button></div>
 
@@ -485,13 +500,13 @@
     
     // FIREBASE CONFIG
     const firebaseConfig = {
-  apiKey: "AIzaSyBbmwUis7hbIRDZdsIN0ie5Me8B8hO8NKY",
-  authDomain: "mylifeqrbr.firebaseapp.com",
-  projectId: "mylifeqrbr",
-  storageBucket: "mylifeqrbr.firebasestorage.app",
-  messagingSenderId: "326484732679",
-  appId: "1:326484732679:web:5d8ca3b51edbc2abe5f3a2"
-};
+        apiKey: "AIzaSyCTxWr9bOaHKIIXYA2e7UkgECK_3UQs17c",
+        authDomain: "mylifeqrbrasil1.firebaseapp.com",
+        projectId: "mylifeqrbrasil1",
+        storageBucket: "mylifeqrbrasil1.firebasestorage.app",
+        messagingSenderId: "680108596725",
+        appId: "1:680108596725:web:d82e2121ce811bad45d4bc"
+    };
     
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -501,6 +516,7 @@
     let fotoBase64 = "";
     let currentFormato = "horizontal";
     let currentColor = "negro";
+    let qrUpdateTimeout;
     
     // Elementos DOM
     const landingScreen = document.getElementById('landingScreen');
@@ -562,7 +578,7 @@
     }
     
     // ============================================
-    // FUNCIONES DEL STICKER - CORREGIDAS
+    // FUNCIONES DEL STICKER
     // ============================================
     
     const QR_CONFIG = {
@@ -579,20 +595,19 @@
     }
     
     function updateStickerImage() {
+        clearTimeout(qrUpdateTimeout);
         const imgElement = document.getElementById('stickerBgImg');
         if (imgElement) {
             imgElement.src = getStickerImage();
             imgElement.onload = () => {
-                setTimeout(() => {
+                qrUpdateTimeout = setTimeout(() => {
                     positionQR();
-                    generateQR();
+                    if (currentUser) generateQR();
                 }, 100);
             };
-            if (imgElement.complete) {
-                setTimeout(() => {
-                    positionQR();
-                    generateQR();
-                }, 100);
+            if (imgElement.complete && currentUser) {
+                positionQR();
+                generateQR();
             }
         }
     }
@@ -602,52 +617,35 @@
         const overlay = document.getElementById('qrOverlay');
         const img = document.getElementById('stickerBgImg');
         if (!container || !overlay || !img) return;
-        
         const imgRect = img.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-        
         if (imgRect.width === 0) {
             setTimeout(() => positionQR(), 100);
             return;
         }
-        
         const config = QR_CONFIG[currentFormato];
-        const relativeLeft = (config.leftPercent / 100) * imgRect.width;
-        const relativeTop = (config.topPercent / 100) * imgRect.height;
-        
-        overlay.style.position = 'absolute';
-        overlay.style.left = `${relativeLeft}px`;
-        overlay.style.top = `${relativeTop}px`;
+        overlay.style.left = `${(config.leftPercent / 100) * imgRect.width}px`;
+        overlay.style.top = `${(config.topPercent / 100) * imgRect.height}px`;
         overlay.style.width = `${(config.widthPercent / 100) * imgRect.width}px`;
         overlay.style.height = `${(config.heightPercent / 100) * imgRect.height}px`;
         overlay.style.display = 'flex';
-        overlay.style.justifyContent = 'center';
-        overlay.style.alignItems = 'center';
     }
     
     function generateQR() {
-        const urlPerfil = currentUser ? 
-            `https://mylifeqrbrasil.github.io/perfil.html?id=${currentUser.uid}` : 
-            'https://mylifeqrbrasil.github.io';
-        
+        if (!currentUser) return;
+        const urlPerfil = `https://mylifeqrbrasil.github.io/perfil.html?id=${currentUser.uid}`;
         const overlay = document.getElementById('qrOverlay');
         if (overlay && typeof QRCode !== 'undefined') {
             overlay.innerHTML = '';
             const img = document.getElementById('stickerBgImg');
             const imgRect = img.getBoundingClientRect();
-            
             if (imgRect.width === 0) {
                 setTimeout(() => generateQR(), 100);
                 return;
             }
-            
             const config = QR_CONFIG[currentFormato];
-            const qrSize = Math.min(
-                (config.widthPercent / 100) * imgRect.width,
-                (config.heightPercent / 100) * imgRect.height,
-                250
-            );
-            
+            const qrWidth = (config.widthPercent / 100) * imgRect.width;
+            const qrHeight = (config.heightPercent / 100) * imgRect.height;
+            const qrSize = Math.min(qrWidth, qrHeight, 250);
             try {
                 new QRCode(overlay, {
                     text: urlPerfil,
@@ -660,8 +658,6 @@
             } catch(e) {
                 console.error('Error generando QR:', e);
             }
-        } else if (overlay) {
-            setTimeout(() => generateQR(), 200);
         }
     }
     
@@ -691,12 +687,10 @@
     async function downloadPNG() {
         const container = document.getElementById('stickerContainer');
         if (!container) return;
-        
         const btn = document.getElementById('downloadPngBtn');
         const originalText = btn.innerText;
         btn.innerText = '⏳ Gerando PNG...';
         btn.disabled = true;
-        
         try {
             await new Promise(r => setTimeout(r, 300));
             const canvas = await html2canvas(container, { scale: 4, backgroundColor: '#ffffff', useCORS: true });
@@ -706,7 +700,6 @@
             finalCanvas.height = config.targetHeight;
             const ctx = finalCanvas.getContext('2d');
             ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, config.targetWidth, config.targetHeight);
-            
             const link = document.createElement('a');
             link.download = `mylifeqr_${currentFormato}_${currentColor}.png`;
             link.href = finalCanvas.toDataURL('image/png');
@@ -722,12 +715,10 @@
     async function downloadPDF() {
         const container = document.getElementById('stickerContainer');
         if (!container) return;
-        
         const btn = document.getElementById('downloadPdfBtn');
         const originalText = btn.innerText;
         btn.innerText = '⏳ Gerando PDF...';
         btn.disabled = true;
-        
         try {
             await new Promise(r => setTimeout(r, 300));
             const canvas = await html2canvas(container, { scale: 4, backgroundColor: '#ffffff', useCORS: true });
@@ -748,7 +739,6 @@
                     document.head.appendChild(script);
                 });
             }
-            
             const { jsPDF } = window.jspdf;
             const size = currentFormato === "horizontal" ? [60, 30] : [30, 30];
             const pdf = new jsPDF({ orientation: size[0] > size[1] ? 'landscape' : 'portrait', unit: 'mm', format: size });
@@ -766,7 +756,7 @@
     document.getElementById('downloadPdfBtn')?.addEventListener('click', downloadPDF);
     
     // ============================================
-    // RESTO DE FUNCIONES (Firebase, perfil, etc.)
+    // FUNCIONES DE FIREBASE
     // ============================================
     
     async function actualizarContador() {
@@ -778,23 +768,27 @@
             }
             const vidasElement = document.getElementById('vidasCounter');
             if (vidasElement) {
-                vidasElement.innerHTML = `💚 ${total}+ vidas protegidas`;
+                const lang = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
+                const textoVidas = lang === 'en' ? 'protected lives' : 'vidas protegidas';
+                vidasElement.innerHTML = `💚 ${total}+ ${textoVidas}`;
             }
-        } catch (error) {
+        } catch (error) { 
             const vidasElement = document.getElementById('vidasCounter');
             if (vidasElement) {
-                vidasElement.innerHTML = `💚 500+ vidas protegidas`;
+                const lang = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
+                const textoVidas = lang === 'en' ? 'protected lives' : 'vidas protegidas';
+                vidasElement.innerHTML = `💚 500+ ${textoVidas}`;
             }
         }
     }
     
     async function obtenerIP() {
-        try {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            return data.ip;
-        } catch (error) {
-            return null;
+        try { 
+            const response = await fetch('https://api.ipify.org?format=json'); 
+            const data = await response.json(); 
+            return data.ip; 
+        } catch (error) { 
+            return null; 
         }
     }
     
@@ -802,17 +796,17 @@
     document.getElementById('btnSuscripcion')?.addEventListener('click', async () => {
         const email = document.getElementById('suscripcionEmail').value;
         const msgDiv = document.getElementById('suscripcionMsg');
-        if (!email) {
-            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ E-mail inválido</span>';
-            return;
+        if (!email) { 
+            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ E-mail inválido</span>'; 
+            return; 
         }
         try {
             await addDoc(collection(db, "suscriptores"), { email, data: new Date().toISOString(), origem: "MyLifeQR Brasil" });
             msgDiv.innerHTML = '<span style="color: #009C3B;">✅ Obrigado por se inscrever!</span>';
             document.getElementById('suscripcionEmail').value = '';
             setTimeout(() => msgDiv.innerHTML = '', 3000);
-        } catch (error) {
-            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ Erro, tente novamente</span>';
+        } catch (error) { 
+            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ Erro, tente novamente</span>'; 
         }
     });
     
@@ -856,28 +850,28 @@
     
     fotoInput?.addEventListener('change', (e) => {
         const file = e.target.files[0];
-        if (file) {
-            comprimirImagem(file, (img) => {
-                fotoBase64 = img;
-                fotoPreview.src = fotoBase64;
-                fotoPreview.style.display = 'block';
+        if (file) { 
+            comprimirImagem(file, (img) => { 
+                fotoBase64 = img; 
+                fotoPreview.src = fotoBase64; 
+                fotoPreview.style.display = 'block'; 
                 if (currentUser) guardarFotoFirestore();
-            });
+            }); 
         }
     });
     
-    async function guardarFotoFirestore() {
-        if (!currentUser) return;
-        await setDoc(doc(db, "perfiles", currentUser.uid), { foto: fotoBase64 }, { merge: true });
+    async function guardarFotoFirestore() { 
+        if (!currentUser) return; 
+        await setDoc(doc(db, "perfiles", currentUser.uid), { foto: fotoBase64 }, { merge: true }); 
     }
     
-    async function carregarFoto(userId) {
-        const docSnap = await getDoc(doc(db, "perfiles", userId));
-        if (docSnap.exists() && docSnap.data().foto) {
-            fotoBase64 = docSnap.data().foto;
-            fotoPreview.src = fotoBase64;
-            fotoPreview.style.display = 'block';
-        }
+    async function carregarFoto(userId) { 
+        const docSnap = await getDoc(doc(db, "perfiles", userId)); 
+        if (docSnap.exists() && docSnap.data().foto) { 
+            fotoBase64 = docSnap.data().foto; 
+            fotoPreview.src = fotoBase64; 
+            fotoPreview.style.display = 'block'; 
+        } 
     }
     
     // Registro
@@ -936,16 +930,16 @@
         const loginError = document.getElementById('loginError');
         if (!email || !password) { loginError.innerText = 'Preencha todos os campos'; return; }
         loginError.innerText = '';
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-        } catch (error) {
-            loginError.innerText = 'E-mail ou senha incorretos';
+        try { 
+            await signInWithEmailAndPassword(auth, email, password); 
+        } catch (error) { 
+            loginError.innerText = 'E-mail ou senha incorretos'; 
         }
     }
     
     // Logout
-    async function handleLogout() {
-        await signOut(auth);
+    async function handleLogout() { 
+        await signOut(auth); 
     }
     
     // Cargar perfil
@@ -976,10 +970,10 @@
             
             document.getElementById('hospital').value = data.hospital || '';
             document.getElementById('notas').value = data.observacoes || '';
-            if (data.foto) {
-                fotoBase64 = data.foto;
-                fotoPreview.src = fotoBase64;
-                fotoPreview.style.display = 'block';
+            if (data.foto) { 
+                fotoBase64 = data.foto; 
+                fotoPreview.src = fotoBase64; 
+                fotoPreview.style.display = 'block'; 
             }
             
             if (data.contato4_nome || data.contato5_nome) {
@@ -989,7 +983,9 @@
                 if (addBtn) addBtn.innerText = '− Ocultar contatos adicionais';
             }
         }
-        updateStickerImage();
+        if (document.getElementById('stickerBgImg')) {
+            updateStickerImage();
+        }
         actualizarContador();
     }
     
@@ -1002,11 +998,13 @@
         
         if (!nome) {
             saveMessage.innerText = '⚠️ O nome completo é obrigatório';
+            saveMessage.style.color = '#009C3B';
             setTimeout(() => saveMessage.innerText = '', 3000);
             return;
         }
         if (!sangue) {
             saveMessage.innerText = '⚠️ Selecione seu tipo sanguíneo';
+            saveMessage.style.color = '#009C3B';
             setTimeout(() => saveMessage.innerText = '', 3000);
             return;
         }
@@ -1046,8 +1044,11 @@
         };
         await setDoc(doc(db, "perfiles", currentUser.uid), perfil, { merge: true });
         saveMessage.innerText = '✅ Dados salvos com sucesso';
+        saveMessage.style.color = '#009C3B';
         setTimeout(() => saveMessage.innerText = '', 2000);
-        updateStickerImage();
+        if (document.getElementById('stickerBgImg')) {
+            updateStickerImage();
+        }
     }
     
     // Eliminar cuenta
@@ -1089,7 +1090,7 @@
             msgDiv.innerHTML = '<span style="color: #009C3B;">✅ E-mail enviado! Verifique sua caixa de entrada.</span>';
             setTimeout(() => window.closeModalReset(), 3000);
         } catch (error) {
-            msgDiv.innerHTML = '<span style="color: #E8152A;">❌ Erro ao enviar e-mail</span>';
+            msgDiv.innerHTML = '<span style="color: #009C3B;">❌ Erro ao enviar e-mail</span>';
         }
     });
     
@@ -1123,12 +1124,12 @@
         const extra = document.getElementById('contactosExtra');
         const btn = document.getElementById('btnAgregarContacto');
         if (extra && btn) {
-            if (extra.classList.contains('hidden')) {
-                extra.classList.remove('hidden');
-                btn.innerText = '− Ocultar contatos adicionais';
-            } else {
-                extra.classList.add('hidden');
-                btn.innerText = '+ Adicionar outro contato (máx. 5)';
+            if (extra.classList.contains('hidden')) { 
+                extra.classList.remove('hidden'); 
+                btn.innerText = '− Ocultar contatos adicionais'; 
+            } else { 
+                extra.classList.add('hidden'); 
+                btn.innerText = '+ Adicionar outro contato (máx. 5)'; 
             }
         }
     });
@@ -1157,27 +1158,93 @@
     document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
     document.getElementById('saveProfileBtn')?.addEventListener('click', guardarPerfil);
     
-    // Modales legales
-    window.showAvisoPrivacidad = () => { document.getElementById('modalAvisoPrivacidad').style.display = 'flex'; };
-    window.closeModalAvisoPrivacidad = () => { document.getElementById('modalAvisoPrivacidad').style.display = 'none'; };
-    window.showTerminosRegistro = () => { document.getElementById('modalLegalRegistro').style.display = 'flex'; };
-    window.showPrivacidadRegistro = () => { document.getElementById('modalLegalRegistro').style.display = 'flex'; };
-    window.closeModalLegalRegistro = () => { document.getElementById('modalLegalRegistro').style.display = 'none'; };
+    // ============================================
+    // MODALES LEGALES CORREGIDOS
+    // ============================================
     
-    // Auth state
+    // Aviso de Privacidad (LGPD)
+    window.showAvisoPrivacidad = () => { 
+        document.getElementById('modalAvisoPrivacidad').style.display = 'flex'; 
+    };
+    window.closeModalAvisoPrivacidad = () => { 
+        document.getElementById('modalAvisoPrivacidad').style.display = 'none'; 
+    };
+    
+    // Termos e Condições (original)
+    window.showTerminosRegistro = () => { 
+        const modal = document.getElementById('modalLegalRegistro');
+        const title = document.getElementById('modalLegalTitle');
+        const body = document.getElementById('modalLegalBody');
+        if (title) title.innerText = '📜 Termos e Condições';
+        if (body) {
+            body.innerHTML = `
+                <h4>1. Objeto</h4>
+                <p>O serviço MyLifeQR Brasil permite que usuários insiram dados pessoais, médicos e contatos de emergência para a geração de um QR Code personalizado, que pode ser impresso e colado em capacetes.</p>
+                <h4>2. Aceitação</h4>
+                <p>Ao se cadastrar e inserir seus dados pessoais e médicos, o usuário concorda expressamente com: a) A exibição pública de seus Dados Pessoais e Sensíveis a qualquer pessoa que escanear o QR Code gerado; b) A isenção de responsabilidade do MyLifeQR Brasil, seus desenvolvedores, parceiros e colaboradores por qualquer uso indevido ou interpretação dos dados por terceiros.</p>
+                <h4>3. Responsabilidade do Usuário</h4>
+                <p>a) Fornecer dados verdadeiros e atualizados; b) Zelar pela segurança de seu próprio dispositivo, senha e informações de login; c) Não utilizar o Site para práticas ilegais, fraudulentas ou que violem estes Termos.</p>
+                <h4>4. Limitação de Responsabilidade</h4>
+                <p>O MyLifeQR Brasil não será responsável por: a) Qualquer dano direto ou indireto decorrente do uso dos dados exibidos via QR Code; b) Uso indevido, interpretação incorreta ou divulgação por terceiros que escanearem o código; c) Problemas técnicos, falhas temporárias ou interrupções de serviço.</p>
+                <h4>5. E-mails Automáticos</h4>
+                <p>Ao ativar notificações para seus contatos de emergência, o usuário concorda que e-mails automáticos podem ser enviados e está ciente de que é sua responsabilidade orientar os contatos sobre verificarem a pasta de SPAM.</p>
+                <h4>6. Lei Aplicável e Foro</h4>
+                <p>Estes Termos serão regidos pela legislação brasileira, especialmente pela LGPD (Lei nº 13.709/2018). Fica eleito o foro da comarca de São Paulo, SP, para dirimir quaisquer dúvidas.</p>
+                <h4>7. Contato</h4>
+                <p>📧 mylifeqrbrasil@gmail.com</p>
+            `;
+        }
+        modal.style.display = 'flex';
+    };
+    
+    // Política de Privacidade
+    window.showPrivacidadRegistro = () => { 
+        const modal = document.getElementById('modalLegalRegistro');
+        const title = document.getElementById('modalLegalTitle');
+        const body = document.getElementById('modalLegalBody');
+        if (title) title.innerText = '🔒 Política de Privacidade';
+        if (body) {
+            body.innerHTML = `
+                <h4>1. Dados que Coletamos</h4>
+                <p>Coletamos nome, idade, tipo sanguíneo, alergias, condições médicas, medicamentos, contatos de emergência, fotografia (opcional) e endereço IP.</p>
+                <h4>2. Finalidade</h4>
+                <p>Os dados são utilizados EXCLUSIVAMENTE para gerar seu perfil médico de emergência acessível via código QR.</p>
+                <h4>3. Compartilhamento</h4>
+                <p>Seus dados NUNCA são vendidos ou compartilhados com terceiros. Ficam armazenados de forma segura no Firebase.</p>
+                <h4>4. Seus direitos (LGPD)</h4>
+                <p>Você tem direito a acessar, retificar, cancelar e se opor ao tratamento de seus dados a qualquer momento.</p>
+                <h4>5. Contato do Encarregado</h4>
+                <p><strong>✉️ mylifeqrbrasil@gmail.com</strong><br>📱 WhatsApp: +52 5652502785</p>
+            `;
+        }
+        modal.style.display = 'flex';
+    };
+    
+    window.closeModalLegalRegistro = () => { 
+        document.getElementById('modalLegalRegistro').style.display = 'none'; 
+    };
+    
+    // Aliases para los botones del footer
+    window.showTerminos = window.showTerminosRegistro;
+    window.showPrivacidade = window.showPrivacidadRegistro;
+    
+    // ============================================
+    // AUTH STATE
+    // ============================================
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             currentUser = user;
-            const userEmailSpan = document.getElementById('userEmail');
-            if (userEmailSpan) userEmailSpan.innerText = user.email;
+            document.getElementById('userEmail').innerText = user.email;
             landingScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
             await carregarPerfil(user.uid);
             await carregarFoto(user.uid);
             setTimeout(() => {
-                positionQR();
-                generateQR();
-            }, 500);
+                if (document.getElementById('stickerBgImg')) {
+                    positionQR();
+                    generateQR();
+                }
+            }, 200);
         } else {
             currentUser = null;
             landingScreen.classList.remove('hidden');
@@ -1185,387 +1252,20 @@
         }
     });
     
-    // Inicializar
+    // Inicialización
+    const scriptQR = document.createElement('script');
+    scriptQR.src = 'https://cdn.jsdelivr.net/npm/qrcodejs2-fix/qrcode.min.js';
+    document.head.appendChild(scriptQR);
+    
     actualizarContador();
-    setTimeout(() => {
-        positionQR();
-        generateQR();
-    }, 1000);
     
-    console.log("✅ Site carregado!");
-</script>
-
-<!-- ============================================ -->
-<!-- SISTEMA DE IDIOMAS (PT/EN) - Updated with correct translations -->
-<!-- ============================================ -->
-<script>
-// Diccionario de traducciones
-const traducoes = {
-    pt: {
-        "navLoginBtn": "🔐 Entrar",
-        "navRegisterBtn": "📝 Cadastrar",
-        "donationText": "MyLifeQR Brasil é gratuito. Se for útil, ajude-nos a continuar salvando vidas",
-        "donateBtn": "❤️ Doar",
-        "heroBadge": "🏍️ Para motociclistas",
-        "heroTitle": "Sua vida merece<br>um guardião",
-        "heroSlogan": "🏍️ Na estrada, cada segundo conta. MyLifeQR Brasil é sua voz quando você não pode falar.",
-        "heroDescription": "Um adesivo com QR no seu capacete que fala por você em emergências. Tipo sanguíneo, alergias, contatos — todas as informações que os paramédicos precisam instantaneamente.",
-        "heroBtnProtect": "🛡️ Proteger-me agora",
-        "heroBtnSticker": "🔲 Ver adesivo",
-        "floatingBadge": "Escaneie e obtenha ajuda",
-        "badgeFree": "Gratuito",
-        "badgeSecure": "Dados protegidos",
-        "badgeMotorcycle": "Para motociclistas",
-        "stat1Title": "70%",
-        "stat1Desc": "dos acidentes graves acontecem em vias urbanas",
-        "stat2Title": "15 min",
-        "stat2Desc": "é o tempo crítico para atendimento médico",
-        "stat3Title": "9 a cada 10",
-        "stat3Desc": "motociclistas não carregam identificação médica",
-        "featuresTitle": "Por que MyLifeQR Brasil?",
-        "featuresSubtitle": "Porque os heróis também precisam de um anjo da guarda",
-        "feature1Title": "Resposta imediata",
-        "feature1Desc": "Em um acidente, cada segundo conta. Suas informações médicas disponíveis instantaneamente.",
-        "feature2Title": "Privacidade garantida",
-        "feature2Desc": "Dados protegidos pela LGPD. Só visível em emergências com aviso de privacidade.",
-        "feature3Title": "Atualize quando quiser",
-        "feature3Desc": "Altere seus dados, contatos ou medicamentos de qualquer dispositivo.",
-        "feature4Title": "Sem aplicativo",
-        "feature4Desc": "O paramédico só escaneia o QR com seu celular. Não precisa instalar nada.",
-        "creatorBio": "O sucesso do MyLifeQR México foi tão grande que os próprios motociclistas brasileiros começaram a pedir: \"Quando teremos uma versão para o Brasil?\" MyLifeQR Brasil é a resposta. Adaptado para os motociclistas brasileiros, com o mesmo coração: gratuito, sincero e feito para que ninguém fique sem ajuda em uma emergência.",
-        "testimonialsTitle": "💬 O que dizem nossos usuários",
-        "testimonialsSubtitle": "Histórias reais de quem já protege sua vida sobre duas rodas",
-        "testimonial1Text": "\"Sou motociclista de finais de semana, vou para a estrada com meus amigos. Em um dos nossos roles, um amigo caiu feio. Ninguém sabia o tipo sanguíneo dele, nem alergias. Foi um desespero. Depois desse dia, todo mundo do grupo adotou o MyLifeQR Brasil. É simples, mas pode salvar uma vida.\"",
-        "testimonial1Author": "— Ricardo S.",
-        "testimonial1Role": "Grupo \"Estradeiros de SP\", 5 anos pilotando",
-        "testimonial2Text": "\"Sou aposentado e pego a estrada sozinho com minha moto. Meu maior medo sempre foi cair em algum lugar isolado e ninguém saber quem eu sou ou como avisar minha família. Descobri o MyLifeQR Brasil por acaso e me deu paz de espírito. Agora eu rodo tranquilo sabendo que, se algo acontecer, vão saber quem sou e como ajudar.\"",
-        "testimonial2Author": "— José A.",
-        "testimonial2Role": "Aposentado, viajante solo, Minas Gerais",
-        "stickerTitle": "🎯 Seu adesivo personalizado",
-        "stickerDesc": "Imprima e cole no seu capacete. Resistente à água e ao sol. Dois formatos disponíveis: Horizontal (6×3cm) ou Quadrado (3×3cm).",
-        "stickerBtn": "📥 Gerar meu adesivo agora",
-        "newsletterTitle": "📧 Receba dicas de segurança",
-        "newsletterDesc": "Inscreva-se e receba informações úteis para motociclistas.",
-        "newsletterPlaceholder": "Seu e-mail",
-        "newsletterBtn": "Inscrever-se",
-        "emailTip": "📧 Seus contatos não estão recebendo os alertas? Peça para adicionarem mylifeqrbrasil@gmail.com à lista de contatos e marcarem o e-mail como \"Não é spam\".",
-        "footerTerms": "📜 Termos e Condições",
-        "footerPrivacy": "🔒 Política de Privacidade",
-        "footerNotice": "🔐 Aviso de Privacidade (LGPD)",
-        "footerWarning": "MyLifeQR Brasil é um sistema de identificação médica de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional. 📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.",
-        "footerCopyright": "MyLifeQR Brasil © 2026 — Protegendo motociclistas brasileiros",
-        "emergencyBtn": "🚨 EMERGÊNCIA! 🚨",
-        "tabForm": "📝 Meus dados",
-        "tabSticker": "🔲 Meu adesivo",
-        "formTitle": "📝 Dados pessoais",
-        "scanQrBtn": "📷 Escanear QR",
-        "shareProfileBtn": "📤 Compartilhar perfil",
-        "uploadPhoto": "📸 Enviar foto",
-        "labelNome": "Nome completo",
-        "labelIdade": "Idade",
-        "labelSangue": "Tipo sanguíneo",
-        "labelDoador": "Doador de órgãos",
-        "labelAlergias": "Alergias",
-        "labelCondicoes": "Condições médicas",
-        "labelMedicamentos": "Medicamentos atuais",
-        "labelContatos": "📞 Contatos de emergência",
-        "labelRelacao": "Relação",
-        "labelTelefone": "📞 Telefone",
-        "labelEmail": "✉️ E-mail",
-        "labelNotificar": "🔔 Ativar notificação de emergência",
-        "btnCall": "📞 Ligar",
-        "btnAddContact": "+ Adicionar outro contato (máx. 5)",
-        "labelHospital": "Convênio / Hospital preferido",
-        "labelNotas": "Observações adicionais",
-        "btnSave": "💾 Salvar meus dados",
-        "btnDelete": "🗑️ Excluir minha conta (apagar todos os dados)",
-        "stickerPreviewTitle": "🔲 Seu adesivo personalizado",
-        "stickerFormat": "Formato:",
-        "stickerHorizontal": "📏 Horizontal (6×3cm)",
-        "stickerCuadrado": "⬛ Quadrado (3×3cm)",
-        "stickerColor": "Cor:",
-        "stickerBlack": "⚫ Fundo Preto",
-        "stickerGreen": "🟢 Fundo Verde",
-        "btnDownloadPng": "📥 Baixar PNG",
-        "btnDownloadPdf": "📄 Baixar PDF",
-        "logoutBtn": "🚪 Sair"
-    },
-    en: {
-        "navLoginBtn": "🔐 Login",
-        "navRegisterBtn": "📝 Sign up",
-        "donationText": "MyLifeQR Brasil is free. If it's useful, help us continue saving lives",
-        "donateBtn": "❤️ Donate",
-        "heroBadge": "🏍️ For motorcyclists",
-        "heroTitle": "Your life deserves<br>a guardian",
-        "heroSlogan": "🏍️ On the road, every second counts. MyLifeQR Brasil is your voice when you can't speak.",
-        "heroDescription": "A QR sticker on your helmet that speaks for you in emergencies. Blood type, allergies, contacts — all the information paramedics need instantly.",
-        "heroBtnProtect": "🛡️ Protect me now",
-        "heroBtnSticker": "🔲 See sticker",
-        "floatingBadge": "Scan and get help",
-        "badgeFree": "Free",
-        "badgeSecure": "Secure Data",
-        "badgeMotorcycle": "For Motorcyclists",
-        "stat1Title": "70%",
-        "stat1Desc": "of serious accidents occur on urban roads",
-        "stat2Title": "15 min",
-        "stat2Desc": "is the critical time for medical care",
-        "stat3Title": "9 out of 10",
-        "stat3Desc": "motorcyclists don't carry medical ID",
-        "featuresTitle": "Why MyLifeQR Brasil?",
-        "featuresSubtitle": "Because heroes also need a guardian angel",
-        "feature1Title": "Immediate response",
-        "feature1Desc": "In an accident, every second counts. Your medical information instantly available.",
-        "feature2Title": "Privacy guaranteed",
-        "feature2Desc": "LGPD-protected data. Only visible in emergencies with privacy notice.",
-        "feature3Title": "Update anytime",
-        "feature3Desc": "Change your data, contacts, or medications from any device.",
-        "feature4Title": "No app needed",
-        "feature4Desc": "Paramedics just scan the QR with their phone. No installation required.",
-        "creatorBio": "The success of MyLifeQR México was so great that Brazilian motorcyclists themselves started asking: \"When will we have a version for Brazil?\" MyLifeQR Brasil is the answer. Adapted for Brazilian motorcyclists, with the same heart: free, sincere, and made so that no one is left without help in an emergency.",
-        "testimonialsTitle": "💬 What our users say",
-        "testimonialsSubtitle": "Real stories from those who already protect their lives on two wheels",
-        "testimonial1Text": "\"I'm a weekend rider, going on road trips with my friends. On one of our rides, a friend had a bad crash. No one knew his blood type or allergies. It was desperate. After that day, everyone in the group adopted MyLifeQR Brasil. It's simple, but it can save a life.\"",
-        "testimonial1Author": "— Ricardo S.",
-        "testimonial1Role": "Group \"Estradeiros de SP\", riding for 5 years",
-        "testimonial2Text": "\"I'm retired and ride alone on my motorcycle. My biggest fear has always been falling in some isolated place and no one knowing who I am or how to contact my family. I discovered MyLifeQR Brasil by chance and it gave me peace of mind. Now I ride peacefully knowing that if something happens, they'll know who I am and how to help.\"",
-        "testimonial2Author": "— José A.",
-        "testimonial2Role": "Retired, solo traveler, Minas Gerais",
-        "stickerTitle": "🎯 Your custom sticker",
-        "stickerDesc": "Print and stick on your helmet. Water and sun resistant. Two formats available: Horizontal (6×3cm) or Square (3×3cm).",
-        "stickerBtn": "📥 Generate my sticker now",
-        "newsletterTitle": "📧 Get safety tips",
-        "newsletterDesc": "Subscribe and receive useful information for motorcyclists.",
-        "newsletterPlaceholder": "Your email",
-        "newsletterBtn": "Subscribe",
-        "emailTip": "📧 Your contacts aren't receiving alerts? Ask them to add mylifeqrbrasil@gmail.com to their contacts and mark the email as \"Not spam\".",
-        "footerTerms": "📜 Terms & Conditions",
-        "footerPrivacy": "🔒 Privacy Policy",
-        "footerNotice": "🔐 Privacy Notice (LGPD)",
-        "footerWarning": "MyLifeQR Brasil is a medical identification support system. It is not a medical or emergency service, nor does it replace professional care. 📞 In case of emergency, call 192 (SAMU) immediately.",
-        "footerCopyright": "MyLifeQR Brasil © 2026 — Protecting Brazilian motorcyclists",
-        "emergencyBtn": "🚨 EMERGENCY! 🚨",
-        "tabForm": "📝 My data",
-        "tabSticker": "🔲 My sticker",
-        "formTitle": "📝 Personal data",
-        "scanQrBtn": "📷 Scan QR",
-        "shareProfileBtn": "📤 Share profile",
-        "uploadPhoto": "📸 Upload photo",
-        "labelNome": "Full name",
-        "labelIdade": "Age",
-        "labelSangue": "Blood type",
-        "labelDoador": "Organ donor",
-        "labelAlergias": "Allergies",
-        "labelCondicoes": "Medical conditions",
-        "labelMedicamentos": "Current medications",
-        "labelContatos": "📞 Emergency contacts",
-        "labelRelacao": "Relationship",
-        "labelTelefone": "📞 Phone",
-        "labelEmail": "✉️ Email",
-        "labelNotificar": "🔔 Enable emergency notification",
-        "btnCall": "📞 Call",
-        "btnAddContact": "+ Add another contact (max 5)",
-        "labelHospital": "Health insurance / Preferred hospital",
-        "labelNotas": "Additional notes",
-        "btnSave": "💾 Save my data",
-        "btnDelete": "🗑️ Delete my account (erase all data)",
-        "stickerPreviewTitle": "🔲 Your custom sticker",
-        "stickerFormat": "Format:",
-        "stickerHorizontal": "📏 Horizontal (6×3cm)",
-        "stickerCuadrado": "⬛ Square (3×3cm)",
-        "stickerColor": "Color:",
-        "stickerBlack": "⚫ Black Background",
-        "stickerGreen": "🟢 Green Background",
-        "btnDownloadPng": "📥 Download PNG",
-        "btnDownloadPdf": "📄 Download PDF",
-        "logoutBtn": "🚪 Logout"
-    }
-};
-
-let idiomaAtual = localStorage.getItem('myLifeQRLang') || 'pt';
-
-function aplicarIdioma() {
-    const texts = traducoes[idiomaAtual];
-    if (!texts) return;
-    
-    // Header
-    const navLogin = document.getElementById('navLoginBtn');
-    const navRegister = document.getElementById('navRegisterBtn');
-    if (navLogin) navLogin.innerHTML = texts.navLoginBtn;
-    if (navRegister) navRegister.innerHTML = texts.navRegisterBtn;
-    
-    // Donation bar
-    const donationTextSpan = document.querySelector('.donation-text span:last-child');
-    if (donationTextSpan) donationTextSpan.textContent = texts.donationText;
-    const donateBtn = document.getElementById('donateBtn');
-    if (donateBtn) donateBtn.innerHTML = texts.donateBtn;
-    
-    // Hero badges - Updated with correct translations
-    const heroBadges = document.querySelectorAll('.hero-badges .badge');
-    if (heroBadges.length >= 3) {
-        heroBadges[0].innerHTML = `<i class="fas fa-bolt"></i> ${texts.badgeFree}`;
-        heroBadges[1].innerHTML = `<i class="fas fa-lock"></i> ${texts.badgeSecure}`;
-        heroBadges[2].innerHTML = `<i class="fas fa-motorcycle"></i> ${texts.badgeMotorcycle}`;
-    }
-    
-    // Hero badge text (the first one)
-    const heroBadgeSpan = document.querySelector('.hero-badge');
-    if (heroBadgeSpan) heroBadgeSpan.innerHTML = `<i class="fas fa-motorcycle"></i> ${texts.heroBadge}`;
-    
-    const heroTitle = document.querySelector('.hero-content h1');
-    if (heroTitle) heroTitle.innerHTML = texts.heroTitle;
-    const heroSlogan = document.querySelector('.hero-content .slogan');
-    if (heroSlogan) heroSlogan.innerHTML = texts.heroSlogan;
-    const heroDesc = document.querySelector('.hero-content p');
-    if (heroDesc) heroDesc.textContent = texts.heroDescription;
-    const heroProtectBtn = document.getElementById('heroRegisterBtn');
-    if (heroProtectBtn) heroProtectBtn.innerHTML = `<i class="fas fa-shield-alt"></i> ${texts.heroBtnProtect}`;
-    const heroStickerBtn = document.getElementById('verStickerBtn');
-    if (heroStickerBtn) heroStickerBtn.innerHTML = `<i class="fas fa-qrcode"></i> ${texts.heroBtnSticker}`;
-    const floatingBadgeSpan = document.querySelector('.floating-badge span');
-    if (floatingBadgeSpan) floatingBadgeSpan.textContent = texts.floatingBadge;
-    
-    // Stats
-    const statTitles = document.querySelectorAll('.stat-item h3');
-    const statDescs = document.querySelectorAll('.stat-item p');
-    if (statTitles[0]) statTitles[0].textContent = texts.stat1Title;
-    if (statDescs[0]) statDescs[0].textContent = texts.stat1Desc;
-    if (statTitles[1]) statTitles[1].textContent = texts.stat2Title;
-    if (statDescs[1]) statDescs[1].textContent = texts.stat2Desc;
-    if (statTitles[2]) statTitles[2].textContent = texts.stat3Title;
-    if (statDescs[2]) statDescs[2].textContent = texts.stat3Desc;
-    
-    // Features
-    const featuresTitle = document.querySelector('.section-header h2');
-    if (featuresTitle) featuresTitle.textContent = texts.featuresTitle;
-    const featuresSub = document.querySelector('.section-header p');
-    if (featuresSub) featuresSub.textContent = texts.featuresSubtitle;
-    const featureTitles = document.querySelectorAll('.feature-card h3');
-    const featureDescs = document.querySelectorAll('.feature-card p');
-    if (featureTitles[0]) featureTitles[0].textContent = texts.feature1Title;
-    if (featureDescs[0]) featureDescs[0].textContent = texts.feature1Desc;
-    if (featureTitles[1]) featureTitles[1].textContent = texts.feature2Title;
-    if (featureDescs[1]) featureDescs[1].textContent = texts.feature2Desc;
-    if (featureTitles[2]) featureTitles[2].textContent = texts.feature3Title;
-    if (featureDescs[2]) featureDescs[2].textContent = texts.feature3Desc;
-    if (featureTitles[3]) featureTitles[3].textContent = texts.feature4Title;
-    if (featureDescs[3]) featureDescs[3].textContent = texts.feature4Desc;
-    
-    // Creator
-    const creatorBioText = document.querySelector('.creator-bio p');
-    if (creatorBioText) creatorBioText.innerHTML = texts.creatorBio;
-    
-    // Testimonials
-    const testTitle = document.querySelectorAll('.testimonials .section-header h2');
-    if (testTitle[0]) testTitle[0].innerHTML = texts.testimonialsTitle;
-    const testSub = document.querySelectorAll('.testimonials .section-header p');
-    if (testSub[0]) testSub[0].textContent = texts.testimonialsSubtitle;
-    const testimonialTexts = document.querySelectorAll('.testimonial-text');
-    const testimonialAuthors = document.querySelectorAll('.testimonial-author');
-    const testimonialRoles = document.querySelectorAll('.testimonial-role');
-    if (testimonialTexts[0]) testimonialTexts[0].innerHTML = texts.testimonial1Text;
-    if (testimonialAuthors[0]) testimonialAuthors[0].innerHTML = texts.testimonial1Author;
-    if (testimonialRoles[0]) testimonialRoles[0].innerHTML = texts.testimonial1Role;
-    if (testimonialTexts[1]) testimonialTexts[1].innerHTML = texts.testimonial2Text;
-    if (testimonialAuthors[1]) testimonialAuthors[1].innerHTML = texts.testimonial2Author;
-    if (testimonialRoles[1]) testimonialRoles[1].innerHTML = texts.testimonial2Role;
-    
-    // Sticker section
-    const stickerTitle = document.querySelector('.sticker-info h2');
-    if (stickerTitle) stickerTitle.innerHTML = texts.stickerTitle;
-    const stickerDesc = document.querySelector('.sticker-info p');
-    if (stickerDesc) stickerDesc.textContent = texts.stickerDesc;
-    const stickerBtn = document.getElementById('stickerRegisterBtn');
-    if (stickerBtn) stickerBtn.innerHTML = `<i class="fas fa-download"></i> ${texts.stickerBtn}`;
-    
-    // Newsletter
-    const newsTitle = document.querySelector('.newsletter h3');
-    if (newsTitle) newsTitle.innerHTML = texts.newsletterTitle;
-    const newsDesc = document.querySelector('.newsletter p:first-of-type');
-    if (newsDesc) newsDesc.textContent = texts.newsletterDesc;
-    const newsInput = document.getElementById('suscripcionEmail');
-    if (newsInput) newsInput.placeholder = texts.newsletterPlaceholder;
-    const newsBtn = document.getElementById('btnSuscripcion');
-    if (newsBtn) newsBtn.innerHTML = `${texts.newsletterBtn} <i class="fas fa-arrow-right"></i>`;
-    
-    // Email tip
-    const emailTipDiv = document.querySelector('.email-tip');
-    if (emailTipDiv) emailTipDiv.innerHTML = `<p>${texts.emailTip}</p>`;
-    
-    // Footer
-    const footerLinks = document.querySelectorAll('.footer-link');
-    if (footerLinks[0]) footerLinks[0].innerHTML = texts.footerTerms;
-    if (footerLinks[1]) footerLinks[1].innerHTML = texts.footerPrivacy;
-    if (footerLinks[2]) footerLinks[2].innerHTML = texts.footerNotice;
-    const footerText = document.querySelector('.footer-text');
-    if (footerText) footerText.innerHTML = `<strong>⚠️ AVISO LEGAL ⚠️</strong><br>${texts.footerWarning}`;
-    const copyright = document.querySelector('.copyright');
-    if (copyright) copyright.textContent = texts.footerCopyright;
-    
-    // Dashboard elements
-    const emergencyBtn = document.getElementById('emergencyBtn');
-    if (emergencyBtn) emergencyBtn.innerHTML = texts.emergencyBtn;
-    const tabFormBtn = document.getElementById('tabFormBtn');
-    if (tabFormBtn) tabFormBtn.innerHTML = texts.tabForm;
-    const tabStickerBtn = document.getElementById('tabStickerBtn');
-    if (tabStickerBtn) tabStickerBtn.innerHTML = texts.tabSticker;
-    const formTitle = document.querySelector('#tabForm .form-card h2');
-    if (formTitle) formTitle.innerHTML = texts.formTitle;
-    const scanBtn = document.getElementById('scanQrBtn');
-    if (scanBtn) scanBtn.innerHTML = texts.scanQrBtn;
-    const shareBtn = document.getElementById('shareProfileBtn');
-    if (shareBtn) shareBtn.innerHTML = texts.shareProfileBtn;
-    const uploadLabel = document.querySelector('label[for="fotoInput"]');
-    if (uploadLabel) uploadLabel.innerHTML = texts.uploadPhoto;
-    const saveBtn = document.getElementById('saveProfileBtn');
-    if (saveBtn) saveBtn.innerHTML = texts.btnSave;
-    const deleteBtn = document.getElementById('deleteAccountBtn');
-    if (deleteBtn) deleteBtn.innerHTML = texts.btnDelete;
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) logoutBtn.innerHTML = texts.logoutBtn;
-    
-    const stickerPreviewTitle = document.querySelector('.sticker-preview h2');
-    if (stickerPreviewTitle) stickerPreviewTitle.innerHTML = texts.stickerPreviewTitle;
-    const formatLabel = document.querySelector('.selector-group:first-child .selector-label');
-    if (formatLabel) formatLabel.innerHTML = texts.stickerFormat;
-    const formatHor = document.querySelector('.format-option[data-format="horizontal"]');
-    if (formatHor) formatHor.innerHTML = texts.stickerHorizontal;
-    const formatQuad = document.querySelector('.format-option[data-format="cuadrado"]');
-    if (formatQuad) formatQuad.innerHTML = texts.stickerCuadrado;
-    const colorLabel = document.querySelector('.selector-group:last-child .selector-label');
-    if (colorLabel) colorLabel.innerHTML = texts.stickerColor;
-    const colorBlack = document.querySelector('.color-option[data-color="negro"]');
-    if (colorBlack) colorBlack.innerHTML = texts.stickerBlack;
-    const colorGreen = document.querySelector('.color-option[data-color="verde"]');
-    if (colorGreen) colorGreen.innerHTML = texts.stickerGreen;
-    const pngBtn = document.getElementById('downloadPngBtn');
-    if (pngBtn) pngBtn.innerHTML = texts.btnDownloadPng;
-    const pdfBtn = document.getElementById('downloadPdfBtn');
-    if (pdfBtn) pdfBtn.innerHTML = texts.btnDownloadPdf;
-}
-
-function mudarIdioma(lang) {
-    idiomaAtual = lang;
-    localStorage.setItem('myLifeQRLang', lang);
-    
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        if (btn.getAttribute('data-lang') === lang) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
+    window.addEventListener('load', () => {
+        if (document.getElementById('stickerBgImg') && document.getElementById('stickerBgImg').complete) {
+            positionQR();
         }
     });
     
-    aplicarIdioma();
-}
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const lang = btn.getAttribute('data-lang');
-        mudarIdioma(lang);
-    });
-});
-
-aplicarIdioma();
+    console.log("✅ Site carregado e pronto para uso!");
 </script>
 
 </body>
