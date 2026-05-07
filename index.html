@@ -30,10 +30,10 @@
         .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; flex-wrap: wrap; gap: 20px; }
         .logo img { height: 52px; width: auto; }
         .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-link { background: none; border: none; font-size: 15px; font-weight: 600; color: #4a5a5a; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; padding: 8px 0; }
+        .nav-link { background: none; border: none; font-size: 15px; font-weight: 600; color: #4a5a5a; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; padding: 8px 0; transition: color 0.3s; }
         .nav-link:hover { color: #009C3B; }
-        .btn-outline { border: 2px solid #009C3B; background: transparent; padding: 8px 24px; border-radius: 100px; font-weight: 700; color: #009C3B; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; }
-        .btn-outline:hover { background: #009C3B; color: white; }
+        .btn-outline { border: 2px solid #009C3B; background: transparent; padding: 8px 24px; border-radius: 100px; font-weight: 700; color: #009C3B; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; transition: all 0.3s; }
+        .btn-outline:hover { background: #009C3B; color: white; transform: translateY(-2px); }
         
         /* LANGUAGE SELECTOR */
         .language-selector { display: flex; gap: 4px; background: #f0f4f0; padding: 4px; border-radius: 100px; }
@@ -41,10 +41,10 @@
         .lang-btn.active { background: #009C3B; color: white; }
         
         /* DONATION BAR */
-        .donation-bar { background: #002776; border-radius: 60px; padding: 14px 28px; margin: 20px 0 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .donation-bar { background: #002776; border-radius: 60px; padding: 14px 28px; margin: 20px 0 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 5px 20px rgba(0,39,118,0.3); }
         .donation-text { color: #FFDF00; font-weight: 700; display: flex; align-items: center; gap: 12px; }
-        .btn-donate { background: #FFDF00; color: #002776; border: none; padding: 10px 28px; border-radius: 100px; font-weight: 800; font-size: 14px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; text-decoration: none; display: inline-block; }
-        .btn-donate:hover { background: #009C3B; color: white; }
+        .btn-donate { background: #FFDF00; color: #002776; border: none; padding: 10px 28px; border-radius: 100px; font-weight: 800; font-size: 14px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; text-decoration: none; display: inline-block; transition: all 0.3s; }
+        .btn-donate:hover { background: #009C3B; color: white; transform: scale(1.05); }
         
         /* HERO */
         .hero { display: grid; grid-template-columns: 1fr 0.9fr; gap: 50px; padding: 40px 0 60px; align-items: center; }
@@ -53,14 +53,19 @@
         .hero-content .slogan { font-size: 20px; font-weight: 600; color: #002776; margin-bottom: 16px; }
         .hero-content p { font-size: 16px; color: #5a6a6a; line-height: 1.6; margin-bottom: 28px; }
         .hero-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-        .badge { background: #f0f4f0; padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 600; color: #009C3B; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-primary { background: #009C3B; color: white; border: none; padding: 16px 36px; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center; gap: 12px; }
-        .btn-primary:hover { background: #002776; color: #FFDF00; }
-        .btn-secondary { background: transparent; border: 2px solid #009C3B; color: #009C3B; padding: 14px 28px; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center; gap: 10px; margin-left: 16px; }
+        .badge { background: #f0f4f0; padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 600; color: #009C3B; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .badge:hover { background: #009C3B; color: white; transform: translateY(-2px); }
+        .btn-primary { background: #009C3B; color: white; border: none; padding: 16px 36px; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,156,59,0.3); }
+        .btn-primary:hover { background: #002776; color: #FFDF00; transform: translateY(-2px); }
+        .btn-secondary { background: transparent; border: 2px solid #009C3B; color: #009C3B; padding: 14px 28px; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center; gap: 10px; margin-left: 16px; transition: all 0.3s; }
+        .btn-secondary:hover { background: rgba(0,156,59,0.05); transform: translateY(-2px); }
         .hero-image { position: relative; }
-        .hero-image img { width: 100%; border-radius: 32px; }
-        .hero-image .floating-badge { position: absolute; bottom: -20px; right: -20px; background: white; border-radius: 20px; padding: 12px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; }
+        .hero-image img { width: 100%; border-radius: 32px; box-shadow: 0 25px 45px rgba(0,0,0,0.15); }
+        .hero-image .floating-badge { position: absolute; bottom: -20px; right: -20px; background: white; border-radius: 20px; padding: 12px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; animation: float 3s ease-in-out infinite; }
         .floating-badge i { font-size: 28px; color: #009C3B; }
+        .floating-badge span { font-weight: 700; color: #1a2a2a; }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         
         /* STATS */
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; background: #002776; border-radius: 40px; padding: 40px 32px; margin: 40px 0; text-align: center; }
@@ -71,63 +76,73 @@
         .features { padding: 60px 0; }
         .section-header { text-align: center; margin-bottom: 48px; }
         .section-header h2 { font-size: 36px; font-weight: 800; color: #1a2a2a; margin-bottom: 12px; }
-        .section-header p { font-size: 18px; color: #6a7a7a; }
+        .section-header p { font-size: 18px; color: #6a7a7a; max-width: 600px; margin: 0 auto; }
         .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
         .feature-card { background: #fafdfa; border-radius: 24px; padding: 32px 24px; text-align: center; border: 1px solid #e8f0e8; transition: all 0.3s; }
-        .feature-card:hover { transform: translateY(-5px); border-color: #009C3B; }
-        .feature-icon { width: 70px; height: 70px; background: rgba(0,156,59,0.1); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; color: #009C3B; }
+        .feature-card:hover { transform: translateY(-8px); border-color: #009C3B; box-shadow: 0 20px 35px rgba(0,156,59,0.1); }
+        .feature-icon { width: 70px; height: 70px; background: rgba(0,156,59,0.1); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; color: #009C3B; transition: all 0.3s; }
+        .feature-card:hover .feature-icon { background: #009C3B; color: white; transform: scale(1.05); }
         .feature-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-        .feature-card p { font-size: 14px; color: #6a7a7a; }
+        .feature-card p { font-size: 14px; color: #6a7a7a; line-height: 1.5; }
         
         /* CREATOR SECTION */
-        .creator-section { background: #f8faf8; border-radius: 32px; padding: 48px 32px; margin: 60px 0 40px; text-align: center; }
-        .creator-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 48px; color: white; }
+        .creator-section { background: #f8faf8; border-radius: 32px; padding: 48px 32px; margin: 60px 0 40px; text-align: center; transition: transform 0.3s; }
+        .creator-section:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .creator-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, #009C3B 0%, #FFDF00 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 48px; color: white; transition: transform 0.3s; }
+        .creator-avatar:hover { transform: rotate(10deg) scale(1.05); }
         .creator-name { font-size: 28px; font-weight: 800; color: #009C3B; margin-bottom: 8px; }
-        .creator-name a { color: #009C3B; text-decoration: none; }
-        .creator-bio { max-width: 700px; margin: 20px auto; color: #5a6a6a; line-height: 1.8; }
+        .creator-name a { color: #009C3B; text-decoration: none; transition: all 0.3s; }
+        .creator-name a:hover { text-decoration: underline; }
+        .creator-bio { max-width: 700px; margin: 20px auto; color: #5a6a6a; line-height: 1.8; font-size: 16px; }
         .creator-contact { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 24px; padding-top: 20px; border-top: 1px solid #e8f0e8; }
-        .creator-contact a { color: #009C3B; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .creator-contact a { color: #009C3B; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .creator-contact a:hover { transform: translateX(5px); color: #FFDF00; }
         
         /* TESTIMONIALS */
         .testimonials { background: #f5faf5; border-radius: 48px; padding: 60px 40px; margin: 40px 0; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 40px; }
         .testimonial-card { background: white; border-radius: 28px; padding: 32px; border: 1px solid #e8f0e8; transition: all 0.3s; }
-        .testimonial-card:hover { transform: translateY(-5px); border-color: #009C3B; }
-        .testimonial-icon { font-size: 32px; color: #009C3B; margin-bottom: 20px; }
+        .testimonial-card:hover { transform: translateY(-5px); border-color: #009C3B; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .testimonial-icon { font-size: 32px; color: #009C3B; margin-bottom: 20px; opacity: 0.6; }
         .testimonial-text { font-size: 16px; line-height: 1.6; color: #2a3a3a; margin-bottom: 24px; }
-        .testimonial-author { font-weight: 700; color: #1a2a2a; }
+        .testimonial-author { font-weight: 700; color: #1a2a2a; margin-bottom: 4px; }
         .testimonial-role { font-size: 13px; color: #7a8a8a; }
         
         /* STICKER SHOWCASE */
         .sticker-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 60px 0; align-items: center; }
-        .sticker-preview-card { background: #f5faf5; border-radius: 40px; padding: 40px; text-align: center; border: 1px solid #e8f0e8; }
-        .sticker-preview-card img { max-width: 70%; height: auto; border-radius: 20px; }
+        .sticker-preview-card { background: linear-gradient(135deg, #f5faf5 0%, #ffffff 100%); border-radius: 40px; padding: 40px; text-align: center; border: 1px solid #e8f0e8; transition: all 0.3s; }
+        .sticker-preview-card:hover { transform: translateY(-8px); border-color: #009C3B; box-shadow: 0 25px 40px rgba(0,156,59,0.1); }
+        .sticker-preview-card img { max-width: 70%; height: auto; border-radius: 20px; margin: 0 auto; display: block; }
         .sticker-info h2 { font-size: 32px; font-weight: 800; margin-bottom: 16px; }
         .sticker-features { list-style: none; margin: 24px 0; }
         .sticker-features li { padding: 10px 0; display: flex; align-items: center; gap: 12px; color: #4a5a5a; }
-        .sticker-features li i { color: #009C3B; }
+        .sticker-features li i { color: #009C3B; font-size: 18px; }
         
         /* NEWSLETTER */
         .newsletter { background: #002776; border-radius: 40px; padding: 50px 40px; margin: 40px 0; text-align: center; color: white; }
         .newsletter h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #FFDF00; }
         .newsletter-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .newsletter-form input { padding: 14px 24px; border-radius: 100px; border: none; width: 300px; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .newsletter-form button { background: #FFDF00; color: #002776; border: none; padding: 14px 32px; border-radius: 100px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .newsletter-form input { padding: 14px 24px; border-radius: 100px; border: none; width: 300px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none; }
+        .newsletter-form input:focus { box-shadow: 0 0 0 3px rgba(255,255,255,0.3); }
+        .newsletter-form button { background: #FFDF00; color: #002776; border: none; padding: 14px 32px; border-radius: 100px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s; }
+        .newsletter-form button:hover { background: #009C3B; color: white; transform: scale(1.02); }
         
         /* FORM CARDS */
         .login-card { max-width: 440px; margin: 60px auto 80px; }
         .form-card { background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid #e8f0e8; }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 6px; }
-        input, select, textarea { width: 100%; padding: 12px 16px; background: #f8f8f8; border: 2px solid #e0e8e0; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: #009C3B; }
+        input, select, textarea { width: 100%; padding: 12px 16px; background: #f8f8f8; border: 2px solid #e0e8e0; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; transition: all 0.3s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #009C3B; box-shadow: 0 0 0 3px rgba(0,156,59,0.1); }
         .error-msg { color: #009C3B; font-size: 13px; margin-top: 8px; }
         .success-msg { color: #009C3B; font-size: 13px; margin-top: 8px; }
-        .link-text { color: #009C3B; cursor: pointer; text-decoration: underline; margin-top: 16px; display: inline-block; background: none; border: none; font-size: 14px; }
+        .link-text { color: #009C3B; cursor: pointer; text-decoration: underline; margin-top: 16px; display: inline-block; background: none; border: none; font-size: 14px; transition: color 0.3s; }
+        .link-text:hover { color: #FFDF00; }
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .btn-add-contact { background: transparent; border: 2px dashed #009C3B; color: #009C3B; padding: 10px; border-radius: 12px; width: 100%; font-weight: 600; cursor: pointer; margin-bottom: 20px; }
+        .btn-add-contact { background: transparent; border: 2px dashed #009C3B; color: #009C3B; padding: 10px; border-radius: 12px; width: 100%; font-weight: 600; cursor: pointer; margin-bottom: 20px; transition: all 0.2s; }
         .btn-add-contact:hover { background: #009C3B; color: white; }
-        .legal-link-inline { color: #009C3B; cursor: pointer; text-decoration: underline; }
+        .legal-link-inline { color: #009C3B; cursor: pointer; text-decoration: underline; transition: color 0.3s; }
+        .legal-link-inline:hover { color: #FFDF00; }
         
         /* DASHBOARD */
         .dashboard-container { background: white; min-height: 100vh; }
@@ -135,66 +150,78 @@
         .dashboard-logo img { height: 48px; }
         .user-menu { display: flex; align-items: center; gap: 20px; }
         .user-email { color: #666; font-size: 14px; }
-        .btn-logout { background: transparent; border: 1px solid #009C3B; color: #009C3B; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 13px; }
-        .btn-logout:hover { background: #009C3B; color: white; }
+        .btn-logout { background: transparent; border: 1px solid #009C3B; color: #009C3B; padding: 6px 16px; border-radius: 30px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.3s; }
+        .btn-logout:hover { background: #009C3B; color: white; transform: translateY(-2px); }
         
-        .emergency-btn { background: #E8152A; color: white; border: none; padding: 20px 40px; border-radius: 60px; font-size: 24px; font-weight: bold; width: 100%; max-width: 300px; cursor: pointer; margin: 20px auto; display: block; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .emergency-btn:hover { background: #B01020; }
+        .emergency-btn { background: #E8152A; color: white; border: none; padding: 20px 40px; border-radius: 60px; font-size: 24px; font-weight: bold; width: 100%; max-width: 300px; cursor: pointer; margin: 20px auto; display: block; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s; animation: pulse 2s ease-in-out infinite; }
+        .emergency-btn:hover { transform: scale(1.05); background: #B01020; }
+        
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
         
         .natives-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 20px 0; }
-        .native-btn { background: #f0f4f0; border: none; padding: 10px 18px; border-radius: 40px; font-size: 14px; cursor: pointer; }
-        .native-btn:hover { background: #009C3B; color: white; }
-        .btn-danger { background: transparent; border: 1px solid #009C3B; color: #009C3B; padding: 12px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 20px; width: 100%; }
+        .native-btn { background: #f0f4f0; border: none; padding: 10px 18px; border-radius: 40px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .native-btn:hover { background: #009C3B; color: white; transform: translateY(-2px); }
+        .btn-danger { background: transparent; border: 1px solid #009C3B; color: #009C3B; padding: 12px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 20px; width: 100%; transition: all 0.2s; }
         .btn-danger:hover { background: #009C3B; color: white; }
         
         .tabs { display: flex; gap: 16px; margin: 24px 0; border-bottom: 2px solid #e8f0e8; }
-        .tab-btn { background: none; border: none; font-size: 16px; font-weight: 600; padding: 12px 0; cursor: pointer; color: #6a7a7a; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .tab-btn.active { color: #009C3B; border-bottom: 2px solid #009C3B; }
+        .tab-btn { background: none; border: none; font-size: 16px; font-weight: 600; padding: 12px 0; cursor: pointer; color: #6a7a7a; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s; position: relative; }
+        .tab-btn.active { color: #009C3B; }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #009C3B; }
         .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+        .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         .two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 0; }
-        .sticker-preview { background: #f5faf5; border-radius: 24px; padding: 24px; text-align: center; position: sticky; top: 20px; }
+        .sticker-preview { background: #f5faf5; border-radius: 24px; padding: 24px; text-align: center; position: sticky; top: 20px; transition: transform 0.3s; }
+        .sticker-preview:hover { transform: translateY(-5px); }
         .sticker-container { position: relative; width: 100%; margin: 0 auto; }
         .sticker-container.horizontal { max-width: 400px; }
         .sticker-container.cuadrado { max-width: 200px; }
         .sticker-bg { width: 100%; height: auto; display: block; border-radius: 12px; background: #1a1a1a; min-height: 100px; }
         .sticker-qr-overlay { position: absolute; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 12px; }
         .sticker-qr-overlay canvas { width: 100% !important; height: 100% !important; border-radius: 12px; }
-        .btn-download { background: #009C3B; color: white; border: none; padding: 12px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; margin: 6px; }
-        .btn-download:hover { background: #002776; }
+        .btn-download { background: #009C3B; color: white; border: none; padding: 12px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; margin: 6px; transition: all 0.3s; }
+        .btn-download:hover { background: #002776; transform: translateY(-2px); }
         .photo-upload { margin-bottom: 20px; text-align: center; }
-        .photo-preview { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 3px solid #009C3B; }
+        .photo-preview { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 3px solid #009C3B; display: none; }
         .section-subtitle-form { font-size: 24px; font-weight: 700; color: #009C3B; margin: 24px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #009C3B; }
         .contact-group { background: #fafdfa; padding: 16px; border-radius: 16px; margin-bottom: 20px; }
         
         /* MODAL */
         .modal-legal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-legal-content { background: white; max-width: 500px; width: 100%; max-height: 85%; border-radius: 24px; overflow: hidden; }
+        .modal-legal-content { background: white; max-width: 500px; width: 100%; max-height: 85%; border-radius: 24px; overflow: hidden; animation: fadeIn 0.3s ease; }
         .modal-legal-header { background: #009C3B; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .modal-legal-header h3 { color: white; margin: 0; }
-        .modal-legal-close { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
+        .modal-legal-header h3 { color: white; margin: 0; font-size: 20px; }
+        .modal-legal-close { background: none; border: none; color: white; font-size: 28px; cursor: pointer; transition: transform 0.3s; }
+        .modal-legal-close:hover { transform: scale(1.1); }
         .modal-legal-body { padding: 20px; overflow-y: auto; max-height: 60vh; font-size: 13px; line-height: 1.6; }
         .modal-legal-body h4 { color: #009C3B; margin: 16px 0 8px; }
         .modal-legal-footer { padding: 16px 20px; border-top: 1px solid #eee; text-align: center; }
-        .modal-legal-footer button { background: #009C3B; color: white; border: none; padding: 10px 24px; border-radius: 30px; cursor: pointer; }
+        .modal-legal-footer button { background: #009C3B; color: white; border: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .modal-legal-footer button:hover { background: #002776; transform: translateY(-2px); }
         
         .footer { margin-top: 60px; padding: 40px 0 30px; border-top: 1px solid #e8f0e8; text-align: center; }
         .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 24px; }
-        .footer-link { color: #009C3B; text-decoration: none; cursor: pointer; font-size: 13px; }
+        .footer-link { color: #009C3B; text-decoration: none; cursor: pointer; font-size: 13px; font-weight: 500; transition: color 0.3s; }
+        .footer-link:hover { color: #FFDF00; text-decoration: underline; }
         .footer-text { font-size: 11px; color: #8a9a9a; line-height: 1.6; max-width: 700px; margin: 0 auto; }
         .copyright { margin-top: 20px; font-size: 10px; color: #aabbab; }
         .sticker-selectors { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
         .selector-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .selector-label { font-size: 12px; font-weight: 600; color: #6a7a6a; }
-        .format-option, .color-option { cursor: pointer; padding: 8px 16px; border-radius: 40px; font-weight: 600; font-size: 14px; }
+        .format-option, .color-option { cursor: pointer; padding: 8px 16px; border-radius: 40px; font-weight: 600; font-size: 14px; transition: all 0.3s; }
         .format-option { background: #f0f4f0; color: #4a5a5a; border: 2px solid #e0e8e0; }
-        .format-option.active { background: #009C3B; color: white; }
-        .color-option.negro { background: #1a2a2a; color: white; }
-        .color-option.verde { background: #009C3B; color: white; }
+        .format-option.active { background: #009C3B; color: white; border-color: #009C3B; }
+        .color-option.negro { background: #1a2a2a; color: white; border: 2px solid #1a2a2a; }
+        .color-option.verde { background: #009C3B; color: white; border: 2px solid #009C3B; }
+        .color-option.active { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .email-tip { background: #f0f4f0; padding: 12px; border-radius: 12px; margin: 20px 0; text-align: center; }
+        .email-tip p { font-size: 12px; color: #6a7a7a; margin: 0; }
         #cookieConsent { position: fixed; bottom: 0; left: 0; right: 0; background: #1a2a2a; color: white; padding: 16px; text-align: center; z-index: 9999; display: none; }
-        #cookieConsent button { background: #009C3B; color: white; border: none; padding: 8px 24px; border-radius: 30px; margin-top: 10px; cursor: pointer; }
+        #cookieConsent button { background: #009C3B; color: white; border: none; padding: 8px 24px; border-radius: 30px; margin-top: 10px; cursor: pointer; transition: all 0.3s; }
+        #cookieConsent button:hover { background: #FFDF00; color: #002776; transform: scale(1.02); }
         
         .hidden { display: none !important; }
         
@@ -211,6 +238,8 @@
             .hero-content h1 { font-size: 40px; }
             .features-grid { grid-template-columns: 1fr; }
             .header { flex-direction: column; }
+            .stats-grid { padding: 32px 20px; }
+            .testimonials { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -279,7 +308,7 @@
             </div>
         </div>
         
-        <!-- CREATOR SECTION - CORREGIDO SIN REPETICIÓN -->
+        <!-- CREATOR SECTION -->
         <div class="creator-section">
             <div class="creator-avatar">🇧🇷</div>
             <div class="creator-name"><a href="https://mylifeqr.github.io" target="_blank">MyLifeQR México</a> → Brasil</div>
@@ -347,7 +376,7 @@
         <!-- FOOTER -->
         <div class="footer">
             <div class="footer-links"><span class="footer-link" onclick="showTerminos()">📜 Termos e Condições</span><span class="footer-link" onclick="showPrivacidade()">🔒 Política de Privacidade</span><span class="footer-link" onclick="showAvisoPrivacidad()">🔐 Aviso de Privacidade (LGPD)</span></div>
-            <div class="footer-text"><strong>⚠️ AVISO LEGAL ⚠️</strong><br>MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><strong>📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.</strong></div>
+            <p class="footer-text"><strong>⚠️ AVISO LEGAL ⚠️</strong><br>MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><strong>📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.</strong></p>
             <div class="copyright">MyLifeQR Brasil © 2026 — Protegendo motociclistas brasileiros</div>
         </div>
     </div>
@@ -362,7 +391,7 @@
         <div class="two-columns">
             <div><div id="tabForm" class="tab-pane active"><div class="form-card"><h2 style="font-size: 28px; font-weight: 700; color: #009C3B;">📝 Dados pessoais</h2>
                 <div class="natives-buttons"><button class="native-btn" id="scanQrBtn">📷 Escanear QR</button><button class="native-btn" id="shareProfileBtn">📤 Compartilhar perfil</button></div>
-                <div class="photo-upload"><img id="fotoPreview" class="photo-preview" src="" alt="Sua foto" style="display: none;"><div style="margin-top: 8px;"><label for="fotoInput" style="background: #f0f4f0; padding: 8px 16px; border-radius: 30px; cursor: pointer; display: inline-block; font-size: 12px;">📸 Enviar foto</label><input type="file" id="fotoInput" accept="image/jpeg,image/png,image/jpg" style="display: none;"></div></div>
+                <div class="photo-upload"><img id="fotoPreview" class="photo-preview" src="" alt="Sua foto"><div style="margin-top: 8px;"><label for="fotoInput" style="background: #f0f4f0; padding: 8px 16px; border-radius: 30px; cursor: pointer; display: inline-block; font-size: 12px;">📸 Enviar foto</label><input type="file" id="fotoInput" accept="image/jpeg,image/png,image/jpg" style="display: none;"></div></div>
                 <div class="form-group"><label>Nome completo</label><input type="text" id="nombre" placeholder="Nome completo"></div>
                 <div class="row-2"><div class="form-group"><label>Idade</label><input type="number" id="edad" placeholder="Idade"></div><div class="form-group"><label>Tipo sanguíneo</label><select id="sangre"><option value="">Selecione</option><option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option><option value="O+">O+</option><option value="O-">O-</option></select></div></div>
                 <div class="form-group"><label>Doador de órgãos</label><select id="donador"><option value="">Selecione</option><option value="Sim">✅ Sim, sou doador</option><option value="Não">❌ Não, não sou doador</option></select></div>
@@ -375,14 +404,17 @@
                 <div class="section-subtitle-form">📞 Contatos de emergência</div>
                 <div style="background: #f0f4f0; padding: 12px; border-radius: 12px; margin-bottom: 16px;"><p style="font-size: 12px; color: #6a7a7a; margin: 0;">💡 <strong>Nota:</strong> Contatos com <strong>e-mail</strong> e a opção <strong>"Ativar notificação"</strong> ativada receberão um alerta automático por e-mail quando seu QR for escaneado em uma emergência.</p></div>
                 
+                <!-- Contato 1 -->
                 <div class="contact-group"><div class="row-2"><div class="form-group"><label>Nome completo</label><input type="text" id="contacto1_nombre" placeholder="Nome completo"></div><div class="form-group"><label>Relação</label><select id="contacto1_relacion"><option value="">Selecione</option><option value="Pai">👨 Pai</option><option value="Mãe">👩 Mãe</option><option value="Irmão">👦 Irmão(ã)</option><option value="Filho">👶 Filho(a)</option><option value="Parceiro">💑 Parceiro(a)</option><option value="Cônjuge">💍 Cônjuge</option><option value="Amigo">👥 Amigo(a)</option><option value="Outro">📌 Outro</option></select></div></div>
                 <div class="row-2"><div class="form-group"><label>📞 Telefone</label><input type="tel" id="contacto1_tel" placeholder="11999999999"></div><div class="form-group"><label>✉️ E-mail</label><input type="email" id="contacto1_email" placeholder="exemplo@email.com"></div></div>
                 <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;"><input type="checkbox" id="contacto1_notificar" style="width: 18px;"><label style="font-size: 12px; text-transform: none; color: #009C3B;">🔔 Ativar notificação de emergência</label><button class="native-btn" onclick="llamarContacto(document.getElementById('contacto1_tel').value)" style="margin-left: auto; padding: 5px 12px; font-size: 12px;">📞 Ligar</button></div></div>
                 
+                <!-- Contato 2 -->
                 <div class="contact-group"><div class="row-2"><div class="form-group"><label>Nome completo</label><input type="text" id="contacto2_nombre" placeholder="Nome completo"></div><div class="form-group"><label>Relação</label><select id="contacto2_relacion"><option value="">Selecione</option><option value="Pai">👨 Pai</option><option value="Mãe">👩 Mãe</option><option value="Irmão">👦 Irmão(ã)</option><option value="Filho">👶 Filho(a)</option><option value="Parceiro">💑 Parceiro(a)</option><option value="Cônjuge">💍 Cônjuge</option><option value="Amigo">👥 Amigo(a)</option><option value="Outro">📌 Outro</option></select></div></div>
                 <div class="row-2"><div class="form-group"><label>📞 Telefone</label><input type="tel" id="contacto2_tel" placeholder="11999999999"></div><div class="form-group"><label>✉️ E-mail</label><input type="email" id="contacto2_email" placeholder="exemplo@email.com"></div></div>
                 <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;"><input type="checkbox" id="contacto2_notificar" style="width: 18px;"><label style="font-size: 12px; text-transform: none; color: #009C3B;">🔔 Ativar notificação de emergência</label><button class="native-btn" onclick="llamarContacto(document.getElementById('contacto2_tel').value)" style="margin-left: auto; padding: 5px 12px; font-size: 12px;">📞 Ligar</button></div></div>
                 
+                <!-- Contato 3 -->
                 <div class="contact-group"><div class="row-2"><div class="form-group"><label>Nome completo</label><input type="text" id="contacto3_nombre" placeholder="Nome completo"></div><div class="form-group"><label>Relação</label><select id="contacto3_relacion"><option value="">Selecione</option><option value="Pai">👨 Pai</option><option value="Mãe">👩 Mãe</option><option value="Irmão">👦 Irmão(ã)</option><option value="Filho">👶 Filho(a)</option><option value="Parceiro">💑 Parceiro(a)</option><option value="Cônjuge">💍 Cônjuge</option><option value="Amigo">👥 Amigo(a)</option><option value="Outro">📌 Outro</option></select></div></div>
                 <div class="row-2"><div class="form-group"><label>📞 Telefone</label><input type="tel" id="contacto3_tel" placeholder="11999999999"></div><div class="form-group"><label>✉️ E-mail</label><input type="email" id="contacto3_email" placeholder="exemplo@email.com"></div></div>
                 <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;"><input type="checkbox" id="contacto3_notificar" style="width: 18px;"><label style="font-size: 12px; text-transform: none; color: #009C3B;">🔔 Ativar notificação de emergência</label><button class="native-btn" onclick="llamarContacto(document.getElementById('contacto3_tel').value)" style="margin-left: auto; padding: 5px 12px; font-size: 12px;">📞 Ligar</button></div></div>
@@ -428,7 +460,7 @@
     <div class="modal-legal-footer"><button onclick="closeModalReset()">Fechar</button></div></div>
 </div>
 
-<!-- MODALS LEGALES CORREGIDOS -->
+<!-- MODALS LEGALES -->
 <div id="modalAvisoPrivacidad" class="modal-legal">
     <div class="modal-legal-content">
         <div class="modal-legal-header">
@@ -628,6 +660,8 @@
         overlay.style.width = `${(config.widthPercent / 100) * imgRect.width}px`;
         overlay.style.height = `${(config.heightPercent / 100) * imgRect.height}px`;
         overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
     }
     
     function generateQR() {
@@ -759,28 +793,27 @@
     // FUNCIONES DE FIREBASE
     // ============================================
     
-        async function actualizarContador() {
+    async function actualizarContador() {
         const vidasElement = document.getElementById('vidasCounter');
         if (!vidasElement) return;
         
         const lang = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
         const textoVidas = lang === 'en' ? 'protected lives' : 'vidas protegidas';
         
+        let total = 500;
         try {
             const counterDoc = await getDoc(doc(db, "public", "stats"));
-            
-            if (counterDoc.exists() && counterDoc.data().totalUsuarios) {
-                const total = counterDoc.data().totalUsuarios;
-                vidasElement.innerHTML = `💚 ${total}+ ${textoVidas}`;
-            } else {
-                // Si no existe el documento o el campo, mostrar 500
-                vidasElement.innerHTML = `💚 500+ ${textoVidas}`;
+            if (counterDoc.exists()) {
+                const data = counterDoc.data();
+                if (data.totalUsuarios) {
+                    total = parseInt(data.totalUsuarios) || 500;
+                }
             }
-        } catch (error) { 
+        } catch (error) {
             console.error("Erro ao carregar contador:", error);
-            // Mostrar 500 en caso de error
-            vidasElement.innerHTML = `💚 500+ ${textoVidas}`;
         }
+        
+        vidasElement.innerHTML = `💚 ${total}+ ${textoVidas}`;
     }
     
     async function obtenerIP() {
@@ -999,13 +1032,11 @@
         
         if (!nome) {
             saveMessage.innerText = '⚠️ O nome completo é obrigatório';
-            saveMessage.style.color = '#009C3B';
             setTimeout(() => saveMessage.innerText = '', 3000);
             return;
         }
         if (!sangue) {
             saveMessage.innerText = '⚠️ Selecione seu tipo sanguíneo';
-            saveMessage.style.color = '#009C3B';
             setTimeout(() => saveMessage.innerText = '', 3000);
             return;
         }
@@ -1045,7 +1076,6 @@
         };
         await setDoc(doc(db, "perfiles", currentUser.uid), perfil, { merge: true });
         saveMessage.innerText = '✅ Dados salvos com sucesso';
-        saveMessage.style.color = '#009C3B';
         setTimeout(() => saveMessage.innerText = '', 2000);
         if (document.getElementById('stickerBgImg')) {
             updateStickerImage();
@@ -1159,19 +1189,13 @@
     document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
     document.getElementById('saveProfileBtn')?.addEventListener('click', guardarPerfil);
     
-    // ============================================
-    // MODALES LEGALES CORREGIDOS
-    // ============================================
-    
-    // Aviso de Privacidad (LGPD)
+    // Modales legales
     window.showAvisoPrivacidad = () => { 
         document.getElementById('modalAvisoPrivacidad').style.display = 'flex'; 
     };
     window.closeModalAvisoPrivacidad = () => { 
         document.getElementById('modalAvisoPrivacidad').style.display = 'none'; 
     };
-    
-    // Termos e Condições (original)
     window.showTerminosRegistro = () => { 
         const modal = document.getElementById('modalLegalRegistro');
         const title = document.getElementById('modalLegalTitle');
@@ -1197,8 +1221,6 @@
         }
         modal.style.display = 'flex';
     };
-    
-    // Política de Privacidade
     window.showPrivacidadRegistro = () => { 
         const modal = document.getElementById('modalLegalRegistro');
         const title = document.getElementById('modalLegalTitle');
@@ -1220,17 +1242,14 @@
         }
         modal.style.display = 'flex';
     };
-    
     window.closeModalLegalRegistro = () => { 
         document.getElementById('modalLegalRegistro').style.display = 'none'; 
     };
-    
-    // Aliases para los botones del footer
     window.showTerminos = window.showTerminosRegistro;
     window.showPrivacidade = window.showPrivacidadRegistro;
     
     // ============================================
-    // TRADUCCIÓN DE IDIOMAS - COMPLETA
+    // TRADUCCIÓN DE IDIOMAS
     // ============================================
     
     const traducoesSite = {
@@ -1300,7 +1319,6 @@
         const textos = traducoesSite[idioma];
         if (!textos) return;
         
-        // Botones header
         const navLoginBtn = document.getElementById('navLoginBtn');
         const navRegisterBtn = document.getElementById('navRegisterBtn');
         const donateBtn = document.getElementById('donateBtn');
@@ -1313,7 +1331,6 @@
         if (heroRegisterBtn) heroRegisterBtn.innerHTML = `<i class="fas fa-shield-alt"></i> ${textos.proteger}`;
         if (verStickerBtn) verStickerBtn.innerHTML = `<i class="fas fa-qrcode"></i> ${textos.verAdesivo}`;
         
-        // Hero section
         const heroTitle = document.querySelector('.hero-content h1');
         const heroSlogan = document.querySelector('.hero-content .slogan');
         const heroText = document.querySelector('.hero-content p');
@@ -1321,7 +1338,6 @@
         if (heroSlogan) heroSlogan.innerHTML = textos.heroSlogan;
         if (heroText) heroText.innerHTML = textos.heroText;
         
-        // Badges
         const badges = document.querySelectorAll('.hero-badges .badge');
         if (badges.length >= 3) {
             badges[0].innerHTML = `<i class="fas fa-bolt"></i> ${textos.gratuito}`;
@@ -1329,13 +1345,11 @@
             badges[2].innerHTML = `<i class="fas fa-motorcycle"></i> ${textos.paraMotociclistas}`;
         }
         
-        // Why section
         const whyTitle = document.querySelector('.section-header h2');
         const whySub = document.querySelector('.section-header p');
         if (whyTitle) whyTitle.innerHTML = textos.whyTitle;
         if (whySub) whySub.innerHTML = textos.whySub;
         
-        // Features
         const featureTitles = document.querySelectorAll('.feature-card h3');
         const featureDescs = document.querySelectorAll('.feature-card p');
         if (featureTitles.length >= 4) {
@@ -1351,7 +1365,6 @@
             featureDescs[3].innerHTML = textos.feature4Desc;
         }
         
-        // Newsletter
         const newsletterTitle = document.querySelector('.newsletter h3');
         const newsletterInput = document.getElementById('suscripcionEmail');
         const newsletterBtn = document.getElementById('btnSuscripcion');
@@ -1359,7 +1372,6 @@
         if (newsletterInput) newsletterInput.placeholder = textos.newsletterPlaceholder;
         if (newsletterBtn) newsletterBtn.innerHTML = `${textos.newsletterBtn} <i class="fas fa-arrow-right"></i>`;
         
-        // Footer
         const footerTermos = document.querySelector('.footer-links .footer-link:first-child');
         const footerPrivacidade = document.querySelector('.footer-links .footer-link:nth-child(2)');
         const footerAviso = document.querySelector('.footer-links .footer-link:nth-child(3)');
@@ -1369,16 +1381,13 @@
         if (footerAviso) footerAviso.innerHTML = textos.footerAviso;
         if (copyright) copyright.innerHTML = textos.copyright;
         
-        // Atualizar contador
         actualizarContador();
     }
     
-    // Função para cambiar idioma
     window.cambiarIdioma = function(lang) {
         if (lang === 'pt' || lang === 'en') {
             localStorage.setItem('mylifeqrbrasil_lang', lang);
             aplicarTraducoes(lang);
-            // Actualizar botones activos
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 if (btn.getAttribute('data-lang') === lang) {
                     btn.classList.add('active');
@@ -1389,7 +1398,6 @@
         }
     };
     
-    // Eventos de idioma
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const lang = btn.getAttribute('data-lang');
@@ -1399,7 +1407,6 @@
         });
     });
     
-    // Inicializar idioma
     const idiomaSalvo = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
     aplicarTraducoes(idiomaSalvo);
     
