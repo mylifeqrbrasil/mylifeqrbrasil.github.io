@@ -759,26 +759,27 @@
     // FUNCIONES DE FIREBASE
     // ============================================
     
-    async function actualizarContador() {
+        async function actualizarContador() {
+        const vidasElement = document.getElementById('vidasCounter');
+        if (!vidasElement) return;
+        
+        const lang = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
+        const textoVidas = lang === 'en' ? 'protected lives' : 'vidas protegidas';
+        
         try {
             const counterDoc = await getDoc(doc(db, "public", "stats"));
-            let total = 500;
+            
             if (counterDoc.exists() && counterDoc.data().totalUsuarios) {
-                total = counterDoc.data().totalUsuarios;
-            }
-            const vidasElement = document.getElementById('vidasCounter');
-            if (vidasElement) {
-                const lang = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
-                const textoVidas = lang === 'en' ? 'protected lives' : 'vidas protegidas';
+                const total = counterDoc.data().totalUsuarios;
                 vidasElement.innerHTML = `💚 ${total}+ ${textoVidas}`;
-            }
-        } catch (error) { 
-            const vidasElement = document.getElementById('vidasCounter');
-            if (vidasElement) {
-                const lang = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
-                const textoVidas = lang === 'en' ? 'protected lives' : 'vidas protegidas';
+            } else {
+                // Si no existe el documento o el campo, mostrar 500
                 vidasElement.innerHTML = `💚 500+ ${textoVidas}`;
             }
+        } catch (error) { 
+            console.error("Erro ao carregar contador:", error);
+            // Mostrar 500 en caso de error
+            vidasElement.innerHTML = `💚 500+ ${textoVidas}`;
         }
     }
     
