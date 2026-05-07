@@ -347,7 +347,7 @@
         <!-- FOOTER -->
         <div class="footer">
             <div class="footer-links"><span class="footer-link" onclick="showTerminos()">📜 Termos e Condições</span><span class="footer-link" onclick="showPrivacidade()">🔒 Política de Privacidade</span><span class="footer-link" onclick="showAvisoPrivacidad()">🔐 Aviso de Privacidade (LGPD)</span></div>
-            <p class="footer-text"><strong>⚠️ AVISO LEGAL ⚠️</strong><br>MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><strong>📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.</strong></p>
+            <div class="footer-text"><strong>⚠️ AVISO LEGAL ⚠️</strong><br>MyLifeQR Brasil é um <strong>sistema de identificação médica</strong> de apoio. Não é um serviço médico, de emergência nem substitui o atendimento profissional.<br><strong>📞 Em caso de emergência, ligue para 192 (SAMU) imediatamente.</strong></div>
             <div class="copyright">MyLifeQR Brasil © 2026 — Protegendo motociclistas brasileiros</div>
         </div>
     </div>
@@ -1227,6 +1227,180 @@
     // Aliases para los botones del footer
     window.showTerminos = window.showTerminosRegistro;
     window.showPrivacidade = window.showPrivacidadRegistro;
+    
+    // ============================================
+    // TRADUCCIÓN DE IDIOMAS - COMPLETA
+    // ============================================
+    
+    const traducoesSite = {
+        pt: {
+            entrar: "🔐 Entrar",
+            cadastrar: "📝 Cadastrar",
+            doar: "❤️ Doar",
+            proteger: "Proteger-me agora",
+            verAdesivo: "Ver adesivo",
+            gratuito: "Gratuito",
+            dadosProtegidos: "Dados protegidos",
+            paraMotociclistas: "Para motociclistas",
+            heroTitle: "Sua vida merece<br>um guardião",
+            heroSlogan: "🏍️ Na estrada, cada segundo conta. MyLifeQR Brasil é sua voz quando você não pode falar.",
+            heroText: "Um adesivo com QR no seu capacete que fala por você em emergências. Tipo sanguíneo, alergias, contatos — todas as informações que os paramédicos precisam instantaneamente.",
+            whyTitle: "Por que MyLifeQR Brasil?",
+            whySub: "Porque os heróis também precisam de um anjo da guarda",
+            feature1: "Resposta imediata",
+            feature1Desc: "Em um acidente, cada segundo conta. Suas informações médicas disponíveis instantaneamente.",
+            feature2: "Privacidade garantida",
+            feature2Desc: "Dados protegidos pela LGPD. Só visível em emergências com aviso de privacidade.",
+            feature3: "Atualize quando quiser",
+            feature3Desc: "Altere seus dados, contatos ou medicamentos de qualquer dispositivo.",
+            feature4: "Sem aplicativo",
+            feature4Desc: "O paramédico só escaneia o QR com seu celular. Não precisa instalar nada.",
+            newsletterTitle: "Receba dicas de segurança",
+            newsletterPlaceholder: "Seu e-mail",
+            newsletterBtn: "Inscrever-se",
+            footerTermos: "📜 Termos e Condições",
+            footerPrivacidade: "🔒 Política de Privacidade",
+            footerAviso: "🔐 Aviso de Privacidade (LGPD)",
+            copyright: "MyLifeQR Brasil © 2026 — Protegendo motociclistas brasileiros"
+        },
+        en: {
+            entrar: "🔐 Sign in",
+            cadastrar: "📝 Sign up",
+            doar: "❤️ Donate",
+            proteger: "Protect me now",
+            verAdesivo: "See sticker",
+            gratuito: "Free",
+            dadosProtegidos: "Protected data",
+            paraMotociclistas: "For motorcyclists",
+            heroTitle: "Your life deserves<br>a guardian",
+            heroSlogan: "🏍️ On the road, every second counts. MyLifeQR Brasil is your voice when you can't speak.",
+            heroText: "A QR sticker on your helmet that speaks for you in emergencies. Blood type, allergies, contacts — all the information paramedics need instantly.",
+            whyTitle: "Why MyLifeQR Brasil?",
+            whySub: "Because heroes also need a guardian angel",
+            feature1: "Immediate response",
+            feature1Desc: "In an accident, every second counts. Your medical information available instantly.",
+            feature2: "Guaranteed privacy",
+            feature2Desc: "Data protected by LGPD. Only visible in emergencies with privacy notice.",
+            feature3: "Update anytime",
+            feature3Desc: "Change your data, contacts or medications from any device.",
+            feature4: "No app needed",
+            feature4Desc: "Paramedics just scan the QR with their phone. No installation required.",
+            newsletterTitle: "Get safety tips",
+            newsletterPlaceholder: "Your email",
+            newsletterBtn: "Subscribe",
+            footerTermos: "📜 Terms & Conditions",
+            footerPrivacidade: "🔒 Privacy Policy",
+            footerAviso: "🔐 Privacy Notice (LGPD)",
+            copyright: "MyLifeQR Brasil © 2026 — Protecting Brazilian motorcyclists"
+        }
+    };
+    
+    function aplicarTraducoes(idioma) {
+        const textos = traducoesSite[idioma];
+        if (!textos) return;
+        
+        // Botones header
+        const navLoginBtn = document.getElementById('navLoginBtn');
+        const navRegisterBtn = document.getElementById('navRegisterBtn');
+        const donateBtn = document.getElementById('donateBtn');
+        const heroRegisterBtn = document.getElementById('heroRegisterBtn');
+        const verStickerBtn = document.getElementById('verStickerBtn');
+        
+        if (navLoginBtn) navLoginBtn.innerHTML = textos.entrar;
+        if (navRegisterBtn) navRegisterBtn.innerHTML = textos.cadastrar;
+        if (donateBtn) donateBtn.innerHTML = textos.doar;
+        if (heroRegisterBtn) heroRegisterBtn.innerHTML = `<i class="fas fa-shield-alt"></i> ${textos.proteger}`;
+        if (verStickerBtn) verStickerBtn.innerHTML = `<i class="fas fa-qrcode"></i> ${textos.verAdesivo}`;
+        
+        // Hero section
+        const heroTitle = document.querySelector('.hero-content h1');
+        const heroSlogan = document.querySelector('.hero-content .slogan');
+        const heroText = document.querySelector('.hero-content p');
+        if (heroTitle) heroTitle.innerHTML = textos.heroTitle;
+        if (heroSlogan) heroSlogan.innerHTML = textos.heroSlogan;
+        if (heroText) heroText.innerHTML = textos.heroText;
+        
+        // Badges
+        const badges = document.querySelectorAll('.hero-badges .badge');
+        if (badges.length >= 3) {
+            badges[0].innerHTML = `<i class="fas fa-bolt"></i> ${textos.gratuito}`;
+            badges[1].innerHTML = `<i class="fas fa-lock"></i> ${textos.dadosProtegidos}`;
+            badges[2].innerHTML = `<i class="fas fa-motorcycle"></i> ${textos.paraMotociclistas}`;
+        }
+        
+        // Why section
+        const whyTitle = document.querySelector('.section-header h2');
+        const whySub = document.querySelector('.section-header p');
+        if (whyTitle) whyTitle.innerHTML = textos.whyTitle;
+        if (whySub) whySub.innerHTML = textos.whySub;
+        
+        // Features
+        const featureTitles = document.querySelectorAll('.feature-card h3');
+        const featureDescs = document.querySelectorAll('.feature-card p');
+        if (featureTitles.length >= 4) {
+            featureTitles[0].innerHTML = textos.feature1;
+            featureTitles[1].innerHTML = textos.feature2;
+            featureTitles[2].innerHTML = textos.feature3;
+            featureTitles[3].innerHTML = textos.feature4;
+        }
+        if (featureDescs.length >= 4) {
+            featureDescs[0].innerHTML = textos.feature1Desc;
+            featureDescs[1].innerHTML = textos.feature2Desc;
+            featureDescs[2].innerHTML = textos.feature3Desc;
+            featureDescs[3].innerHTML = textos.feature4Desc;
+        }
+        
+        // Newsletter
+        const newsletterTitle = document.querySelector('.newsletter h3');
+        const newsletterInput = document.getElementById('suscripcionEmail');
+        const newsletterBtn = document.getElementById('btnSuscripcion');
+        if (newsletterTitle) newsletterTitle.innerHTML = `<i class="fas fa-envelope"></i> ${textos.newsletterTitle}`;
+        if (newsletterInput) newsletterInput.placeholder = textos.newsletterPlaceholder;
+        if (newsletterBtn) newsletterBtn.innerHTML = `${textos.newsletterBtn} <i class="fas fa-arrow-right"></i>`;
+        
+        // Footer
+        const footerTermos = document.querySelector('.footer-links .footer-link:first-child');
+        const footerPrivacidade = document.querySelector('.footer-links .footer-link:nth-child(2)');
+        const footerAviso = document.querySelector('.footer-links .footer-link:nth-child(3)');
+        const copyright = document.querySelector('.copyright');
+        if (footerTermos) footerTermos.innerHTML = textos.footerTermos;
+        if (footerPrivacidade) footerPrivacidade.innerHTML = textos.footerPrivacidade;
+        if (footerAviso) footerAviso.innerHTML = textos.footerAviso;
+        if (copyright) copyright.innerHTML = textos.copyright;
+        
+        // Atualizar contador
+        actualizarContador();
+    }
+    
+    // Função para cambiar idioma
+    window.cambiarIdioma = function(lang) {
+        if (lang === 'pt' || lang === 'en') {
+            localStorage.setItem('mylifeqrbrasil_lang', lang);
+            aplicarTraducoes(lang);
+            // Actualizar botones activos
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+    };
+    
+    // Eventos de idioma
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            if (lang === 'pt' || lang === 'en') {
+                window.cambiarIdioma(lang);
+            }
+        });
+    });
+    
+    // Inicializar idioma
+    const idiomaSalvo = localStorage.getItem('mylifeqrbrasil_lang') || 'pt';
+    aplicarTraducoes(idiomaSalvo);
     
     // ============================================
     // AUTH STATE
